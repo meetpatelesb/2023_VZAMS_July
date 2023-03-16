@@ -66,7 +66,6 @@ input[type="text"]:focus {
     font-weight: 600;
     border: 0;
 }
-
 .content .btn:hover {
     background-color: #7c8082;
 }
