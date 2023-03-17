@@ -7,9 +7,11 @@ var div_auth = document.getElementById("auth");
 var div_code = document.getElementById("verify_code");
 var div_psw = document.getElementById("psw");
 var page_count = document.getElementById("counter");
-
-
+var next =  document.getElementById("next_btn");
+var next_a =  document.getElementById("next_a");
+next_a.innerHTML = "Activate Link";
 function change_tab() {
+    next_a.innerHTML = "Next";
     switch (toggle) {
 
         case 1:
@@ -44,12 +46,12 @@ function change_tab() {
             var input_cpsw = document.getElementById("floatingCpassword").value;
 
             if (input_psw != "" && input_cpsw != "") {
-
+                console.log("object");
             }
             else {
                 document.getElementById('err_psw').innerHTML = "Please fill password";
                 document.getElementById('err_psw').style.color = "red";
-                return
+                return;
             }
             break;
         default:
@@ -67,20 +69,21 @@ function change_tab() {
     console.log(toggle);
 }
 
-var next = document.getElementById("next_btn");
+
+
+var next =  document.getElementById("next_btn");
 function visible(){
     next.style.visibility = "visible";
-
 }
 function disable()
 {
     next.style.visibility = "hidden";
 }
-disable();
+
 function validate(field) {
     
     console.log(field);
-    var regex = new RegExp(/^[0-9]+$/);
+    var regex = new RegExp(/^[0-9]+$/); // only numbers
     var regex_psw = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/); //Minimum eight characters, at least one letter, one number and one special character
    
 
@@ -106,51 +109,37 @@ function validate(field) {
                 else {
                     document.getElementById('err_code').innerHTML = "Enter only five digit";
                     document.getElementById('err_code').style.color = "red";
-                    disable()
-
+                    disable();
                 }
             }
             else {
                 document.getElementById('err_code').innerHTML = "Please enter only number";
                 document.getElementById('err_code').style.color = "red";
-                disable()
-
-
+                disable();
             }
         }
         /*code validation */
     }
-   if(field == 'psw') {
-    /*password validate */
+
+    if(field == 'psw')
+    {
         var input_psw = document.getElementById("floatingPassword").value;
         var input_cpsw = document.getElementById("floatingCpassword").value;
-        
-        if (input_psw.length == 0 || input_cpsw.length == 0) {
 
-            document.getElementById('err_psw').innerHTML = "";
+        if(input_psw.length == 0)
+        {
             disable();
         }
-        else {
-            
-            if (input_psw != input_cpsw) {
-                document.getElementById('err_psw').innerHTML = "Entered password is miss matched";
-                document.getElementById('err_psw').style.color = "red";
-                disable();  
+        else{
+            if(regex_psw.test(input_psw))
+            {
+                console.log("success");
             }
             else{
-                if (regex_psw.test(input_psw)) {
-
-                    console.log("Success");
-                    visible();
-
-                }
-                else {
-                    document.getElementById('err_psw').innerHTML = "Password containe minimum eight characters, at least one letter, one number and one special character";
-                    document.getElementById('err_psw').style.color = "red";
-                    disable();
-                }
+                document.getElementById("err_psw").innerHTML = "Minimum eight characters, at least one letter, one number and one special character";
+                document.getElementById("err_psw").style.color ="red";
+                disable();
             }
         }
     }
-    /*password validate */
 }
