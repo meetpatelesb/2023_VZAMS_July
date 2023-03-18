@@ -7,11 +7,12 @@ var div_auth = document.getElementById("auth");
 var div_code = document.getElementById("verify_code");
 var div_psw = document.getElementById("psw");
 var page_count = document.getElementById("counter");
-var next =  document.getElementById("next_btn");
-var next_a =  document.getElementById("next_a");
-next_a.innerHTML = "Activate Link";
+var next = document.getElementById("next_btn");
+var next_a = document.getElementById("next_a");
+
+
 function change_tab() {
-    next_a.innerHTML = "Next";
+    
     switch (toggle) {
 
         case 1:
@@ -21,11 +22,10 @@ function change_tab() {
             div_code.classList.add("active");
             div_auth.classList.add("in_active");
             break;
-
+            ;
         case 2:
 
             var input_code = document.getElementById("floatingCode").value;
-
             if (input_code != "") {
 
                 div_code.classList.remove("active");
@@ -71,75 +71,86 @@ function change_tab() {
 
 
 
-var next =  document.getElementById("next_btn");
-function visible(){
+var next = document.getElementById("next_btn");
+function visible() {
     next.style.visibility = "visible";
 }
-function disable()
-{
+function disable() {
     next.style.visibility = "hidden";
 }
 
 function validate(field) {
-    
+
     console.log(field);
     var regex = new RegExp(/^[0-9]+$/); // only numbers
     var regex_psw = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/); //Minimum eight characters, at least one letter, one number and one special character
-   
+
 
     if (field == 'code') {
-        
+        var next_a = document.getElementById("next_a2");
+
         /*code validation */
         var input_code = document.getElementById("floatingCode").value;
         if (input_code.length == 0) {
 
             document.getElementById('err_code').innerHTML = "";
-            disable();
+           
         }
         else {
             if (regex.test(input_code)) {
-               visible();
-
-
+                
                 if (input_code.length == 5) {
                     document.getElementById('err_code').innerHTML = "";
-                    visible();
+                    next_a.style.pointerEvents = "";
+
 
                 }
                 else {
                     document.getElementById('err_code').innerHTML = "Enter only five digit";
                     document.getElementById('err_code').style.color = "red";
-                    disable();
+                    next_a.style.pointerEvents = "none";
+
                 }
             }
             else {
                 document.getElementById('err_code').innerHTML = "Please enter only number";
                 document.getElementById('err_code').style.color = "red";
-                disable();
+               
             }
         }
         /*code validation */
     }
 
-    if(field == 'psw')
-    {
+    if (field == 'psw') {
+        var next_a = document.getElementById("next_a3");
+
         var input_psw = document.getElementById("floatingPassword").value;
         var input_cpsw = document.getElementById("floatingCpassword").value;
+        console.log(input_psw);
+        if (input_psw.length == 0) {
 
-        if(input_psw.length == 0)
-        {
-            disable();
+            document.getElementById('err_code').innerHTML = "";
+           
         }
-        else{
-            if(regex_psw.test(input_psw))
+            if(input_psw == input_cpsw)
             {
-                console.log("success");
+                console.log("password same");
+                if(regex_psw.test(input_psw)) {
+                    console.log("password regex");
+                 document.getElementById("err_psw").innerHTML = "";
+                 next_a.style.pointerEvents = "";
+                }
+                else {
+                    document.getElementById("err_psw").innerHTML = "Minimum eight characters, at least one letter, one number and one special character";
+                    document.getElementById("err_psw").style.color = "red";
+                    next_a.style.pointerEvents = "none";
+                }
             }
             else{
-                document.getElementById("err_psw").innerHTML = "Minimum eight characters, at least one letter, one number and one special character";
-                document.getElementById("err_psw").style.color ="red";
-                disable();
+                document.getElementById("err_psw").innerHTML = "Entered password is miss match";
+                document.getElementById("err_psw").style.color = "red";
+                next_a.style.pointerEvents = "none";
             }
+            
         }
     }
-}
