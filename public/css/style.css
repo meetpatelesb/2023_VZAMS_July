@@ -12,11 +12,14 @@ body {
 #counter{
     font-weight: bold;
 }
+
 .active{
     display: block;
+    
 }
 .in_active{
     display: none;
+    
 }
 .t_logo img {
     width: 50px;
@@ -30,6 +33,7 @@ body {
     margin-top: 4%;
 }
 .form_register {
+    
     max-width: 550px;
     margin: 0 auto;
     padding: 20px 50px 30px;
