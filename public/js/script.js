@@ -9,20 +9,28 @@ var div_psw = document.getElementById("psw");
 var page_count = document.getElementById("counter");
 var next = document.getElementById("next_btn");
 var next_a = document.getElementById("next_a");
+var code;
 
-
-function change_tab() {
+async function change_tab() {
     
     switch (toggle) {
 
         case 1:
-
+            
+            const result = await fetch("http://localhost:8000/send",{
+                    method:"post",
+                    headers:{
+                        "content-type" : "application/json"
+                    }
+                })
+            const data = await result.json();
+            code = data.code;
             div_auth.classList.remove("active");
             div_code.classList.remove("in_active");
             div_code.classList.add("active");
             div_auth.classList.add("in_active");
             break;
-            ;
+            
         case 2:
 
             var input_code = document.getElementById("floatingCode").value;
@@ -88,7 +96,6 @@ function validate(field) {
 
     if (field == 'code') {
         var next_a = document.getElementById("next_a2");
-
         /*code validation */
         var input_code = document.getElementById("floatingCode").value;
         if (input_code.length == 0) {
@@ -100,10 +107,17 @@ function validate(field) {
             if (regex.test(input_code)) {
                 
                 if (input_code.length == 5) {
-                    document.getElementById('err_code').innerHTML = "";
-                    next_a.style.pointerEvents = "";
-
-
+                    if(input_code == code)
+                    {
+                        document.getElementById('err_code').innerHTML = "";
+                        next_a.style.pointerEvents = "";
+                        console.log("success");
+                    }
+                    else{
+                        document.getElementById('err_code').innerHTML = "Enter valid code";
+                        document.getElementById('err_code').style.color = "red";
+                        next_a.style.pointerEvents = "none";
+                    }
                 }
                 else {
                     document.getElementById('err_code').innerHTML = "Enter only five digit";
