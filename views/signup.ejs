@@ -19,58 +19,67 @@
 
                 <div class="container">
                     <span>Page <span id="counter">1 </span> of 3</span>
-                    <div class="authenticate toggle_div active" id="auth">
+                    <div class="authenticate toggle_div active" id="auth" >
                         <div class="t_logo d-flex justify-content-center mb-2">
                             <img src="/assets/images/twitter.png" alt="tiwtter_logo">
                         </div>
                         <div class="content">
-                            <h2>Authenticate your account</h2>
+                            <h3 class="cls_h3">Authenticate your account</h3>
                             <p>We need to make sure that you're a real person.</p>
                         </div>
+                        <div class="next" id="next_btn">
+                            <a href="javascript:void(0)" id="next_a" onclick="return change_tab()">Activate</a>
+                        </div>
+    
+                    </div>
+                    
+                        
+                        <div class="code toggle_div in_active" id="verify_code">
+                            <div class="code_title common_p">
+                                <h3 class="cls_h3">We sent you code</h3>
+                                <p>Enter it below to verify</p>
+                            </div>
+                            <div class="code_input form-floating mb-3">
+                                <input type="text" class="form-control" id="floatingCode" placeholder="Enter code"
+                                    value="" onblur="validate('code')">
+                                <label for="floatingCode">Code</label>
+                                <span id="err_code"></span>
+                            </div>
+                            <div class="next" id="next_btn">
+                                <a href="javascript:void(0)" id="next_a2" onclick="return change_tab()">Next</a>
+                            </div>
+                        </div>
+                        <div class="password toggle_div in_active" id="psw">
+                            <div class="password_title common_p">
+                                <h3 class="cls_h3">You'll need a password</h3>
+                                <p>Make sure it's 8 characters or more.</p>
+                            </div>
+                            <div class="password">
+                                <div class="password_input form-floating mb-3">
+                                    <input type="password" class="form-control" id="floatingPassword"
+                                        placeholder="Enter code" onblur="validate('psw')">
+                                    <label for="floatingPassword">Password</label>
+                                </div>
+                                <div class="password_input form-floating mb-3">
+                                    <input type="password" class="form-control" id="floatingCpassword"
+                                        placeholder="Enter code" onblur="validate('psw')">
+                                    <label for="floatingCpassword">Confirm Password</label>
+                                    <span id="err_psw"></span>
+                                </div>
 
-                        <div class="active_link">
-                            <a href="javascript:void(0)" onclick="change_tab()">Active Link</a>
-                        </div>
-                    </div>
-                    <div class="code toggle_div in_active" id="verify_code">
-                        <div class="code_title common_p">
-                            <h3>We sent you code</h3>
-                            <p>Enter it below to verify</p>
-                        </div>
-                        <div class="code_input form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingCode" placeholder="Enter code" value="">
-                            <label for="floatingCode">Code</label>
-                            <span id="err_code"></span>
-                        </div>
-                        <div class="next">
-                            <a href="javascript:void(0)" onclick="change_tab()">Next</a>
-                        </div>
-                    </div>
-                    <div class="password toggle_div in_active" id="psw">
-                        <div class="password_title common_p">
-                            <h3>You'll need a password</h3>
-                            <p>Make sure it's 8 characters or more.</p>
-                        </div>
-                        <div class="password">
-                            <div class="password_input form-floating mb-3">
-                                <input type="password" class="form-control" id="floatingPassword"
-                                    placeholder="Enter code">
-                                <label for="floatingPassword">Password</label>
                             </div>
-                            <div class="password_input form-floating mb-3">
-                                <input type="password" class="form-control" id="floatingCpassword"
-                                    placeholder="Enter code">
-                                <label for="floatingCpassword">Confirm Password</label>
-                                <span id="err_psw"></span>
+                            <div class="next" id="next_btn">
+                                <a href="javascript:void(0)" id="next_a3" onclick="return change_tab()">Next</a>
                             </div>
                         </div>
-                        <div class="next">
-                            <a href="javascript:void(0)" onclick="change_tab()">Next</a>
-                        </div>
-                    </div>
+                       
+    
+                    
+                    
 
                 </div>
             </div>
+
         </div>
     </div>
 
