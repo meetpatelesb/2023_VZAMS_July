@@ -26,10 +26,6 @@ app.use("/register",userSignup);
 app.use("/email",emailRoute);
 
 
-
-
-
-
 app.listen(process.env.PORT,()=>{
-    console.log("running 8000");
+    console.log("running 8080");
 })
