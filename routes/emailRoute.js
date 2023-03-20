@@ -3,24 +3,25 @@ var router = express.Router();
 var nodeMailer = require("nodemailer"); 
 
 
-app.post("/send",async (req,res) =>{
+router.post("/send",async (req,res) =>{
     const transporter = nodeMailer.createTransport({
         service:"gmail",
         host:"smpt.gmail.com",
         auth: {
         type:"OAuth2",
-          user:"pnmewada@gmail.com",
+          user:"pnmrewada@gmail.com",
           clientId:'708172720191-d6kcstu306pih80bfigfvcojbog0ekvd.apps.googleusercontent.com',
-          clientSecret:'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',
-          refreshToken:'1//04rgrk5lQSzG1CgYIARAAGAQSNwF-L9IrUoCxQ3WgJKzalIwaASdXB2-9YbEgd68QRiNqwByaUgFVHU7TAGvm6Boi-ECXAmY4xZE',
-          accessToken:'ya29.a0AVvZVspXOHEJ9ju-pC9iv9nPzAeX75dIFuSglu_uEtdb1l3YvC5E1Iv-cS2hUzR0LXYy47GncMqj-Epq1CTyf21hBlNoRtxP7Rv5Bb2mFZGa9WiM6G8viV3I-7JSAMsMsqeCGtPT_wB5Syi8jrMlsd3kWZlOaCgYKAYsSARASFQGbdwaIEMcN5O-8Xf2z9u-0wqxGXg0163'
+          clientSecret:'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',
+          refreshToken:'1//044okiJ4ST_jQCgYIARAAGAQSNwF-L9IrlxNxYOS_R1Ts4t6O6amXuwJHzBfiQoVr-KdqsZ_wLzpV1eQdABTw5X65pFgNsvkcxyU',
+          accessToken:'ya29.a0AVvZVsobxBYunTQtk-Q0adbPaSVWGePQxaLdgaupNSyliOtJhWSRjjbvOfYs2mvknLeaV8pWNcQtGvAgThpdcz5NKrjXykOA0pmCy-C0wvQpFic-XAXPsSxkZ2NADjwUGJ4jILNS3P4c3ojNrRzgCQ0XD4wftBEaCgYKAbYSARASFQGbdwaItDY9T19CQpie_tteG1hawQ0166'
         },
         
     });
-var code = parseInt(Math.random() * 93932);
+var code = parseInt(Math.random() * 98567);
+console.log(code);
 transporter.sendMail({
     to:"pnmewada@gmail.com",
-    from:"'siddharth pandya'   <pnmrewada@gmail.com>",
+    from:"Team Twitter  <pnmrewada@gmail.com>",
     subject : "Twitter verification code",
     text:"code",
     html:` <div class="container" style="font-family: Helvetica,Arial,sans-serif;max-width:600px;overflow:auto;line-height:2">
@@ -42,4 +43,4 @@ transporter.sendMail({
 res.json({code})
 })
 
-module.export = router;
+module.exports = router;
