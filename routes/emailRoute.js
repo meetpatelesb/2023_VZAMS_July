@@ -18,7 +18,7 @@ router.post("/send",async (req,res) =>{
         
     });
 var code = parseInt(Math.random() * 98567);
-console.log(code);
+
 transporter.sendMail({
     to:"pnmewada@gmail.com",
     from:"Team Twitter  <pnmrewada@gmail.com>",
