@@ -17,7 +17,7 @@ async function change_tab() {
 
         case 1:
             
-            const result = await fetch("http://localhost:8000/send",{
+            const result = await fetch("http://localhost:8000/email/send",{
                     method:"post",
                     headers:{
                         "content-type" : "application/json"
