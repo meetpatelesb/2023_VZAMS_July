@@ -4,6 +4,7 @@ var nodeMailer = require("nodemailer");
 
 
 router.post("/send",async (req,res) =>{
+  var email = req.body.email;
     const transporter = nodeMailer.createTransport({
         service:"gmail",
         host:"smpt.gmail.com",
@@ -11,16 +12,16 @@ router.post("/send",async (req,res) =>{
         type:"OAuth2",
           user:"pnmrewada@gmail.com",
           clientId:'708172720191-d6kcstu306pih80bfigfvcojbog0ekvd.apps.googleusercontent.com',
-          clientSecret:'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',
-          refreshToken:'1//044okiJ4ST_jQCgYIARAAGAQSNwF-L9IrlxNxYOS_R1Ts4t6O6amXuwJHzBfiQoVr-KdqsZ_wLzpV1eQdABTw5X65pFgNsvkcxyU',
-          accessToken:'ya29.a0AVvZVsobxBYunTQtk-Q0adbPaSVWGePQxaLdgaupNSyliOtJhWSRjjbvOfYs2mvknLeaV8pWNcQtGvAgThpdcz5NKrjXykOA0pmCy-C0wvQpFic-XAXPsSxkZ2NADjwUGJ4jILNS3P4c3ojNrRzgCQ0XD4wftBEaCgYKAbYSARASFQGbdwaItDY9T19CQpie_tteG1hawQ0166'
+          clientSecret:'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',
+          refreshToken:'1//04V9dFKQnDsbSCgYIARAAGAQSNwF-L9IrJq_UASQsh3tijfEMEy3kWnP3rnOzZ0-cxUbUEJe-EbmN2G6oa-h0N3dVXrBKc8A8cY0',
+          accessToken:'ya29.a0AVvZVso4yaOnxSQug6gJy5LxNCYuVw4Rm3VO5SKgvjoEoCe06ccqWwB4NQAKvDRwN2GBHhNNGhDDtJ5xZ7xdvK8e-zUM2CrkX1ffRgW7EeTAZ1h92-DVOOBTPmbC3lxBjE6UvSkDzC-7mYfgscAYQda9niaDaCgYKARwSARASFQGbdwaI1Cfj1ws_ixTf1bZrSxThgA0163'
         },
         
     });
-var code = parseInt(Math.random() * 98567);
+var code =  Math.floor(Math.random() *90000);
 
 transporter.sendMail({
-    to:"pnmewada@gmail.com",
+    to:`${email}`,
     from:"Team Twitter  <pnmrewada@gmail.com>",
     subject : "Twitter verification code",
     text:"code",
