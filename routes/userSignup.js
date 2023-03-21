@@ -3,7 +3,6 @@ var connection = require("../config/connectionDB");
 var bcrypt = require('bcryptjs');
 var sessions = require('express-session');
 var util = require("util");
-const session = require("express-session");
 var router = express.Router();
 
 router.use(sessions({
@@ -40,7 +39,7 @@ router.post("/signup",async (req,res) => {
     }
     catch(err)
     {
-        console.error("Executing Error!");
+        console.log(err,"Executing Error!");
 
     }
 
@@ -67,7 +66,7 @@ try{
 }
 catch(err)
 {
-    console.error("Executing Error!");
+    console.log(err,"Executing Error!");
 
 }
 
@@ -91,7 +90,7 @@ router.post("/valid_username", async (req ,res)=>{
     }
     catch(err)
     {
-        console.error("Executing Error!");
+        console.log(err,"Executing Error!");
     }
     
 })
