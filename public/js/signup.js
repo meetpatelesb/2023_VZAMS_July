@@ -1,3 +1,4 @@
+
 async function validate(field) {
     var name = document.myForm.name.value
     var email = document.myForm.email.value
@@ -80,10 +81,29 @@ async function validate(field) {
             document.getElementById('err_username').innerHTML = ""
         } else {
             if (username.match(unregex)) {
-
-                next_a.style.pointerEvents = "";
                 
-                document.getElementById('err_username').innerHTML = "";
+                const result = await fetch("http://localhost:8080/register/valid_username",{
+                    method:'post',
+                    headers:{
+                        'content-type' : 'application/json'
+                    },
+                    body : JSON.stringify({
+                        username
+                    })
+                })
+                const data = await result.json();
+                if(data.username == username)
+                {
+                    alert("Username is already registered");
+                    document.getElementById('err_username').innerHTML="Username is already registered";
+                    document.getElementById('err_username').style.color= "red";
+                    next_a.style.pointerEvents = "none";
+                }
+                else{
+                    next_a.style.pointerEvents = "";
+                    document.getElementById('err_username').innerHTML = "";
+                }
+               
             } else {
             Error_Message('err_username', "Username cannot contain whitespace and must be between 3-15 characters.");
             next_a.style.pointerEvents = "none";
@@ -154,7 +174,6 @@ async function validate(field) {
             } else {
             Error_Message('err_psw', "Minimum eight characters, at least one letter, one number and one special character");
             
-                
             }
         } else {
             Error_Message('err_psw', "Entered password is miss match");
@@ -216,7 +235,11 @@ async function change_tab() {
     var input_dis3 = document.getElementById("floatingInput_3")
     input_dis3.value = input3
 
-    next_a.innerHTML = "Next";
+    var name = document.myForm.name.value
+    var email = document.myForm.email.value
+    var date = document.myForm.dob.value;
+    var checkbox = document.myForm.checkbox.checked;
+    var username = document.myForm.username.value
 
     switch (toggle) {
         case 1:
@@ -225,14 +248,9 @@ async function change_tab() {
             break;
 
         case 2:
-            var name = document.myForm.name.value
-            var email = document.myForm.email.value
-            var date = document.myForm.dob.value;
-
+           
             if (name != "") {
-
                 Error_Message('err_name', "");
-
 
                 if (email != "") {
                     Error_Message('err_mail', "");
@@ -257,7 +275,6 @@ async function change_tab() {
             break;
 
         case 3:
-            var checkbox = document.myForm.checkbox.checked;
             if (checkbox) {
                 Error_Message('err_check',"");
 
@@ -270,7 +287,6 @@ async function change_tab() {
             break;
 
         case 4:
-            var username = document.myForm.username.value
             if (username != "") {
                 Error_Message('err_username',"");
                 classLists(div_up, div_lp);
@@ -285,7 +301,10 @@ async function change_tab() {
                 method: "post",
                 headers: {
                     "content-type": "application/json"
-                }
+                },
+                body : JSON.stringify({
+                    email
+                })
             })
             const data = await result.json();
             code = data.code;
