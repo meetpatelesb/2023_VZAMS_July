@@ -2,7 +2,7 @@
 const connection = require('../connection/connection');
 const queryExecute = require('../connection/queryExecute');
 const bcrypt = require('bcryptjs');
-const { logging } = require('googleapis/build/src/apis/logging');
+// const { logging } = require('googleapis/build/src/apis/logging');
 var session = require('express-session');
 let app = require('express')();
 app.use(session({
