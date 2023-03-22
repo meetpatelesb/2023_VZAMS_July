@@ -1,6 +1,5 @@
 var toggle = 1;
 
-
 var div_auth = document.getElementById("auth");
 var div_confirm = document.getElementById("confirm");
 var div_code = document.getElementById("verify_code");
@@ -55,7 +54,7 @@ async function change_tab() {
 
                 let func_fetch = async(text_value) => {
 
-                    let res = await fetch('/forget_password', {
+                    let res = await fetch('/forget/fetch/forget_password', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
@@ -88,7 +87,7 @@ async function change_tab() {
             var input_check = document.getElementById("check");
             if (input_check.checked) {
                 classLists(div_confirm, div_code);
-                const res = await fetch("/email/send", {
+                const res = await fetch("/forget/email/send", {
                     method: "post",
                     headers: {
                         "content-type": "application/json"
@@ -109,28 +108,10 @@ async function change_tab() {
 
             if (input_code != "") {
                 classLists(div_code, div_psw);
-
-
-
             } else {
                 Error_Message('err_code', 'Please Enter The Verification Code');
                 return;
             }
-            break;
-
-        case 4:
-
-            var input_psw = document.getElementById("floatingPassword").value;
-            var input_cpsw = document.getElementById("floatingCpassword").value;
-
-            if (input_psw == '' || input_cpsw == '') {
-                Error_Message('err_psw2', 'Fields are Empty.');
-            } else if (!(input_psw == input_cpsw)) {
-                Error_Message('err_psw2', 'Password and Confirm Password Does not Match.');
-            } else if (input_psw != "" && input_cpsw != "") {
-                console.log("object");
-            }
-
             break;
 
         default:
@@ -170,7 +151,7 @@ async function validate(field) {
 
                 if (input_code.length == 5) {
 
-                    const res = await fetch("/email/check", {
+                    const res = await fetch("/forget/email/check", {
                         method: "post",
                         headers: {
                             "content-type": "application/json"
@@ -205,25 +186,35 @@ async function validate(field) {
     }
 
     if (field == 'psw') {
+
+
         var input_psw = document.getElementById("floatingPassword").value;
         var input_cpsw = document.getElementById("floatingCpassword").value;
-        var next_a = document.getElementById('next_4');
+        var next_a = document.getElementById('submit_btn');
+        console.log(input_psw);
+        if (input_psw.length == 0) {
+            next_a.style.pointerEvents = "";
 
+            Error_Message('err_psw2', "");
 
+        }
         if (input_psw == input_cpsw) {
+            console.log("password same");
             if (regex_psw.test(input_psw)) {
-                Error_Message('err_psw2', '');
-                next_a.style.pointerEvents = '';
+                next_a.style.pointerEvents = "";
+
+                Error_Message('err_psw2', "");
+
 
             } else {
-                Error_Message('err_psw2', 'Minimun Eight Characters, Include one letter,one number and one special Character');
-                next_a.style.pointerEvents = 'none';
+                Error_Message('err_psw2', "Minimum eight characters, at least one letter, one number and one special character");
+
             }
         } else {
-            Error_Message('err_psw2', 'Password and Confirm Password does not match');
-            next_a.style.pointerEvents = 'none';
+            Error_Message('err_psw2', "Entered password is miss match");
+            next_a.style.pointerEvents = "none";
+
         }
 
     }
-
 }

@@ -1,7 +1,7 @@
 // Controller
 const {
     page_signIn,
-    page_signIn_post,
+    fetch_signIn_post,
     fetch_validEmail,
 } = require('../controllers/EP_signIn');
 
@@ -12,9 +12,9 @@ let router = express.Router();
 // Endpoints
 
 
-router.get('/signIn', page_signIn)
+router.get('/', page_signIn)
 
-router.post('/signIn', page_signIn_post)
+router.post('/signIn', fetch_signIn_post)
 
 router.post('/signin/valid_email', fetch_validEmail);
 

@@ -1,12 +1,5 @@
-function fill() {
-    var input = document.getElementById("floatingInput3").value;
-    if (input == "") {
-        return false;
-    }
-}
 var toggle = 1;
 var div_auth = document.getElementById("signin");
-// console.log(div_auth);
 var div_psw = document.getElementById("signin3");
 
 function classLists(first, second) {
@@ -15,7 +8,6 @@ function classLists(first, second) {
     second.classList.remove("inactive");
     second.classList.add("active");
 }
-
 
 function Error_Message(alert, message) {
     document.getElementById(alert).innerHTML = message;
@@ -61,25 +53,10 @@ function change_tab() {
 
         case 2:
             var psw = document.getElementById('floatingInput3').value;
+            let email = document.getElementById('floatingInput').value;
+            console.log(email);
             console.log(psw);
-            if (psw == "") {
-                Error_Message('warning2', 'Please Fill all the fields!');
-            } else {
-                let func_fetch = async(psw) => {
 
-                    let res = await fetch('/check_password', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            password: psw
-                        })
-                    })
-
-                    func_fetch(psw);
-                }
-            }
             break;
 
         default:
@@ -94,4 +71,43 @@ function change_tab() {
     }
     console.log(toggle);
 
+}
+
+async function check_submit(event) {
+    event.preventDefault();
+    var psw = document.getElementById('floatingInput3').value;
+    let email = document.getElementById('floatingInput').value;
+    let form = document.getElementById('myform');
+
+    if (psw == "") {
+        Error_Message('warning2', 'Please Fill all the fields!');
+        return;
+    } else {
+
+        let func_fetch = async() => {
+
+            let res = await fetch('/signIn', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    pass: psw,
+                    email
+                })
+
+            })
+            let data = await res.json();
+            console.log(data.status)
+
+            if (data.status == 200) {
+                location.assign('/homePage')
+            } else {
+                Error_Message('warning2', 'Incorrect Password');
+                return;
+            }
+        }
+
+        func_fetch();
+    }
 }

@@ -73,9 +73,25 @@ app.use(express.urlencoded({ extended: true }))
 //access env file
 dotenv.config();
 
+// session
+
+// var session = require('express-session');
+// app.use(cookieParser());
+// app.use(session({
+//     secret: "secret key",
+//     resave: false,
+//     saveUninitialized: true,
+
+// }));
+
+// let payload = { user: checkExists[0]['user_id'] };
+// const session_token = jwt.sign(payload, "JWT_SECRET");
+
+// req.session.user_id = result[0].id;
+// req.session.email = session_token;
 
 // routes 
-app.use('/', forgetPassword);
+app.use('/forget', forgetPassword);
 app.use('/', signUp);
 app.use('/', signIn);
 

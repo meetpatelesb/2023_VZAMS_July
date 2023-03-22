@@ -1,6 +1,7 @@
 // Require LocalFiles
 const connection = require('../connection/connection');
 const queryExecute = require('../connection/queryExecute');
+const bcrypt = require('bcryptjs');
 
 
 // Global Variable 
@@ -9,9 +10,37 @@ let count = 0;
 
 // Functions
 
+
 let page_forgetPassword = (req, res) => {
     res.render('forgetPassword');
 };
+
+let page_forgetPassword_post = async(req, res) => {
+    var texts = req.body.text_value;
+    let pass = req.body.password;
+
+
+    console.log(req.body);
+
+    let password = await bcrypt.hash(pass, 10);
+    console.log(password);
+
+    let sql = ``;
+    if (texts[0] == '@') {
+        sql = `update user_master set user_password = '${password}' where user_name = '${texts}'`;
+        await queryExecute(sql);
+    } else if (texts.includes('@')) {
+        sql = `update user_master set user_password = '${password}' where user_name = '${texts}'`;
+        await queryExecute(sql);
+    } else {
+        sql = `update user_master set user_password = '${password}' where user_name = '@${texts}'`;
+        await queryExecute(sql);
+    }
+
+    console.log(sql);
+
+    res.redirect('/');
+}
 
 let fetch_forgetPassword = async(req, res) => {
 
@@ -29,7 +58,7 @@ let fetch_forgetPassword = async(req, res) => {
     if (!(checkExists.length === 0)) {
 
         res.status(200);
-        res.json({ status: 200, msg: ' ', email: checkExists[0]['user_email'] });
+        res.json({ status: 200, email: checkExists[0]['user_email'] });
 
     } else {
         res.status(404);
@@ -109,4 +138,5 @@ module.exports = {
     fetch_forgetPassword,
     fetch_emailCheck,
     fetch_sendMail,
+    page_forgetPassword_post
 };
