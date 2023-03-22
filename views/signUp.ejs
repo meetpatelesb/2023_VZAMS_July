@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign-up</title>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" type="text/css">
+    <link rel="stylesheet" href="/css/signUp.css" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="form-box">
+            <div class="form-register">
+                <form action="/signup" name="myForm" method="post" onsubmit="return fill_field()">
+                    <span>Page <span id="counter">1 </span> of 8</span>
+
+                    <!-- first page -->
+                    <div class="first-page toggle_div active" id="auth">
+                        <div class="t_logo d-flex justify-content-center mb-2">
+                            <img src="/assets/logo-twitter.png" alt="tiwtter_logo">
+                            <!-- <img src="https://www.freepnglogos.com/uploads/twitter-logo-png/twitter-bird-symbols-png-logo-0.png"
+                            alt="tiwtter_logo"> -->
+                        </div>
+
+                        <div class="authenticate">
+                            <div class="content">
+                                <p>Join Twitter today</p>
+
+                            </div>
+                            <div class="google">
+                                <!-- <a class="oauth-container btn darken-4 white black-text" href="/users/google-oauth/" style="text-transform:none"> -->
+                                <div class="google-logo">
+                                    <img width="20px" style="margin-top:7px; margin-right:8px" alt="Google sign-in" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
+                                </div>
+                                <div class="google-p">
+                                    <span>Sign up with Google</span>
+                                </div>
+
+                            </div>
+
+                            <div class="or">
+                                <p>-OR-</p>
+                            </div>
+
+                            <div class="create_link" id="next_btn" id="next_a" onclick="change_tab()">
+                                <a href="javascript:void(0)">Create Account</a>
+                            </div>
+
+                        </div>
+
+                        <div class="tos">
+                            By signing up, you agree to the
+                            <a href="https://twitter.com/en/tos">Terms of Service</a> and
+                            <a href="https://twitter.com/en/privacy">Privacy Policy</a>, including
+                            <a href="https://help.twitter.com/en/rules-and-policies/twitter-cookies">Cookie use.</a>
+                        </div>
+
+                        <div class="sign-in">
+                            Already have an account? <a href="/">Sign-in</a>
+                        </div>
+
+
+                    </div>
+
+                    <!-- /* Create your accound wizard */ -->
+                    <div class="second-page toggle_div in_active" id="second_page">
+                        <div class="v-create">
+                            <h3>Create your account</h3>
+                        </div>
+
+                        <div class="v-name form-floating mb-3">
+                            <input type="text" class="form-control" name="name" id="floatingInput1" placeholder="Enter your name" onblur="validate('name')" required>
+                            <label for="floatingInput1" class="floatingInput text-muted">Name</label>
+                            <span id="err_name"></span>
+                        </div>
+
+                        <div class="v-mail form-floating mb-3">
+                            <input type="email" class="form-control" name="email" id="floatingInput2" placeholder="Enter your email" onblur="validate('email')" required>
+                            <label for="floatingInput2" class="floatingInput text-muted">Email</label>
+                            <span id="err_mail"></span>
+                        </div>
+
+                        <div class="v-dob">
+                            <h5>Date of birth</h5>
+                            <p>This will not be shown publicly. Confirm your own age, even if this account is for business, a pet, or something else.</p>
+
+                            <div class="v-month form-floating mb-3">
+                                <input type="date" class="form-control" name="dob" id="floatingInput3" placeholder="Enter your email" onblur="validate('dob')">
+                                <label for="floatingInput" class="floatingInput text-muted">Date of birth</label>
+                                <span id="err_dob"></span>
+                            </div>
+
+                        </div>
+
+                        <div class="next" id="next_btn" id="next_a1" onclick="change_tab()">
+                            <a href="javascript:void(0)">Next</a>
+                        </div>
+
+                    </div>
+
+                    <!-- Customize your experience -->
+                    <div class="third-page toggle_div in_active" id="third_page">
+
+                        <div class="v-create">
+                            <h3>Customize your experience</h3>
+                        </div>
+                        <div class="v-content">
+                            <h5>Track where you see Twitter content across the web</h5>
+
+
+                            <div class="v-checkbox">
+
+                                <div class="checkbox-content">
+                                    Twitter uses this data to personalize your experience. this web browsering history will never be stored with your name, email, or phone number.
+                                </div>
+                                <input type="checkbox" name="checkbox" id="checkbox_check">
+
+                            </div>
+
+                            <div class="tp">
+                                <p>By signing up, you agree to the
+                                    <a href="https://twitter.com/en/tos">Terms of Service</a> and
+                                    <a href="https://twitter.com/en/privacy">Privacy Policy</a>, including
+                                    <a href="https://help.twitter.com/en/rules-and-policies/twitter-cookies">Cookie
+                                        use.</a> Twitter may use your contact information, including your email address and phone number for purpose outlined in our Privacy Policy.
+                                    <!-- <a href="#">Learn more</a> -->
+                                </p>
+                                <span id="err_check"></span>
+                            </div>
+                        </div>
+                        <div class="next" id="next_btn" id="next_a3" onclick="change_tab()">
+                            <a href="javascript:void(0)">Next</a>
+                        </div>
+
+                    </div>
+
+                    <!-- What should we call you? Username page -->
+                    <div class="v-username toggle_div in_active" id="v_username">
+                        <div class="t_logo d-flex justify-content-center mb-2">
+                            <img class='twitter-logo' src="/assets/logo-twitter.png" alt="twitter_logo">
+                        </div>
+
+                        <div class="content">
+                            <h3>What should we call you?</h3>
+                            <p>Your @username is unique. You can always change it later.</p>
+                        </div>
+
+
+
+                        <div class="v-name form-floating mb-3">
+                            <input type="text" class="form-control" name="username" id="floatingInput" placeholder="Enter your name" onblur="validate('username')" required>
+
+                            <label for="floatingInput" class="floatingInput text-muted">Username</label>
+                            <span id="err_username"></span>
+                        </div>
+
+                        <div class="next" id="next_btn" id="next_a4" onclick="change_tab()">
+                            <a href="javascript:void(0)">Next</a>
+                        </div>
+
+                    </div>
+
+                    <!--Create your account final page-->
+                    <div class="last-wizard toggle_div in_active" id="last_wizard">
+
+                        <div class="v-create">
+                            <h3>Create your account</h3>
+                        </div>
+
+                        <div class="v-name form-floating mb-3">
+                            <input type="text" class="form-control" id="floatingInput_1" placeholder="Enter your name" disabled>
+                            <label for="floatingInput" class="floatingInput text-muted">Name</label>
+                        </div>
+
+                        <div class="v-mail form-floating mb-3">
+                            <input type="mail" class="form-control" id="floatingInput_2" placeholder="Enter your email" disabled>
+                            <label for="floatingInput" class="floatingInput text-muted">Email</label>
+                        </div>
+
+                        <div class="v-dob">
+                            <h5>Date of birth</h5>
+                            <p>This will not be shown publicly. Confirm your own age, even if this account is for business, a pet, or something else.</p>
+
+                            <div class="v-month form-floating mb-3">
+                                <input type="date" class="form-control" id="floatingInput_3" placeholder="Enter your email" disabled>
+                                <label for="floatingInput" class="floatingInput text-muted">Date of birth</label>
+                            </div>
+
+                        </div>
+
+                        <div class="next" id="next_btn" id="next_a5" onclick="change_tab()">
+                            <a href="javascript:void(0)">Next</a>
+                        </div>
+
+
+                    </div>
+
+                    <!-- sid page-1 -->
+                    <div class="authenticate toggle_div in_active" id="s_auth">
+                        <div class="t_logo d-flex justify-content-center mb-2">
+                            <img src="/assets/logo-twitter.png" alt="tiwtter_logo">
+                        </div>
+                        <div class="content">
+                            <h3>Authenticate your account</h3>
+                            <p>We need to make sure that you're a real person.</p>
+                        </div>
+                        <div class="next" id="next_btn" id="next_s1" onclick="return change_tab()">
+                            <a href="javascript:void(0)">Activate</a>
+                        </div>
+                    </div>
+
+                    <!-- sid page 2 -->
+                    <div class="code toggle_div in_active" id="verify_code">
+                        <div class="code_title common_p">
+                            <h3 class="cls_h3">We sent you code</h3>
+                            <p>Enter it below to verify</p>
+                        </div>
+                        <div class="code_input form-floating mb-3">
+                            <input type="text" class="form-control" id="floatingCode" placeholder="Enter code" value="" onblur="validate('code')">
+                            <label for="floatingCode">Code</label>
+                            <span id="err_code"></span>
+                        </div>
+                        <div class="next" id="next_btn">
+                            <a href="javascript:void(0)" id="next_s2" onclick="return change_tab()">Next</a>
+                        </div>
+                    </div>
+
+                    <!-- sid page:03 -->
+                    <div class="password toggle_div in_active" id="psw">
+                        <div class="password_title common_p">
+                            <h3 class="cls_h3">You'll need a password</h3>
+                            <p>Make sure it's 8 characters or more.</p>
+                        </div>
+                        <div class="password">
+                            <div class="password_input form-floating mb-3">
+                                <input type="password" class="form-control" name="psw" id="floatingPassword" placeholder="Enter code" onblur="validate('psw')">
+                                <label for="floatingPassword">Password</label>
+                            </div>
+                            <div class="password_input form-floating mb-3">
+                                <input type="password" class="form-control" id="floatingCpassword" placeholder="Enter code" onblur="validate('psw')">
+                                <label for="floatingCpassword">Confirm Password</label>
+                                <span id="err_psw"></span>
+                            </div>
+
+                        </div>
+                        <div class="next" id="next_btn">
+                            <input type="submit" id="submit_btn" value="Register">
+                        </div>
+                    </div>
+                </form>
+
+
+
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+    function fill_field() {
+
+        var input_psw = document.getElementById("floatingPassword").value;
+        var input_cpsw = document.getElementById("floatingCpassword").value;
+
+        if (input_psw == "" && input_cpsw == "") {
+            return false;
+        }
+    }
+</script>
+
+<script src="/js/signUp.js"></script>
+
+</html>
+
+</html>
