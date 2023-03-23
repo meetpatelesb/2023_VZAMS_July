@@ -12,95 +12,94 @@
 <body>
     <div class="main">
         <div class="wrapper">
-            <header>
-                <div class="header-container">
-                    <div class="icon-frame">
-                        <img src="/images/larr.png" alt="Left Arrow" class="icon">
-                    </div>
-                    <div class="account-header">
-                        <a href="" target="_top">
-                            <p class="account-name">
-                                <span> Aditya Thakor </span>
-                                <img src="/images/Twitter-Verified.png" alt="Verified Badge" width="18" height="18" class="verified-badge" />
-                            </p>
-                        </a>
-                        <small>564 Tweets</small>
-                    </div>
-                    <div class="icon-frame">
-
-                    </div>
-                </div>
-            </header>
-            <main>
-                <section class="hero">
-                    <img src="/images/banner.jpg" alt="Twitter Banner" width="680" height="220" class="twitter-banner">
-                    <div class="profile-pic-container">
-                        <img src="/images/Profile.jpg" alt="Profile Picture" width="135" height="135" class="twitter-profile-picture">
-                    </div>
-                </section>
-                <section class="profile-details">
-                    <nav>
-                        <div class="icon-frame frame-cover">
-                            <img src="https://assets.codepen.io/9277864/menu-more.svg" alt="More Button" width="15" height="15" class="icon" />
+            <% for(const x of get_profile) {%>
+                <header>
+                    <div class="header-container">
+                        <div class="icon-frame">
+                            <img src="/assets/larr.png" alt="Left Arrow" class="icon">
                         </div>
-
-                        <button class="profile-botton">
-                    <a href="" target="_top">Edit Profile</a>
-                  </button>
-                    </nav>
-                    <div class="profile-info">
-
                         <div class="account-header">
                             <a href="" target="_top">
                                 <p class="account-name">
-                                    <span> Aditya Thakor </span>
-                                    <img src="/images/Twitter-Verified.png" alt="Verified Badge" width="18" height="18" class="verified-badge" />
+                                    <span> <%= x.profile_name %> </span>
+                                    <img src="/assets/Twitter-Verified.png" alt="Verified Badge" class="verified-badge" />
                                 </p>
                             </a>
-                            <small>@localhost_adi</small>
+                            <small>564 Tweets</small>
                         </div>
 
-
-                        <div class="account-info">
-                            <p>Aditya Thakor</p>
-                            <div class="info-container-1">
-
-                            </div>
-                            <div class="info-follow">
-                                <p><strong>1,448</strong> <span>Following</span></p>
-                                <p><strong>350.8K</strong> <span>Followers</span></p>
-                            </div>
-                        </div>
                     </div>
-                </section>
-                <section class="section-tweets">
-                    <ul class="tweets-nav">
-                        <li tabindex="0">
-                            <div>
-                                <p>Tweets</p>
+                </header>
+                <div>
+                    <section class="hero">
+                        <img src="/assets/banner.jpg" alt="Twitter Banner" class="twitter-banner">
+                        <div class="profile-pic-container">
+                            <img src="/assets/Profile.jpg" alt="Profile Picture" class="twitter-profile-picture">
+                        </div>
+                    </section>
+                    <section class="profile-details">
+                        <nav>
+                            <div class="add-more add-cover">
+                                <img src="/assets/option.png" alt="More Button" class="icon" />
                             </div>
-                        </li>
-                        <li tabindex="0">
-                            <div>
-                                <p>Tweets & replies</p>
-                            </div>
-                        </li>
-                        <li tabindex="0">
-                            <div>
-                                <p>Media</p>
-                            </div>
-                        </li>
-                        <li tabindex="0">
-                            <div>
-                                <p>Likes</p>
-                            </div>
-                        </li>
-                    </ul>
-                </section>
-            </main>
 
+                            <button class="profile-botton">
+                    <a href="/edit" target="_top">Edit Profile</a>
+                  </button>
+                        </nav>
+                        <div class="profile-info">
+
+                            <div class="account-header">
+                                <a href="" target="_top">
+                                    <p class="account-name">
+                                        <span> <%= x.profile_name %> </span>
+                                        <img src="/assets/Twitter-Verified.png" alt="Verified Badge" class="verified-badge" />
+                                    </p>
+                                </a>
+                                <small><%= x.user_username%></small>
+                            </div>
+
+
+                            <div>
+                                <p class="user-name">
+                                    <%= x.profile_bio %>
+                                </p>
+
+                                <div class="user-follow">
+                                    <p><strong><%= x.profile_following %></strong><span>Following</span></p>
+                                    <p><strong><%= x.profile_followers %></strong> <span>Followers</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="section-tweets">
+                        <ul class="tabs">
+                            <li tabindex="1">
+                                <div>
+                                    <p>Tweets</p>
+                                </div>
+                            </li>
+                            <li tabindex="2">
+                                <div>
+                                    <p>Tweets & replies</p>
+                                </div>
+                            </li>
+                            <li tabindex="3">
+                                <div>
+                                    <p>Media</p>
+                                </div>
+                            </li>
+                            <li tabindex="4">
+                                <div>
+                                    <p>Likes</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </section>
+                </div>
+
+                <%}%>
         </div>
-
     </div>
 
     <script>

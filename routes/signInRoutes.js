@@ -3,7 +3,7 @@ const {
     page_signIn,
     fetch_signIn_post,
     fetch_validEmail,
-} = require('../controllers/EP_signIn');
+} = require('../controllers/EP_SignIn');
 
 
 let express = require('express');

@@ -5,7 +5,7 @@ const {
     fetch_validEmail,
     fetch_userName,
     fetch_sendMail
-} = require('../controllers/EP_signUp');
+} = require('../controllers/EP_SignUp');
 
 
 let express = require('express');

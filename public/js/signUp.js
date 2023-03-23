@@ -72,13 +72,14 @@ async function validate(field) {
     }
 
     if (field == 'username') {
+        console.log(username);
         var next_a = document.getElementById("next_a4")
         if (username.length == 0) {
             document.getElementById('err_username').innerHTML = ""
         } else {
             if (username.match(unregex)) {
 
-                const result = await fetch("/signUp/valid_username", {
+                const result = await fetch("/signUp/valid_username'", {
                     method: 'post',
                     headers: {
                         'content-type': 'application/json'
