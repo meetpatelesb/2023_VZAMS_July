@@ -123,14 +123,15 @@ let fetch_sendMail = async(req, res) => {
 
 let fetch_userName = async(req, res) => {
     var userName = req.body.username;
-
+    console.log(userName);
     var query = `select user_username from user_master where user_username = '@${userName}'`;
+    console.log(query);
     try {
         var result = await queryExecute(query);
-        if (result.length != 0) {
-            var username = result[0].user_username;
+        console.log(result);
+        if (result.length == 0) {
             res.json({
-                username
+                username: userName
             })
         }
     } catch (err) {

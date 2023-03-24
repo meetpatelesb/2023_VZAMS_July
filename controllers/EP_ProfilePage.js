@@ -15,14 +15,31 @@ let page_profilePage = async(req, res) => {
 `
         console.log(sql);
         let get_profile = await queryExecute(sql);
-        res.render('userprofile', { get_profile });
+
+        let tweets = `SELECT tweet_content,um.user_username,tweet_image,tweet_video,tweet_id,user_name
+        FROM twitter.tweet_master om 
+       join user_master um 
+       on um.user_id = om.user_id
+       where om.user_id = ${user_id}`;
+
+        let get_tweets = await queryExecute(tweets);
+
+        res.render('userprofile', { get_profile, tweets: get_tweets });
     } else {
         res.redirect('/');
     }
 
 }
 
+let fetch_tweets = async(req, res) => {
+
+    console.log(req.session.user_id);
+    res.json({ done: 'done' });
+
+}
+
 
 module.exports = {
-    page_profilePage
+    page_profilePage,
+    fetch_tweets
 }

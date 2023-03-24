@@ -36,10 +36,13 @@ async function validate(field) {
     if (field == 'email') {
         var next_a = document.getElementById("next_a1");
         if (email.length == 0) {
+
             document.getElementById('err_mail').innerHTML = "";
 
         } else {
             if (mail_regEx.test(email)) {
+                next_a.style.pointerEvents = "";
+
                 document.getElementById('err_mail').innerHTML = "";
 
 
@@ -74,12 +77,14 @@ async function validate(field) {
     if (field == 'username') {
         console.log(username);
         var next_a = document.getElementById("next_a4")
+        console.log(next_a);
         if (username.length == 0) {
             document.getElementById('err_username').innerHTML = ""
         } else {
             if (username.match(unregex)) {
 
-                const result = await fetch("/signUp/valid_username'", {
+
+                const result = await fetch("/signUp/valid_username", {
                     method: 'post',
                     headers: {
                         'content-type': 'application/json'
@@ -89,6 +94,8 @@ async function validate(field) {
                     })
                 })
                 const data = await result.json();
+                console.log(data.username);
+
                 if (data.username == username) {
                     document.getElementById('err_username').innerHTML = "Username is already registered";
                     document.getElementById('err_username').style.color = "red";

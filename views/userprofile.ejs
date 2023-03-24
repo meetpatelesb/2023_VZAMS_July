@@ -16,7 +16,7 @@
                 <header>
                     <div class="header-container">
                         <div class="icon-frame">
-                            <img src="/assets/larr.png" alt="Left Arrow" class="icon">
+                            <img src="/assets/larr.png" alt="Left Arrow" class="const-icon">
                         </div>
                         <div class="account-header">
                             <a href="" target="_top">
@@ -40,7 +40,7 @@
                     <section class="profile-details">
                         <nav>
                             <div class="add-more add-cover">
-                                <img src="/assets/option.png" alt="More Button" class="icon" />
+                                <img src="/assets/option.png" alt="More Button" class="const-icon" />
                             </div>
 
                             <button class="profile-botton">
@@ -75,35 +75,146 @@
                     <section class="section-tweets">
                         <ul class="tabs">
                             <li tabindex="1">
-                                <div>
+                                <div class="active">
                                     <p>Tweets</p>
                                 </div>
                             </li>
                             <li tabindex="2">
-                                <div>
-                                    <p>Tweets & replies</p>
+                                <div class="notactive">
+                                    <p>Re-Tweets</p>
                                 </div>
                             </li>
                             <li tabindex="3">
-                                <div>
-                                    <p>Media</p>
-                                </div>
-                            </li>
-                            <li tabindex="4">
-                                <div>
+                                <div class="notactive">
                                     <p>Likes</p>
                                 </div>
                             </li>
+
                         </ul>
                     </section>
                 </div>
 
                 <%}%>
+
+
+
+                    <%for(j=0;j<tweets.length;j++){%>
+                        <section class="tweets-details">
+
+
+                            <div class="tweets">
+                                <div class="left-clm">
+                                    <img src="/assets/proflieimg.jpg" class="user-profile" />
+                                </div>
+                                <div class="right-clm">
+                                    <div>
+
+                                        <div class='tweet-name'>
+                                            <a href="" target="_top">
+                                                <p>
+                                                    <h4>
+                                                        <%= tweets[0].user_name%>
+                                                    </h4>
+                                                </p>
+                                            </a>
+                                            <a href="" target="_top">
+                                                <small><%= tweets[0].user_username%></small>
+                                            </a>
+                                        </div>
+
+                                        <div class="tweets-area">
+                                            <p class="tweet-text" id="tweet-text">
+                                                <%=tweets[j].tweet_content%>
+
+                                            </p>
+                                            <div class="gui">
+                                                <%if(tweets[j].tweet_image){%>
+                                                    <img src="/upload/<%=tweets[j].tweet_image%>" class="tweet-img">
+                                                    <%}else if(tweets[j].tweet_video){%>
+                                                        <video controls>
+                                                            <source src="/upload/<%=tweets[j].tweet_video%>" type="video/mp4" class="tweet-video">
+                                                          </video>
+
+                                                        <%}%>
+
+                                                            <div class="like-icons">
+                                                                <div class="icon">
+                                                                    <div class="tweet-chat">
+                                                                        <div class="tweet-footer-icon">
+                                                                            <a href="javascript:void(0)" class="fa fa-reply" id="reply" onclick="like('<%=tweets[j].tweet_id%>')">
+                                                                                <img src="/assets/chat-icon.png" alt="chat-icon">
+                                                                            </a>
+                                                                        </div>
+                                                                        <div class="tweet-footer-text">
+                                                                            <small class="reply-count" id="reply-count">1000</small>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="icon">
+                                                                    <div class="tweet-chat">
+                                                                        <div class="tweet-footer-icon">
+                                                                            <a href="javascript:void(0)" class="fa fa-reply" id="reply" onclick="like('<%=tweets[j].tweet_id%>')">
+                                                                                <img src="/assets/repost.png" alt="chat-icon">
+                                                                            </a>
+                                                                        </div>
+                                                                        <div class="tweet-footer-text">
+                                                                            <small class="reply-count" id="reply-count">1000</small>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="icon">
+                                                                    <div class="tweet-chat">
+                                                                        <div class="tweet-footer-icon">
+                                                                            <a href="javascript:void(0)" class="fa fa-reply" id="reply" onclick="like('<%=tweets[j].tweet_id%>')">
+                                                                                <img src="/assets/heart.png" alt="chat-icon">
+                                                                            </a>
+                                                                        </div>
+                                                                        <div class="tweet-footer-text">
+                                                                            <small class="reply-count" id="reply-count">1000</small>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+
+                                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </section>
+
+                        <%}%>
+
+
+
+
+
+
+
+
+
         </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     </div>
 
-    <script>
-    </script>
+    <script src="/js/profilePage.js"></script>
 
 </body>
 

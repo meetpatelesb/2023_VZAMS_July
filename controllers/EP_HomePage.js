@@ -6,7 +6,8 @@ const bcrypt = require('bcryptjs')
 
 var page_home = async function(req, res) {
 
-    var showTweet = `SELECT * FROM twitter.tweet_master where user_id = '1' order  by tweet_create desc;`;
+    let user_id = req.session.user_id;
+    var showTweet = `SELECT * FROM twitter.tweet_master where user_id = ${user_id} order  by tweet_create desc;`;
 
     var tweets = await queryExecute(showTweet);
     res.render('homePage', { port: process.env.PORT, tweets });
