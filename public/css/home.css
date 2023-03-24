@@ -1,5 +1,4 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css");
-
 * {
     margin: 0;
     padding: 0;
@@ -14,7 +13,7 @@
 
 html {
     color: #fff;
-    font-size: 15px;
+    /* font-size: 15px; */
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
@@ -38,7 +37,6 @@ body {
     grid-template-columns: 243px auto 283px;
     margin: 0 auto;
     max-width: 1230px;
-    border: 1px solid;
 }
 
 .left-side {
@@ -49,20 +47,17 @@ body {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    border: 1px solid;
 }
 
 .content {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    border: 1px solid;
 }
 
 .right-side {
     box-sizing: border-box;
     margin: 0px;
-    border: 1px solid;
 }
 
 
@@ -87,7 +82,6 @@ side bar started-----------------------
     margin-top: 10px;
     padding: 0px;
     box-sizing: border-box;
-    border: 1px solid;
 }
 
 .left-navbar a {
@@ -96,7 +90,6 @@ side bar started-----------------------
 }
 
 .left-navbar a div {
-    border: 1px solid;
     display: flex;
     padding: 4px;
     align-items: center;
@@ -180,13 +173,12 @@ sidebar ended---------------------
 
 .static-name {
     position: fixed;
-    height: 15vh;
+    height: 100px;
     width: 679px;
     padding: 0 12px 0 12px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    border: 1px solid;
     background-color: white;
 }
 
@@ -205,7 +197,7 @@ first tweet
 
 .title {
     padding-top: 110px;
-    /* position: relative */
+    /* position: relative; */
 }
 
 .title img {
@@ -215,12 +207,10 @@ first tweet
 
 .tweet {
     display: flex;
-    border: 2px solid;
 }
 
 .tweet-area {
     margin-left: 15px;
-    border: 1px solid;
 }
 
 textarea {
@@ -239,7 +229,6 @@ textarea {
 }
 
 .tweet-a {
-    border: 1px solid;
     margin-left: 350px;
     display: flex;
     align-items: end;
@@ -266,36 +255,24 @@ tweet showing start
 
 .tweets {
     display: flex;
-    border: 2px solid;
-    border: 3px solid;
-    margin-top: 20px;
-}
-
-.comments {
-    margin-left: 70px;
-    display: flex;
-    border: 2px solid;
-    border: 3px solid;
     margin-top: 20px;
 }
 
 .tweets a i {
     color: black;
     margin-left: 270px;
-    border: 1px solid;
 }
 
 .tweet-text {
     margin-top: 10px;
     font-size: 17px;
-    border: 1px solid;
     border-radius: 10px;
-    width: 520px;
+    width: 612px;
     text-align: justify;
 }
 
 .tweets-area a {
-    /* border: 1px solid; */
+    /* */
     display: flex;
     color: black;
     /* margin-top: 8px; */
@@ -308,6 +285,16 @@ tweet showing start
 .tweets-area .tweet-img {
     height: 200px;
     width: 200px;
+}
+
+.tweet-area .tweet-video {
+    height: 100px;
+    width: 100px;
+}
+
+.tweets-area video {
+    width: 300px;
+    height: 270px;
 }
 
 .like-icons {
@@ -337,6 +324,19 @@ tweets showign end
 right sidebar starte
 */
 
+.right-side {
+    height: 100vh;
+    width: 283px;
+}
+
+.w-t-f {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 600;
+}
+
 .search-bar {
     position: relative;
 }
@@ -356,14 +356,12 @@ right sidebar starte
     width: 243px;
     height: 46px;
     padding-left: 35px;
-    border: 1px solid;
 }
 
 .right-side div a {
     /* font-size: 16px; */
     height: 30px;
     font-weight: 700;
-    border: 1px solid;
     background-color: var(--main-color);
     border-radius: 10px;
     color: inherit;
@@ -371,6 +369,12 @@ right sidebar starte
     /* margin-top: 100px;
      */
     padding: 5px;
+}
+
+.recommand-profile {
+    width: auto;
+    border: 1px solid;
+    background-color: #8899A6;
 }
 
 .profile-btn-s {
@@ -410,7 +414,7 @@ right sidebar starte
 }
 
 .follow-btn-s {
-    width: calc(100% /3);
+    width: calc( 100% /3);
     /* margin-left: 230px; */
 }
 
@@ -423,9 +427,35 @@ right sidebar starte
     width: calc(100% / 3);
 }
 
+.follow-btn-s input {
+    color: black;
+    background-color: var(--main-color);
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 400;
+}
+
 .error {
     color: red;
     font-size: 20px;
+}
+
+
+/* 
+
+*/
+
+#like {
+    /* color: red; */
+    /* background-color: red; */
+    color: black
+}
+.comments {
+    margin-left: 70px;
+    display: flex;
+    border: 2px solid;
+    border: 3px solid;
+    margin-top: 20px;
 }
 
 .cmt-box {

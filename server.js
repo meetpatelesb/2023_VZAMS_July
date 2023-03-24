@@ -1,3 +1,73 @@
+
+
+// Packages
+const express = require('express');
+const app = express();
+const bcrypt = require('bcryptjs')
+const dotenv = require('dotenv');
+const bodyparser = require('body-parser');
+const mysql2 = require('mysql2');
+const { ejs } = require('ejs');
+var http = require('http');
+const { connect } = require('http2');
+const jwt = require('jsonwebtoken');
+const cookieParser = require('cookie-parser');
+const queryExecute = require('./connection/queryExecute');
+app.use(cookieParser());
+const PORT = process.env.PORT;
+app.use(bodyparser.json());
+app.use(bodyparser.urlencoded({ extended: false }));
+// Require Routes
+// let forgetPassword = require('./routes/forgotPasswordRoutes');
+// let signUp = require('./routes/signUpRoutes');
+// let signIn = require('./routes/signInRoutes');
+
+// multer use
+var multer = require('multer');
+const path = require('path');
+
+// ejs templete view engine
+app.set('view engine', 'ejs');
+
+
+// Assets
+// app.use("/css", express.static(__dirname + '/public/css'));
+// app.use("/assets", express.static(__dirname + '/public/assets'));
+// app.use("/js", express.static(__dirname + '/public/js'));
+//access body
+// app.use(express.json());
+// app.use(express.urlencoded({ extended: true }))
+
+//access env file
+dotenv.config();
+
+//assests
+
+app.use(express.static((__dirname + '/public')));
+console.log(__dirname + '/public');
+
+// home api 
+let meet_home = require('./routes/meetRoutes')
+app.use('/', meet_home);
+
+// search api
+let search = require('./routes/searchRoutes');
+app.use('/', search);
+
+
+// app.post('/tweetshow', function(req, res) {
+
+// });
+
+
+// app.get('/tweet', function(req, res) {
+//     res.redirect('/');
+
+// });
+
+
+// port
+
 // // functions 
 
 
@@ -43,36 +113,6 @@
 
 
 
-// Packages
-
-const express = require('express');
-const app = express();
-const bcrypt = require('bcryptjs')
-const dotenv = require('dotenv');
-const PORT = process.env.PORT;
-
-// Require Routes
-let forgetPassword = require('./routes/forgotPasswordRoutes');
-let signUp = require('./routes/signUpRoutes');
-let signIn = require('./routes/signInRoutes');
-
-
-
-// ejs templete view engine
-app.set('view engine', 'ejs');
-
-
-// Assets
-app.use("/css", express.static(__dirname + '/public/css'));
-app.use("/assets", express.static(__dirname + '/public/assets'));
-app.use("/js", express.static(__dirname + '/public/js'));
-//access body
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }))
-
-//access env file
-dotenv.config();
-
 // session
 
 // var session = require('express-session');
@@ -91,9 +131,9 @@ dotenv.config();
 // req.session.email = session_token;
 
 // routes 
-app.use('/forget', forgetPassword);
-app.use('/', signUp);
-app.use('/', signIn);
+// app.use('/forget', forgetPassword);
+// app.use('/', signUp);
+// app.use('/', signIn);
 
 
 

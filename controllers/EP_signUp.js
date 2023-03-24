@@ -39,7 +39,7 @@ let page_signUp_post = async(req, res) => {
         console.error("Executing Error!");
     }
 
-    res.render('homePage');
+    res.redirect('/');
 }
 
 let fetch_validEmail = async(req, res) => {
