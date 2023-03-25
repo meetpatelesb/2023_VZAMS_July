@@ -52,20 +52,27 @@ const dotenv = require('dotenv');
 const PORT = process.env.PORT;
 
 // Require Routes
-let forgetPassword = require('./routes/forgotPasswordRoutes');
-let signUp = require('./routes/signUpRoutes');
-let signIn = require('./routes/signInRoutes');
+let forgetPassword = require('./src/routes/forgotPasswordRoutes');
+let signUp = require('./src/routes/signUpRoutes');
+let signIn = require('./src/routes/signInRoutes');
+let profilePage = require('./src/routes/profilePageRoutes');
+let homePage = require('./src/routes/homePageRoutes');
+var retweet = require("./src/routes/retweetRoutes.js");
 
+
+let sessionCheck = require('./src/middleWare/session')
 
 
 // ejs templete view engine
 app.set('view engine', 'ejs');
 
 
+
 // Assets
 app.use("/css", express.static(__dirname + '/public/css'));
 app.use("/assets", express.static(__dirname + '/public/assets'));
 app.use("/js", express.static(__dirname + '/public/js'));
+app.use("/upload", express.static(__dirname + '/public/upload'));
 //access body
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
@@ -75,27 +82,25 @@ dotenv.config();
 
 // session
 
-// var session = require('express-session');
-// app.use(cookieParser());
-// app.use(session({
-//     secret: "secret key",
-//     resave: false,
-//     saveUninitialized: true,
-
-// }));
-
-// let payload = { user: checkExists[0]['user_id'] };
-// const session_token = jwt.sign(payload, "JWT_SECRET");
-
-// req.session.user_id = result[0].id;
-// req.session.email = session_token;
+var session = require('express-session');
+app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true,
+}))
 
 // routes 
 app.use('/forget', forgetPassword);
 app.use('/', signUp);
 app.use('/', signIn);
+app.use('/', sessionCheck, profilePage);
+app.use('/', sessionCheck, homePage);
+app.use("/tweet", retweet);
 
 
 
+app.get('/edit', sessionCheck, (req, res) => {
+    res.render('editProfile')
+})
 
 app.listen(process.env.PORT, () => { console.log('http://localhost:' + process.env.PORT); })
