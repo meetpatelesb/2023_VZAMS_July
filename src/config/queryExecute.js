@@ -1,4 +1,5 @@
-const connection = require('../connection/connection');
+const connection = require('../config/connection.js');
+
 
 const queryExecute = async(query) => {
 

@@ -1,6 +1,6 @@
 // Require LocalFiles
-const connection = require('../connection/connection');
-const queryExecute = require('../connection/queryExecute');
+const connection = require('../config/connection.js');
+const queryExecute = require('../config/queryExecute');
 const bcrypt = require('bcryptjs');
 const nodemailer = require('nodemailer');
 
@@ -12,7 +12,7 @@ let count = 0;
 
 
 let page_forgetPassword = (req, res) => {
-    res.render('forgetPassword');
+    res.render('../src/views/forgetPassword');
 };
 
 let page_forgetPassword_post = async(req, res) => {
@@ -20,10 +20,10 @@ let page_forgetPassword_post = async(req, res) => {
     let pass = req.body.password;
 
 
-    console.log(req.body);
+   
 
     let password = await bcrypt.hash(pass, 10);
-    console.log(password);
+   
 
     let sql = ``;
     if (texts[0] == '@') {
@@ -37,7 +37,7 @@ let page_forgetPassword_post = async(req, res) => {
         await queryExecute(sql);
     }
 
-    console.log(sql);
+   
 
     res.redirect('/');
 }

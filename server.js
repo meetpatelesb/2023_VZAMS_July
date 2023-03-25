@@ -52,18 +52,20 @@ const dotenv = require('dotenv');
 const PORT = process.env.PORT;
 
 // Require Routes
-let forgetPassword = require('./routes/forgotPasswordRoutes');
-let signUp = require('./routes/signUpRoutes');
-let signIn = require('./routes/signInRoutes');
-let profilePage = require('./routes/profilePageRoutes');
-let homePage = require('./routes/homePageRoutes');
+let forgetPassword = require('./src/routes/forgotPasswordRoutes');
+let signUp = require('./src/routes/signUpRoutes');
+let signIn = require('./src/routes/signInRoutes');
+let profilePage = require('./src/routes/profilePageRoutes');
+let homePage = require('./src/routes/homePageRoutes');
+var retweet = require("./src/routes/retweetRoutes.js");
 
 
-let sessionCheck = require('./middleWare/session')
+let sessionCheck = require('./src/middleWare/session')
 
 
 // ejs templete view engine
 app.set('view engine', 'ejs');
+
 
 
 // Assets
@@ -93,6 +95,8 @@ app.use('/', signUp);
 app.use('/', signIn);
 app.use('/', sessionCheck, profilePage);
 app.use('/', sessionCheck, homePage);
+app.use("/tweet", retweet);
+
 
 
 app.get('/edit', sessionCheck, (req, res) => {

@@ -1,12 +1,13 @@
 // Require Files
-const connection = require('../connection/connection');
-const queryExecute = require('../connection/queryExecute');
+const connection = require('../config/connection.js');
+const queryExecute = require('../config/queryExecute');
 const bcrypt = require('bcryptjs');
 
 // Functions
 
 let page_signIn = (req, res) => {
-    res.render('signIn')
+
+    res.render('../src/views/signIn');
 };
 
 let fetch_signIn_post = async(req, res) => {
@@ -15,14 +16,11 @@ let fetch_signIn_post = async(req, res) => {
 
     var sql = `select user_password,user_id from user_master where user_email="${email}"`;
     var result = await queryExecute(sql);
-    console.log(result[0]['user_password']);
+  
     let passas = await bcrypt.compare(pass, result[0]['user_password']);
-    console.log(passas);
-    console.log(result[0]['user_id']);
 
     if ((passas)) {
-        req.session.user_id = result[0]['user_id']
-
+        req.session.user_id = result[0]['user_id'];
         res.json({ status: 200 })
 
     } else {

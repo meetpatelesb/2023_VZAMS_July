@@ -2,7 +2,7 @@
 
 let express = require('express');
 let router = express.Router();
-let multer = require('../config/multer')
+let multer = require('../config/multer.js')
 
 
 const { page_home, page_tweet_create, fetch_follow, fetch_unfollow } = require('../controllers/EP_HomePage');

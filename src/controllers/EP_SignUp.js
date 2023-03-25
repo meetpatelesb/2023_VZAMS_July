@@ -1,35 +1,36 @@
 // Require Files
-const connection = require('../connection/connection');
-const queryExecute = require('../connection/queryExecute');
+const connection = require('../config/connection.js');
+const queryExecute = require('../config/queryExecute');
 const bcrypt = require('bcryptjs')
 const nodemailer = require('nodemailer');
 // variable
 
-let count = 0
+let count = 0;
 
 // Functions
 
-let page_signUp = async(req, res) => {
-    res.render('signUp');
+let page_signUp = async (req, res) => {
+    res.render('../src/views/signUp');
+    
 };
 
-let page_signUp_post = async(req, res) => {
+let page_signUp_post = async (req, res) => {
 
     const { name, email, dob, username, psw } = req.body;
 
     let newPsw = await bcrypt.hash(psw, 10);
 
     try {
-        var user = `INSERT INTO user_master (user_username, user_email, user_password,user_activation , user_dob) values
-            ('@${username}','${email.toLowerCase()}', '${newPsw}', '1','${dob}')`;
+        var user = `INSERT INTO user_master (user_name , user_username, user_email, user_password,user_activation , user_dob) values
+            ('${name}','${username}','${email.toLowerCase()}', '${newPsw}', '1','${dob}')`;
         var userInsert = await queryExecute(user);
         insertedUserId = userInsert.insertId;
 
         let profile = `INSERT INTO profile_master (profile_name,profile_username, user_id,dob) values
-            ('${name}','@${username}',${insertedUserId},'${dob}')`;
+            ('${name}','${username}',${insertedUserId},'${dob}')`;
         let result = await queryExecute(profile);
 
-        console.log(profile);
+       
         if (!(result)) {
             console.log('No result');
         }
@@ -37,16 +38,15 @@ let page_signUp_post = async(req, res) => {
         console.error("Executing Error!");
     }
 
-    res.redirect('/');
+    res.redirect("/");
 }
 
-let fetch_validEmail = async(req, res) => {
+let fetch_validEmail = async (req, res) => {
     var userEmail = req.body.email;
-    console.log(userEmail);
+ 
 
     var query = `select user_email from user_master where user_email = '${userEmail.toLowerCase()}'`;
-    console.log(query);
-    try {
+  
         var result = await queryExecute(query);
         if (result.length != 0) {
 
@@ -55,18 +55,15 @@ let fetch_validEmail = async(req, res) => {
                 email: userEmail
             })
         }
-    } catch (err) {
-        console.error("Executing Error!");
-    }
+   
 
 }
 
 
-let fetch_sendMail = async(req, res) => {
+let fetch_sendMail = async (req, res) => {
 
     let email = req.body.email;
-    console.log(email);
-
+   
 
     if (count == 0) {
         OTP = '';
@@ -121,21 +118,22 @@ let fetch_sendMail = async(req, res) => {
 };
 
 
-let fetch_userName = async(req, res) => {
+let fetch_userName = async (req, res) => {
     var userName = req.body.username;
-    console.log(userName);
-    var query = `select user_username from user_master where user_username = '@${userName}'`;
-    console.log(query);
-    try {
-        var result = await queryExecute(query);
-        console.log(result);
-        if (result.length == 0) {
-            res.json({
-                username: userName
-            })
-        }
-    } catch (err) {
-        console.error("Executing Error!");
+   
+    var query = `select user_username from user_master where user_username = '${userName}'`;
+  
+    var result = await queryExecute(query);
+   
+    if (result.length != 0) {
+        res.json({
+            username: result[0].user_username
+        })
+    }
+    else {
+        res.json({
+            userName
+        })
     }
 
 }
