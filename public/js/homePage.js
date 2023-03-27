@@ -1,40 +1,84 @@
 /*sid js*/
-    var flag = false;
-    async function retweet(id) {
+var flag = false;
+async function retweet(id) {
 
-        var retweet_icon_count = document.getElementById("span" + id);
-        var retweet_icon = document.getElementById(id);
+    var retweet_icon_count = document.getElementById("span" + id);
+    var retweet_icon = document.getElementById(id);
 
 
-        if (retweet_icon.classList.value == "fa-solid fa-retweet") {
+    if (retweet_icon.classList.value == "fa-solid fa-retweet") {
 
-            const result = await fetch("/tweet/retweet", {
-                method: "post",
-                headers: {
-                    "content-type": "application/json"
-                },
-                body: JSON.stringify({
-                    tweet_id: id,
+        const result = await fetch("/tweet/retweet", {
+            method: "post",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify({
+                tweet_id: id,
 
-                })
             })
+        })
 
-            const data = await result.json();
+        const data = await result.json();
 
-            if (data) {
-                retweet_icon_count.innerHTML = data.count;
-                if (data.flag == true) {
-                    retweet_icon.style.color = "green"
-                }
-                else if (data.flag == false) {
-                    retweet_icon.style.color = "black";
-                }
-
+        if (data) {
+            retweet_icon_count.innerHTML = data.count;
+            if (data.flag == true) {
+                retweet_icon.style.color = "green"
+            } else if (data.flag == false) {
+                retweet_icon.style.color = "black";
             }
 
         }
+
     }
+}
 /*sid js*/
+
+//Vishwa js of LIKE module
+
+async function likeFunction(x) {
+    console.log(x)
+    var like_color = document.getElementById(x);
+    var span = document.getElementById('s' + x);
+
+    //Like
+    if (like_color.style.color == '') {
+        like_color.style.color = 'red'
+        console.log('like')
+
+        const result = await fetch("http://localhost:4127/like", {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                tweet_id: x
+            })
+        })
+        const data = await result.json();
+        span.innerHTML = data.l_count;
+    }
+    //Dislike
+    else {
+        console.log("hey");
+        like_color.style.color = ''
+        console.log('unlike')
+        const result = await fetch("http://localhost:4127/like", {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                tweet_id: x
+            })
+        })
+        const data = await result.json();
+        span.innerHTML = data.l_count;
+    }
+}
+
+//LIKE module ended!
 
 async function search() {
     document.getElementById('search_pro').innerHTML = '';
