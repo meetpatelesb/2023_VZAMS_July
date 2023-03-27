@@ -158,10 +158,6 @@ side bar started-----------------------
     background-color: rgba(230, 231, 232, 200);
 }
 
-.follow-btn {
-    /* width: calc( 100% /3); */
-}
-
 .profile-btn div a i {
     color: black;
 }
