@@ -15,7 +15,7 @@
   "main": "With Flows",
   "scripts": {
     "test": "not defined",
-    "start": "node server.js"
+    "start": "nodemon server.js"
   },
   "repository": {
     "type": "git",

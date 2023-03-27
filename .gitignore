@@ -1,1 +1,8 @@
-node_modules/
+<<<<<<< HEAD
+.env
+node_modules
+=======
+/node_modules
+.env
+/public/upload
+>>>>>>> 5cf65d1e0a08579eedac3eba05ee46f378d6c953

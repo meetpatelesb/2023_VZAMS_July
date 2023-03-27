@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/profile.css">
+    <title>Other Profile</title>
+</head>
+
+<body>
+    <div class="main">
+        <div class="wrapper">
+            <% for(const x of get_profile) {%>
+                <header>
+                    <div class="header-container">
+                        <div class="icon-frame">
+                            <img src="/assets/larr.png" alt="Left Arrow" class="icon">
+                        </div>
+                        <div class="account-header">
+                            <a href="" target="_top">
+                                <p class="account-name">
+                                    <span> <%= x.profile_name %> </span>
+                                    <img src="/assets/Twitter-Verified.png" alt="Verified Badge" class="verified-badge" />
+                                </p>
+                            </a>
+                            <small>564 Tweets</small>
+                        </div>
+
+                    </div>
+                </header>
+                <div>
+                    <section class="hero">
+                        <img src="/assets/banner.jpg" alt="Twitter Banner" class="twitter-banner">
+                        <div class="profile-pic-container">
+                            <img src="/assets/Profile.jpg" alt="Profile Picture" class="twitter-profile-picture">
+                        </div>
+                    </section>
+                    <section class="profile-details">
+                        <nav>
+                            <div class="add-more add-cover">
+                                <img src="/assets/option.png" alt="More Button" class="icon" />
+                            </div>
+
+                            <button class="profile-botton">
+                    <a href="/edit" target="_top">Edit Profile</a>
+                  </button>
+                        </nav>
+                        <div class="profile-info">
+
+                            <div class="account-header">
+                                <a href="" target="_top">
+                                    <p class="account-name">
+                                        <span> <%= x.profile_name %> </span>
+                                        <img src="/assets/Twitter-Verified.png" alt="Verified Badge" class="verified-badge" />
+                                    </p>
+                                </a>
+                                <small><%= x.user_username%></small>
+                            </div>
+
+
+                            <div>
+                                <p class="user-name">
+                                    <%= x.profile_bio %>
+                                </p>
+
+                                <div class="user-follow">
+                                    <p><strong><%= x.profile_following %></strong><span>Following</span></p>
+                                    <p><strong><%= x.profile_followers %></strong> <span>Followers</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="section-tweets">
+                        <ul class="tabs">
+                            <li tabindex="1">
+                                <div>
+                                    <p>Tweets</p>
+                                </div>
+                            </li>
+                            <li tabindex="2">
+                                <div>
+                                    <p>Tweets & replies</p>
+                                </div>
+                            </li>
+                            <li tabindex="3">
+                                <div>
+                                    <p>Media</p>
+                                </div>
+                            </li>
+                            <li tabindex="4">
+                                <div>
+                                    <p>Likes</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </section>
+                </div>
+
+                <%}%>
+        </div>
+    </div>
+
+    <script>
+    </script>
+
+</body>
+
+</html>
