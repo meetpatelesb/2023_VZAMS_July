@@ -13,10 +13,27 @@ const queryExecute = require('./connection/queryExecute');
 app.use(cookieParser());
 
 
+// session
+var session = require('express-session');
+app.use(session({
+    secret: process.env.SECRETKEY,
+    resave: false,
+    saveUninitialized: true,
+}))
+
 
 // multer use
 var multer = require('multer');
 const path = require('path');
+
+
+
+
+// middleware
+
+
+
+
 
 app.set('view engine', 'ejs');
 

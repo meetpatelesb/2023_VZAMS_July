@@ -119,7 +119,7 @@
                         </div>
                         <div class="right-clm">
                             <div class="tweet-area">
-                                <textarea name="tweet_text" id="tweet-text" cols="44" rows="5" maxlength="150" placeholder="What's Happening ?" onkeydown="maxim()" fixed></textarea>
+                                <textarea name="tweet_text" id="tweet-text" cols="44" rows="5" placeholder="What's Happening ?" onkeyup="maxim()" fixed></textarea>
                                 <p id="error-max" class="error"></p>
                                 <div>
                                     <label for="tweet-img">
@@ -220,52 +220,24 @@
             </div>
             <span class="w-t-f">Who to Follow</span>
             <div class="recommand-profile">
-                <div class="profile-btn-s">
-                    <div class="left-clm-s">
-                        <img src="/assets/proflieimg.jpg" class="profile-img-s" />
-                    </div>
-                    <div class="right-clm-s">
-                        <div>
-                            <strong>Meet Vaghasiya </strong>
-                            <span class="tag">@Meet_patel07</span>
+
+                <%for(let i =0;i<whoFollow.length;i++){%>
+
+                    <div class="profile-btn-s">
+                        <div class="left-clm-s">
+                            <img src="/upload/<%=whoFollow[i].profile_image%>" class="profile-img-s" />
+                        </div>
+                        <div class="right-clm-s">
+                            <div>
+                                <strong><%=whoFollow[i].profile_name%> </strong>
+                                <span class="tag">@<%=whoFollow[i].user_username%> </span>
+                            </div>
+                        </div>
+                        <div class="follow-btn-s">
+                            <input type='button' class="follow-a-s" id="<%=whoFollow[i].user_id%>" onclick='follow( "<%=whoFollow[i].user_id%>")' value='Follow'>
                         </div>
                     </div>
-                    <div class="follow-btn-s">
-                        <a class="follow-a" href="">Follow</a>
-                    </div>
-                </div>
-
-                <div class="profile-btn-s">
-                    <div class="left-clm-s">
-                        <img src="/assets/proflieimg.jpg" class="profile-img-s" />
-                    </div>
-                    <div class="right-clm-s">
-                        <div>
-                            <strong>Meet Vaghasiya </strong>
-                            <span class="tag">@Meet_patel07</span>
-                        </div>
-                    </div>
-                    <div class="follow-btn-s">
-                        <a class="follow-a" href="">Follow</a>
-                    </div>
-                </div>
-
-                <div class="profile-btn-s">
-                    <div class="left-clm-s">
-                        <img src="/assets/proflieimg.jpg" class="profile-img-s" />
-                    </div>
-                    <div class="right-clm-s">
-                        <div>
-                            <strong>Meet Vaghasiya </strong>
-                            <span class="tag">@Meet_patel07</span>
-                        </div>
-                    </div>
-                    <div class="follow-btn-s">
-                        <a class="follow-a" href="">Follow</a>
-                    </div>
-                </div>
-
-
+                    <%}%>
             </div>
         </aside>
 
@@ -285,29 +257,70 @@
         let res = await fetch(`/search?search=${searchText}`);
 
         let data = await res.json();
-        console.log(data.search_res);
+
         if (data.search_res.length) {
-            // alert(data.search_res.length);
 
-            data.search_res.forEach(p => {
-
-                console.log(p.user_username);
-                search_pro += ` <div class="profile-btn-s">
-                    <div class="left-clm-s">
-                        <img src="/upload/${p.profile_image}" class="profile-img-s" />
-                    </div>
-                    <div class="right-clm-s">
-                        <div>
-                            <strong>${p.user_username}</strong><br>
-                            <span class="tag">@${p.profile_name}</span>
+            for (let i = 0; i < data.search_res.length; i++) {
+                var sample = ``;
+                search_pro +=
+                    `     <div class="profile-btn-s" onclick="search_profile(${data.search_res[i].user_id})">
+                        <div class="left-clm-s">
+                            <img src="/upload/${data.search_res[i].profile_image}" class="profile-img-s" />
                         </div>
-                    </div>
-                    <div class="follow-btn-s">
-                        <input type='button' class="follow-a-s" id="${p.user_id}" onclick='follow(${p.user_id})' value='Follow'>
-                    </div>
-                </div>`;
+                        <div class="right-clm-s">
+                            <div>
+                                <strong>${data.search_res[i].user_username}</strong><br>
+                                <span class="tag">@${data.search_res[i].profile_name}</span>
+                            </div>
+                        </div>
+                    
+                        <div class="follow-btn-s">
+                `;
 
-            });
+                // const temp = data.follow_user_res;
+
+                // console.log(temp[i].follow_flag);
+                // console.log(data.follow_user_res);
+
+
+                // console.log(data.follow_user_res.length);
+                // if (data.follow_user_res.length != 0) {
+                //     for (let j = 0; j < data.follow_user_res.length; j++) {
+
+                //     }
+                // } else {
+                //     search_pro += `<input type='button' class="follow-a-s" id="${data.search_res[i].user_id}" onclick='follow(${data.search_res[i].user_id})' value='Follow'>`;
+                // }
+
+
+
+                // if (data.follow_user_res.length != 0) {
+                //     // for (let j = 0; j < data.follow_user_res.length; j++) {
+                //     console.log(data.follow_user_res[i].followers_uid == data.search_res[i].user_id);
+                //     console.log(data.follow_user_res[i].follow_flag == 0);
+
+                //     if (data.follow_user_res[i].follow_flag == 0 && data.follow_user_res[i].followers_uid == data.search_res[i].user_id) {
+                //         console.log(data.follow_user_res[i].follow_flag + "if")
+                //         sample += `<input type='button' class="follow-a-s" id="${data.search_res[i].user_id}" onclick='follow(${data.search_res[i].user_id})' value='Follow'>`
+                //     } else {
+                //         console.log(data.follow_user_res[i].follow_flag + "else")
+                //         sample += ` <input type='button' class="follow-a-s" id="${data.search_res[i].user_id}" onclick='follow(${data.search_res[i].user_id})' value='Following'>`;
+
+                //     }
+
+
+                //     // }
+                // } else {
+                //     console.log("else else")
+                //     sample += `<input type='button' class="follow-a-s" id="${data.search_res[i].user_id}" onclick='follow(${data.search_res[i].user_id})' value='Follow'>`;
+                // }
+
+
+
+                search_pro += `${sample}</div> </div>`;
+
+
+            };
 
         }
         document.getElementById('search_pro').innerHTML = search_pro;
@@ -315,11 +328,12 @@
         //     document.getElementById('search_pro').innerHTML = "User Not Found!";
     }
 
-    document.getElementById('tweetBtn').disabled = false;
+    document.getElementById('tweetBtn').disabled = true;
 
-    var max_len = document.getElementById('tweet-text');
-    var max = max_len.getAttribute('maxlength');
-    // console.log(max);
+    var max_len = document.getElementById('tweet-text').value.length;
+    // var max = max_len.getAttribute('maxlength');
+    var max = max_len;
+    console.log(max);
     var error_max = document.getElementById("error-max");
 
     function maxim() {
@@ -327,7 +341,9 @@
         var max_abccc = document.getElementById('tweet-text').value;
         var len = max_abccc.length;
         console.log(len);
-        if (len >= 150) {
+        if (len == 0 && len == undefined && len == null) {
+            document.getElementById('tweetBtn').disabled = true;
+        } else if (len >= 151) {
             error_max.innerHTML = "tweet character limit is reached!!";
             document.getElementById('tweetBtn').disabled = true;
             console.log("taruelse");
@@ -337,6 +353,23 @@
             console.log("false");
 
         }
+
+    }
+
+
+
+    // search_profile
+
+    async function search_profile(pro_id) {
+        console.log(pro_id);
+        console.log(`/search_profile?pro_id=${pro_id}`)
+
+        let res = await fetch(`/search_profile?pro_id=${pro_id}`);
+
+        let data = await res.json();
+
+        console.log(data);
+
 
     }
 
@@ -382,11 +415,11 @@
 
     // function like() {
     //     var color = document.getElementById("like");
-    //     if (color.style.color == "black") {
+    //     if (color.style.color == " ") {
     //         color.style.color = "red";
     //         console.log("red");
     //     } else {
-    //         color.style.color = "black";
+    //         color.style.color = " ";
     //         console.log("black");
     //     }
 

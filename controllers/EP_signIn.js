@@ -35,13 +35,9 @@ let fetch_signIn_post = async(req, res) => {
 
 
     if ((passas)) {
+        req.session.user_id = result[0]['user_id']
+        console.log(req.session.user_id);
         res.json({ status: 200 })
-
-        let payload = { email, user_id: passas[0]['user_id'] }
-        console.log(payload);
-        const session_token = jwt.sign(payload, "JWT_SECRET");
-        req.session.user_id = result[0].id;
-        req.session.email = session_token;
 
     } else {
         res.json({ status: 400 })
