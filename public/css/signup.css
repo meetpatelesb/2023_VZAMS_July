@@ -174,6 +174,7 @@ textarea {
     background: rgba(0, 0, 0, 0.9);
     cursor: pointer;
 }
+
 .next input[type=submit] {
     display: flex;
     justify-content: center;
@@ -224,7 +225,6 @@ textarea {
     border-width: 30px;
 }
 
-
 .sign-up {
     display: flex;
     justify-content: center;
@@ -251,10 +251,12 @@ textarea {
 
 
 /* sid ni css */
-.content h3,p{
-    text-align: center;
 
+.content h3,
+p {
+    text-align: center;
 }
+
 .content p {
     font-size: 14px;
     padding-top: 2%;

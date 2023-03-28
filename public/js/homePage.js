@@ -1,6 +1,7 @@
 /*zeel js*/
 
 //show comment box
+
 async function popcomment(id, j) {
     console.log("hello");
     let cmt_box = document.getElementsByName('cmt-box');
@@ -46,13 +47,25 @@ function alertcmt(id, j) {
     if (((com[j].value).trim()).length > 0) {
         document.getElementById('alert').innerHTML = " ";
     } else {
+        //comment alert
+        function alertcmt(id, j) {
+            var com = document.getElementsByName('cmt');
+            console.log(com[j].value);
+            if (((com[j].value).trim()).length > 0) {
+                document.getElementById('alert').innerHTML = " ";
+            } else {
 
+                document.getElementById('alert').innerHTML = "please enter a comment"
+                document.getElementById('alert').style.color = "red";
+            }
+        }
         document.getElementById('alert').innerHTML = "please enter a comment"
         document.getElementById('alert').style.color = "red";
     }
 }
 
 //insert comment in database
+
 async function savecomment(id, j) {
 
     var com = document.getElementsByName('cmt');
@@ -121,6 +134,7 @@ function emoji() {
     }
 }
 
+
 //close comment area
 function closecomment(id, j) {
     let cmt_box = document.getElementsByName('cmt-box');
@@ -128,14 +142,17 @@ function closecomment(id, j) {
 }
 
 
-/*sid js*/
+
+/*---------------------------sid js---------------------------------------------*/
 var flag = false;
 async function retweet(id) {
 
     var retweet_icon_count = document.getElementById("span" + id);
     var retweet_icon = document.getElementById(id);
+    console.log("ICON :", retweet_icon);
+    console.log("COUNT:", retweet_icon_count);
 
-
+    console.log("tweetid", id);
     if (retweet_icon.classList.value == "fa-solid fa-retweet") {
 
         const result = await fetch("/tweet/retweet", {
@@ -145,17 +162,16 @@ async function retweet(id) {
             },
             body: JSON.stringify({
                 tweet_id: id,
-
             })
         })
 
         const data = await result.json();
-
+        console.log(data);
         if (data) {
             retweet_icon_count.innerHTML = data.count;
             if (data.flag == true) {
                 retweet_icon.style.color = "green"
-            } else if (data.flag == false) {
+            } else if (data.flag == false) {} else if (data.flag == false) {
                 retweet_icon.style.color = "black";
             }
 
@@ -163,7 +179,7 @@ async function retweet(id) {
 
     }
 }
-/*sid js*/
+/*-----------------------------sid js-------------------------------------------*/
 
 
 /*meet js  */
@@ -250,17 +266,73 @@ async function search_profile(pro_id, pro_name) {
 }
 
 // follow function .................
-
-async function follow(user) {
+async function follow_user(user) {
+    console.log("click follow");
     var follow_btn = document.getElementById(user).value;
     if (follow_btn == "Follow") {
         document.getElementById(user).value = "Following";
         var user_id = user;
+
         let res = await fetch(`/follow?follow_id='${user_id}'`);
 
     } else {
         document.getElementById(user).value = "Follow";
         var user_id = user;
         let res = await fetch(`/follow?follow_id='${user_id}'`);
+    }
+}
+
+
+// function like() {
+//     var color = document.getElementById("like");
+//     if (color.style.color == "black") {
+//         color.style.color = "red";
+//         console.log("red");
+//     } else {
+//         color.style.color = "black";
+//         console.log("black");
+//     }
+
+// }
+
+/*-------------------------------Vishwa Like Module-------------------------------------*/
+async function likeFunction(x) {
+    // console.log(x)
+    var like_color = document.getElementById('like' + x);
+    var span = document.getElementById('s' + x);
+
+    //Like
+    if (like_color.style.color == '') {
+        like_color.style.color = 'red'
+            // console.log('like')
+
+        const result = await fetch("/tweet_like/like", {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                tweet_id: x
+            })
+        })
+        const data = await result.json();
+        span.innerHTML = data.l_count;
+    }
+    //Dislike
+    else {
+        console.log("Dislike");
+        like_color.style.color = ''
+            // console.log('unlike')
+        const result = await fetch("/tweet_like/like", {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                tweet_id: x
+            })
+        })
+        const data = await result.json();
+        span.innerHTML = data.l_count;
     }
 }

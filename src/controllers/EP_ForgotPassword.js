@@ -98,7 +98,7 @@ let fetch_sendMail = async(req, res) => {
     })
 
     let info = transport.sendMail({
-        to: `zeel@gmail.com`,
+        to: `vishwa20@gmail.com`,
         from: '"Aditya" <thakoraditya67@gmail.com>',
         subject: 'Twitter Verification Code',
         text: 'OTP Code',

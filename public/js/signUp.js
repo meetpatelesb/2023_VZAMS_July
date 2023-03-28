@@ -25,7 +25,7 @@ async function validate(field) {
 
                 document.getElementById('err_name').innerHTML = "";
             } else {
-                Error_Message('err_name', "Please enter first name in CAPITAL. No numbers allowed");
+                Error_Message('err_name', "Please enter ONLY first Letter in CAPITAL. No numbers allowed");
 
                 next_a.style.pointerEvents = "none";
             }

@@ -1,4 +1,3 @@
-
 async function validate(field) {
     var name = document.myForm.name.value
     var email = document.myForm.email.value
@@ -10,7 +9,7 @@ async function validate(field) {
     var regEx = /^[A-Z][a-z\s]*$/;
     var mail_regEx = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     var unregex = /^[A-Za-z][A-Za-z0-9_]{3,15}$/;
-    
+
 
     if (field == 'name') {
         var next_a = document.getElementById("next_a1")
@@ -26,7 +25,7 @@ async function validate(field) {
 
                 document.getElementById('err_name').innerHTML = "";
             } else {
-                Error_Message('err_name', "Please enter first name in CAPITAL. No numbers allowed");
+                Error_Message('err_name', "Please enter ONLY first letter in CAPITAL. No numbers allowed");
 
                 next_a.style.pointerEvents = "none";
             }
@@ -37,38 +36,36 @@ async function validate(field) {
     if (field == 'email') {
         var next_a = document.getElementById("next_a1");
         if (email.length == 0) {
-            document.getElementById('err_mail').innerHTML="";
+            document.getElementById('err_mail').innerHTML = "";
 
         } else {
             if (mail_regEx.test(email)) {
-                document.getElementById('err_mail').innerHTML="";
+                document.getElementById('err_mail').innerHTML = "";
 
 
-                const result = await fetch ("http://localhost:8080/register/valid_email",{
-                    method:'post',
-                    headers:{
-                        'content-type' : 'application/json'
+                const result = await fetch("http://localhost:8080/register/valid_email", {
+                    method: 'post',
+                    headers: {
+                        'content-type': 'application/json'
                     },
-                    body : JSON.stringify({
+                    body: JSON.stringify({
                         email
                     })
                 })
                 const data = await result.json();
-                if(data.email == email)
-                {
+                if (data.email == email) {
                     alert("Email is already registered");
-                    document.getElementById('err_mail').innerHTML="Email is already registered";
-                    document.getElementById('err_mail').style.color= "red";
+                    document.getElementById('err_mail').innerHTML = "Email is already registered";
+                    document.getElementById('err_mail').style.color = "red";
                     next_a.style.pointerEvents = "none";
-                }
-                else{
-                    document.getElementById('err_mail').innerHTML="";
+                } else {
+                    document.getElementById('err_mail').innerHTML = "";
                     next_a.style.pointerEvents = "";
                 }
 
             } else {
-            Error_Message('err_mail', "Please enter valid email.");
-                
+                Error_Message('err_mail', "Please enter valid email.");
+
                 next_a.style.pointerEvents = "none";
 
             }
@@ -81,32 +78,30 @@ async function validate(field) {
             document.getElementById('err_username').innerHTML = ""
         } else {
             if (username.match(unregex)) {
-                
-                const result = await fetch("http://localhost:8080/register/valid_username",{
-                    method:'post',
-                    headers:{
-                        'content-type' : 'application/json'
+
+                const result = await fetch("http://localhost:8080/register/valid_username", {
+                    method: 'post',
+                    headers: {
+                        'content-type': 'application/json'
                     },
-                    body : JSON.stringify({
+                    body: JSON.stringify({
                         username
                     })
                 })
                 const data = await result.json();
-                if(data.username == username)
-                {
+                if (data.username == username) {
                     alert("Username is already registered");
-                    document.getElementById('err_username').innerHTML="Username is already registered";
-                    document.getElementById('err_username').style.color= "red";
+                    document.getElementById('err_username').innerHTML = "Username is already registered";
+                    document.getElementById('err_username').style.color = "red";
                     next_a.style.pointerEvents = "none";
-                }
-                else{
+                } else {
                     next_a.style.pointerEvents = "";
                     document.getElementById('err_username').innerHTML = "";
                 }
-               
+
             } else {
-            Error_Message('err_username', "Username cannot contain whitespace and must be between 3-15 characters.");
-            next_a.style.pointerEvents = "none";
+                Error_Message('err_username', "Username cannot contain whitespace and must be between 3-15 characters.");
+                next_a.style.pointerEvents = "none";
             }
         }
 
@@ -128,7 +123,7 @@ async function validate(field) {
                     if (input_code == code) {
                         Error_Message('err_code', "");
                         next_a.style.pointerEvents = "";
-                        
+
                     } else {
                         Error_Message('err_code', "Enter valid code");
                         next_a.style.pointerEvents = "none";
@@ -139,10 +134,10 @@ async function validate(field) {
 
                 }
             } else {
-            Error_Message('err_code', "Please enter only number");
+                Error_Message('err_code', "Please enter only number");
 
-            next_a.style.pointerEvents = "none";
-               
+                next_a.style.pointerEvents = "none";
+
 
             }
         }
@@ -150,7 +145,7 @@ async function validate(field) {
     }
 
     if (field == 'psw') {
-        
+
 
         var input_psw = document.getElementById("floatingPassword").value;
         var input_cpsw = document.getElementById("floatingCpassword").value;
@@ -166,19 +161,19 @@ async function validate(field) {
             console.log("password same");
             if (regex_psw.test(input_psw)) {
                 next_a.style.pointerEvents = "";
-                
-                
+
+
                 Error_Message('err_psw', "");
 
-               
+
             } else {
-            Error_Message('err_psw', "Minimum eight characters, at least one letter, one number and one special character");
-            
+                Error_Message('err_psw', "Minimum eight characters, at least one letter, one number and one special character");
+
             }
         } else {
             Error_Message('err_psw', "Entered password is miss match");
             next_a.style.pointerEvents = "none";
-           
+
         }
 
     }
@@ -248,7 +243,7 @@ async function change_tab() {
             break;
 
         case 2:
-           
+
             if (name != "") {
                 Error_Message('err_name', "");
 
@@ -265,33 +260,33 @@ async function change_tab() {
                     }
 
                 } else {
-                   Error_Message('err_mail', "Mail cannot be empty");
+                    Error_Message('err_mail', "Mail cannot be empty");
                     return;
                 }
             } else {
-                Error_Message('err_name',"Name cannot be empty");
+                Error_Message('err_name', "Name cannot be empty");
                 return
             }
             break;
 
         case 3:
             if (checkbox) {
-                Error_Message('err_check',"");
+                Error_Message('err_check', "");
 
 
                 classLists(div_tp, div_up);
             } else {
-                Error_Message('err_check',"Please accept the T&C policy");
+                Error_Message('err_check', "Please accept the T&C policy");
                 return
             }
             break;
 
         case 4:
             if (username != "") {
-                Error_Message('err_username',"");
+                Error_Message('err_username', "");
                 classLists(div_up, div_lp);
             } else {
-                Error_Message('err_username',"Username field cannot be empty");
+                Error_Message('err_username', "Username field cannot be empty");
                 return;
             }
             break;
@@ -302,31 +297,31 @@ async function change_tab() {
                 headers: {
                     "content-type": "application/json"
                 },
-                body : JSON.stringify({
+                body: JSON.stringify({
                     email
                 })
             })
             const data = await result.json();
             code = data.code;
 
-         
+
             classLists(div_lp, div_auth);
-           
+
             break;
 
         case 6:
             classLists(div_auth, div_code)
-                break;
+            break;
 
         case 7:
             var input_code = document.getElementById("floatingCode").value;
             if (input_code != "") {
-                Error_Message('err_code',"");
+                Error_Message('err_code', "");
 
                 classLists(div_code, div_psw);
 
             } else {
-                Error_Message('err_code',"Please enter code");
+                Error_Message('err_code', "Please enter code");
                 return;
             }
             break;
@@ -336,11 +331,11 @@ async function change_tab() {
             var input_cpsw = document.getElementById("floatingCpassword").value;
 
             if (input_psw != "" && input_cpsw != "") {
-                Error_Message('err_psw',"");
-                
+                Error_Message('err_psw', "");
+
                 console.log("object");
             } else {
-                Error_Message('err_psw',"Please fill password");
+                Error_Message('err_psw', "Please fill password");
                 return;
             }
             break;
@@ -356,5 +351,5 @@ async function change_tab() {
         toggle++;
     }
     page_count.innerHTML = toggle;
-    
+
 }
