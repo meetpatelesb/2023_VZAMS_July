@@ -3,11 +3,11 @@ const queryExecute = require('../config/queryExecute');
 const { use } = require('../routes/commentRoutes');
 const bcrypt = require('bcryptjs');
 
-var fetch_Comment = async (req, res) => {
-var user_id = req.session.user_id;
+var fetch_Comment = async(req, res) => {
+    var user_id = req.session.user_id;
     var cmt = req.body.comment;
     var tweet_id = req.body.tweet_id;
-    console.log("tweet_id",tweet_id);
+    console.log("tweet_id", tweet_id);
 
     var countcm = `SELECT comment_count FROM twitter.tweet_master WHERE tweet_id = ${tweet_id};`
     var countex = await queryExecute(countcm);
@@ -23,9 +23,9 @@ var user_id = req.session.user_id;
     // show comments
     var showcomment = `SELECT * FROM twitter.comment_master where tweet_id = '${tweet_id}' order  by comment_create desc`;
     var comments = await queryExecute(showcomment);
-   
+
     // increase comment count
-    var countsql =`
+    var countsql = `
     UPDATE twitter.tweet_master 
     SET comment_count = ${count}
     WHERE tweet_id = ${tweet_id}; `
@@ -34,7 +34,7 @@ var user_id = req.session.user_id;
     res.json({ comments: comments });
 }
 
-var show_Comment = async (req, res) => {
+var show_Comment = async(req, res) => {
     console.log("heyy");
     let tweet_id = req.query.id;
     console.log(tweet_id);
@@ -42,4 +42,4 @@ var show_Comment = async (req, res) => {
     var comments = await queryExecute(showcomment);
     res.json({ comments: comments });
 }
-module.exports = { fetch_Comment, show_Comment};
+module.exports = { fetch_Comment, show_Comment };

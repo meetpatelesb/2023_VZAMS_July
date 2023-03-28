@@ -170,7 +170,10 @@ app.use("/comm", comment);
 app.use("/tweet_like", like)
 
 
+let search = require('./src/routes/searchRoutes');
+// let sessionCheck = require('./src/middleWare/session')
 
+app.use('/', search);
 
 app.get('/edit', sessionCheck, (req, res) => {
     res.render('editProfile')
