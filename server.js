@@ -1,5 +1,3 @@
-
-
 // // Packages
 // const express = require('express');
 // const app = express();
@@ -128,7 +126,8 @@ let signIn = require('./src/routes/signInRoutes');
 let profilePage = require('./src/routes/profilePageRoutes');
 let homePage = require('./src/routes/homePageRoutes');
 var retweet = require("./src/routes/retweetRoutes.js");
-var comment = require("./src/routes/commentRoutes")
+var comment = require("./src/routes/commentRoutes");
+var like = require("./src/routes/likeRoutes")
 
 
 let sessionCheck = require('./src/middleWare/session')
@@ -167,7 +166,9 @@ app.use('/', signIn);
 app.use('/', sessionCheck, profilePage);
 app.use('/', sessionCheck, homePage);
 app.use("/tweet", retweet);
-app.use("/comm", comment)
+app.use("/comm", comment);
+app.use("/tweet_like", like)
+
 
 
 

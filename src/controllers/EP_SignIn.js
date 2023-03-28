@@ -16,7 +16,7 @@ let fetch_signIn_post = async(req, res) => {
 
     var sql = `select user_password,user_id from user_master where user_email="${email}"`;
     var result = await queryExecute(sql);
-  
+
     let passas = await bcrypt.compare(pass, result[0]['user_password']);
 
     if ((passas)) {

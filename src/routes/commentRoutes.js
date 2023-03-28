@@ -5,7 +5,7 @@ let router = express.Router();
 let multer = require('../config/multer.js')
 
 
-const {  fetch_Comment, show_Comment  } = require('../controllers/EP_Comment');
+const { fetch_Comment, show_Comment } = require('../controllers/EP_Comment');
 
 router.post('/comment', fetch_Comment);
 

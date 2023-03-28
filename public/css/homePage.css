@@ -153,8 +153,8 @@ side bar started-----------------------
     }
 
     .profile-img {
-        width: 120px;
-        height: 120px;
+        height: 50px;
+        width: 50px;
         object-fit: cover;
         border: 4px solid #fefefd;
         border-radius: 50%;
@@ -217,10 +217,7 @@ first tweet
         /* position: relative; */
     }
 
-    .title img {
-        height: 50px;
-        width: 50px;
-    }
+    .title-img {}
 
     .tweet {
         display: flex;
@@ -270,6 +267,7 @@ tweet showing start
     .tweets {
         display: flex;
         margin-top: 40px;
+        border-bottom: 0.5px solid #bfc3c6;
     }
 
     .tweets a i {
@@ -283,6 +281,7 @@ tweet showing start
         border-radius: 10px;
         width: 612px;
         text-align: justify;
+        word-wrap: anywhere;
     }
 
     .tweets-area a {
@@ -296,9 +295,9 @@ tweet showing start
         /* margin-left: 40px; */
     }
 
-    .tweets-area .tweet-img {
-        height: 200px;
-        width: 200px;
+    .tweet-img {
+        width: 100%;
+        border-radius: 10px;
     }
 
     .tweet-area .tweet-video {
@@ -314,12 +313,14 @@ tweet showing start
     .like-icons {
         display: flex;
         flex-wrap: wrap;
+        justify-content: space-between;
         margin-top: 20px;
     }
 
+    /* 
     .icon {
         width: calc(100% / 3);
-    }
+    } */
 
     .icon a {
         display: inline;
@@ -411,6 +412,7 @@ right sidebar starte
 
     .profile-img-s {
         border-radius: 100%;
+
     }
 
     .right-clm-s {
@@ -466,7 +468,7 @@ right sidebar starte
 
     #cmt-box {
         display: none;
-        width: 70%;
+        width: 100%;
         height: auto;
         margin-top: 20px;
     }
@@ -565,4 +567,14 @@ right sidebar starte
     .show-pro {
         display: flex;
         flex-direction: column;
+    }
+
+    .user {
+        width: 50%;
+    }
+
+    .more {
+        display: flex;
+        justify-content: flex-end;
+        width: 50%;
     }

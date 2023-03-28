@@ -1,42 +1,40 @@
 {
-  "name": "project-vzams_twitter",
-  "version": "1.0.0",
-  "description": "Assign group Project for Implement Twitter functionality.",
-  "main": "With Flows",
-  "scripts": {
-    "test": "not defined",
-    "start": "nodemon server.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/meetpatelesb/2023_VZAMS_July.git"
-  },
-  "keywords": [
-    "no",
-    "keywords"
-  ],
-  "author": "no author",
-  "license": "UNLICENSED",
-  "bugs": {
-    "url": "https://github.com/meetpatelesb/2023_VZAMS_July/issues"
-  },
-  "homepage": "https://github.com/meetpatelesb/2023_VZAMS_July#readme",
-  "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "body-parser": "^1.20.2",
-    "cookie-parser": "^1.4.6",
-    "dotenv": "^16.0.3",
-    "ejs": "^3.1.9",
-    "express": "^4.18.2",
-    "express-session": "^1.17.3",
-    "expresss": "^0.0.0",
-    "flows": "^0.0.0",
-    "googleapis": "^113.0.0",
-    "jsonwebtoken": "^9.0.0",
-    "multer": "^1.4.5-lts.1",
-    "mysql2": "^3.2.0",
-    "nodemailer": "^6.9.1",
-    "nodemon": "^2.0.21",
-    "with": "^7.0.2"
-  }
+    "name": "project-vzams_twitter",
+    "version": "1.0.0",
+    "description": "Assign group Project for Implement Twitter functionality.",
+    "main": "With Flows",
+    "scripts": {
+        "test": "not defined",
+        "start": "nodemon server.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/meetpatelesb/2023_VZAMS_July.git"
+    },
+    "keywords": [
+        "no",
+        "keywords"
+    ],
+    "author": "no author",
+    "license": "UNLICENSED",
+    "bugs": {
+        "url": "https://github.com/meetpatelesb/2023_VZAMS_July/issues"
+    },
+    "homepage": "https://github.com/meetpatelesb/2023_VZAMS_July#readme",
+    "dependencies": {
+        "bcryptjs": "^2.4.3",
+        "body-parser": "^1.20.2",
+        "cookie-parser": "^1.4.6",
+        "dotenv": "^16.0.3",
+        "ejs": "^3.1.9",
+        "express": "^4.18.2",
+        "express-session": "^1.17.3",
+        "flows": "^0.0.0",
+        "jsonwebtoken": "^9.0.0",
+        "multer": "^1.4.5-lts.1",
+        "mysql2": "^3.2.0",
+        "nodemailer": "^6.9.1",
+        "nodemon": "^2.0.21",
+        "with": "^7.0.2"
+    }
 }
