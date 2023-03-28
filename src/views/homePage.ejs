@@ -97,6 +97,8 @@
                                 <strong><%=userName[0].user_name%></strong>
                                 <span class="tag"><%=userName[0].user_username%></span>
                             </div>
+
+                            <span></span>
                         </div>
                         <div class="pro-more">
                             <a href="">
@@ -151,8 +153,9 @@
                         </div>
                         <div class="right-clm">
                             <div>
-                                <strong id="">Meet Vaghasiya</strong>
-                                <span class="tag">@Meet_patel07</span>
+                                <strong id=""><%=tweets[j].user_name%></strong>
+                                <span class="tag"><%=tweets[j].user_username%></span>
+                                <span class="tweet_time"><%=tweet_create[j]%></span>
                                 <a href="">
                                     <i class="bi bi-three-dots"></i>
                                 </a>
