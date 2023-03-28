@@ -1,7 +1,9 @@
-var express = require('express');
-var routes = express.Router();
-var fetch_like = require("../controllers/EP_like");
-var fetch_like = require("../controllers/EP_retweet");
+let express = require('express');
+let router = express.Router();
+let multer = require('../config/multer.js')
 
-router.post("/", fetch_like)
-router.post("/like", fetch_retweet)
+
+const { fetch_like } = require('../controllers/EP_like');
+
+router.post("/like", fetch_like);
+module.exports = router;
