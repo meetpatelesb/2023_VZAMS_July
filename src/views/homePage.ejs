@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer"
 />
 
+<script type="module" src="https://cdn.jsdelivr.net/npm/emoji-picker-element@^1/index.js"></script>
 <link rel="stylesheet" href="https://unicons.iconscout.com/release/v3.0.6/css/line.css">
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
@@ -88,8 +89,12 @@
                         </div>
                         <div class="right-clm">
                             <div>
-                                <strong><%=userName[0].user_name%></strong>
-                                <span class="tag"><%=userName[0].user_username%></span>
+                                <strong>
+                                    <%=userName[0].user_name%>
+                                </strong>
+                                <span class="tag">
+                                    <%=userName[0].user_username%>
+                                </span>
                             </div>
                         </div>
                         <div class="pro-more">
@@ -165,8 +170,10 @@
                                                 <div class="like-icons">
                                                     <div class="icon">
                                                         <%=tweets[j].tweet_id%>
-                                                            <a href="" class="fa fa-reply" id="reply" onclick="like('<%=tweets[j].tweet_id%>')"></a>
-                                                            <span class="reply-count" id="reply-count">1000</span>
+                                                            <a class="fa-solid fa-comment" id="reply" onclick="popcomment('<%=tweets[j].tweet_id%>','<%=j%>')"></a>
+                                                            <span class="reply-count" id="reply-count">
+                                                            <%=totalcmt[j].comment_count%>
+                                                        </span>
                                                     </div>
                                                     <div class="icon">
                                                         <!-- <i class="fa-brands fa-twitter"></i> -->
@@ -178,6 +185,40 @@
                                                         <span class="retweet-count" id="span<%=tweets[j].tweet_id%>">
                                                         <%=tweets[j].retweet_like_count%>
                                                     </span>
+                                                    </div>
+                                                </div>
+                                                <div class="cmt" name="cmt-box" id="cmt-box">
+                                                    <div class="cmt-enter">
+                                                        <div class="head">
+                                                            <h5>Type your Reply.. </h5>
+                                                        </div>
+                                                        <div class="cmt-content">
+                                                            <form>
+                                                                <div class="cmt-textarea">
+                                                                    <textarea class="cmt border border-secondary" id="cmt" onblur="alertcmt('<%=tweets[j].tweet_id%>','<%=j%>')" name="cmt"></textarea>
+                                                                </div>
+                                                                <p id="alert"></p>
+                                                                <div class="cmt-footer">
+                                                                    <div class="btn1">
+                                                                        <a class="far fa-grin-beam" class="emojiclk" id="emojiclk" onclick="emoji()"></a>
+                                                                        <emoji-picker id="emoji" class="emoji" style="display: none;"></emoji-picker>
+                                                                    </div>
+                                                                    <div class="btns">
+                                                                        <div class="btn3"><a class="btn btn-secondary" id="close" onclick="closecomment('<%=tweets[j].tweet_id%>','<%=j%>')">Close</a>
+                                                                        </div>
+                                                                        <div class="btn2" id="savecommentbtn" name="savecommentbtn">
+
+                                                                            <!-- <input type="submit" value="Comment" id="comment"
+                                                                        class="btn btn-primary"
+                                                                        onclick="savecomment( <%=tweets[j].tweet_id%>)"> -->
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="cmt-show" id="cmt-show" name="cmt-show">
+
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
                                                     </div>
                                                 </div>
 
@@ -197,7 +238,7 @@
             <div class="search-bar">
 
                 <div><i class="bi bi-search"></i></div>
-                <input class="search" placeholder="Search Tweets" id="search-text" onchange="search()" />
+                <input class="search" placeholder="Search Tweets" id="search-text" onkeyup="search()" />
 
             </div>
             <div class="search_profiles">
@@ -245,6 +286,6 @@
     });
     console.log(userLike);
 </script>
-<script src="/js/homePage.js"></script>
+<script src="js/homePage.js"></script>
 
 </html>

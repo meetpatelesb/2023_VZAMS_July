@@ -10,6 +10,10 @@ var page_home = async function(req, res) {
     var likes = `select retweet_like_count from tweet_master`;
     var showLikes = await queryExecute(likes);
     var retweet_like_count = showLikes;
+    //comment show
+    var countcmt = `SELECT comment_count FROM twitter.tweet_master order by tweet_create desc;`
+    var totalcmt = await queryExecute(countcmt);
+    console.log("totalcmt", countcmt);
 
     var already = `select tweet_id from retweet_master where user_id = ${user_id} AND active =  1`
     var alreadyLiked = await queryExecute(already);
@@ -54,7 +58,7 @@ var page_home = async function(req, res) {
 
 
 
-    res.render('../src/views/homePage', { port: process.env.PORT, tweets, retweet_like_count, userLiked, userName, whoFollow });
+    res.render('../src/views/homePage', { port: process.env.PORT, tweets, retweet_like_count, userLiked, userName, whoFollow, totalcmt });
 
 };
 

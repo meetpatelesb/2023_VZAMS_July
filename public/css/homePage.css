@@ -173,6 +173,10 @@ side bar started-----------------------
         background-color: rgba(230, 231, 232, 200);
     }
     
+    .follow-btn {
+        /* width: calc( 100% /3); */
+    }
+    
     .profile-btn div a i {
         color: black;
     }
@@ -263,7 +267,7 @@ tweet showing start
     
     .tweets a i {
         color: black;
-        margin-left: 270px;
+        margin-left: 180px;
     }
     
     .tweet-text {
@@ -413,7 +417,7 @@ right sidebar starte
     }
     
     .follow-btn-s {
-        width: calc( 100% /3);
+        width: calc(100% /3);
         /* margin-left: 230px; */
     }
     
@@ -446,4 +450,89 @@ right sidebar starte
         /* color: red; */
         /* background-color: red; */
         color: black
+    }
+    /* comment */
+    
+    #cmt-box {
+        display: none;
+        width: 70%;
+        height: auto;
+        margin-top: 20px;
+    }
+    
+    .cmt {
+        width: 100%;
+        height: 100px;
+        resize: none;
+        font-size: 20px;
+        border-radius: 5px;
+    }
+    
+    .cmt-footer {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: flex-start;
+    }
+    
+    .cmt-show {
+        /* margin-left: -6px; */
+        margin-top: 25px;
+        /* background-color: lightblue; */
+        width: 100%;
+        height: 110px;
+        overflow: auto;
+        overflow-x: hidden;
+    }
+    
+    .emoji {
+        justify-content: flex-start;
+    }
+    
+    .btn1 {
+        display: flex;
+        justify-content: flex-start;
+        width: 50%;
+    }
+    
+    .btn2 {
+        display: flex;
+        justify-content: flex-end;
+    }
+    
+    .btns {
+        width: 50%;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+    }
+    
+    #emoji {
+        width: 100%;
+    }
+    
+    #close {
+        display: block;
+    }
+    
+    .comments {
+        display: flex;
+        flex-direction: row;
+    }
+    
+    .comm-sec {
+        display: flex;
+        width: 100%;
+        flex-direction: row;
+    }
+    
+    .cmt-p {
+        font-weight: 900;
+        font-size: 20px;
+        padding: 5px;
+    }
+    
+    .cmt-tag {
+        padding: 8px;
+        font-size: 15px;
     }
