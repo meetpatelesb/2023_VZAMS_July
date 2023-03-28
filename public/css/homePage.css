@@ -70,7 +70,7 @@ side bar started-----------------------
         height: 100%;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        /* justify-content: space-between; */
     }
 
     .twitter-icon {
@@ -140,7 +140,7 @@ side bar started-----------------------
         display: flex;
         flex-direction: row;
         margin: 30px 0;
-        padding: 12px;
+        /* padding: 12px; */
         cursor: pointer;
         width: calc(100% + 12px);
         border-radius: 9999px;
@@ -212,6 +212,8 @@ first tweet
 
     .title {
         padding-top: 110px;
+        display: flex;
+        flex-direction: column;
         /* position: relative; */
     }
 
@@ -267,7 +269,7 @@ tweet showing start
 
     .tweets {
         display: flex;
-        margin-top: 20px;
+        margin-top: 40px;
     }
 
     .tweets a i {
@@ -312,6 +314,7 @@ tweet showing start
     .like-icons {
         display: flex;
         flex-wrap: wrap;
+        margin-top: 20px;
     }
 
     .icon {
@@ -545,4 +548,21 @@ right sidebar starte
     .cmt-tag {
         padding: 8px;
         font-size: 15px;
+    }
+
+    .emojit {
+        color: #089de8;
+        margin: 10px;
+    }
+
+    .sec-menu {
+
+        display: flex;
+        flex-direction: column;
+        margin-top: 30px;
+    }
+
+    .show-pro {
+        display: flex;
+        flex-direction: column;
     }

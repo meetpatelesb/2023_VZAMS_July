@@ -42,7 +42,7 @@
         }
         }
 
-    //comment alert
+//comment alert
     function alertcmt(id, j) {
         var com = document.getElementsByName('cmt');
         console.log(com[j].value);
@@ -107,17 +107,18 @@
  //show emojis
     let clk = 1;
     function emoji() {
-        var clk = document.getElementById('emojiclk')
+        var clk = document.getElementsByClassName('emojiclk')
+        console.log("hello");
         if (!clk == 0) {
             console.log("hello")
-            document.getElementById('emoji').style.display = "block";
+            document.getElementsByClassName('emoji').style.display = "block";
             document.querySelector('emoji-picker').addEventListener('emoji-click', e => {
-                document.getElementById("cmt").value += e.detail.unicode
+                document.getElementsByClassName("cmt").value += e.detail.unicode
             })
             clk = 0;
 
         } else {
-            document.getElementById('emoji').style.display = "none";
+            document.getElementsByClassName('emoji').style.display = "none";
             clk = 1;
         }
     }
