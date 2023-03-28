@@ -9,7 +9,7 @@ var fetch_Comment = async(req, res) => {
     var tweet_id = req.body.tweet_id;
     console.log("tweet_id", tweet_id);
 
-    var countcm = `SELECT comment_count FROM twitter.tweet_master WHERE tweet_id = ${tweet_id};`
+    var countcm = `SELECT comment_count FROM tweet_master WHERE tweet_id = ${tweet_id};`
     var countex = await queryExecute(countcm);
     var count = countex[0].comment_count;
     // console.log("count",count);
@@ -21,12 +21,12 @@ var fetch_Comment = async(req, res) => {
 
 
     // show comments
-    var showcomment = `SELECT * FROM twitter.comment_master where tweet_id = '${tweet_id}' order  by comment_create desc`;
+    var showcomment = `SELECT * FROM comment_master where tweet_id = '${tweet_id}' order  by comment_create desc`;
     var comments = await queryExecute(showcomment);
 
     // increase comment count
     var countsql = `
-    UPDATE twitter.tweet_master 
+    UPDATE tweet_master 
     SET comment_count = ${count}
     WHERE tweet_id = ${tweet_id}; `
     var comment_count = await queryExecute(countsql);
@@ -38,7 +38,7 @@ var show_Comment = async(req, res) => {
     console.log("heyy");
     let tweet_id = req.query.id;
     console.log(tweet_id);
-    var showcomment = `SELECT * FROM twitter.comment_master where tweet_id = '${tweet_id}' order  by comment_create desc`;
+    var showcomment = `SELECT * FROM comment_master where tweet_id = '${tweet_id}' order  by comment_create desc`;
     var comments = await queryExecute(showcomment);
     res.json({ comments: comments });
 }
