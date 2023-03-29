@@ -43,6 +43,7 @@
 
 
 
+
 // Packages
 
 const express = require('express');
@@ -56,17 +57,16 @@ let forgetPassword = require('./src/routes/forgotPasswordRoutes');
 let signUp = require('./src/routes/signUpRoutes');
 let signIn = require('./src/routes/signInRoutes');
 let profilePage = require('./src/routes/profilePageRoutes');
+let editPage = require('./src/routes/editProfile');
 let homePage = require('./src/routes/homePageRoutes');
 var retweet = require("./src/routes/retweetRoutes.js");
-
-
+// let meet_home = require('./src/routes/meetRoutes')
+let search = require('./src/routes/searchRoutes');
 let sessionCheck = require('./src/middleWare/session')
 
 
 // ejs templete view engine
 app.set('view engine', 'ejs');
-
-
 
 // Assets
 app.use("/css", express.static(__dirname + '/public/css'));
@@ -95,8 +95,16 @@ app.use('/', signUp);
 app.use('/', signIn);
 app.use('/', sessionCheck, profilePage);
 app.use('/', sessionCheck, homePage);
+app.use('/', sessionCheck, editPage);
 app.use("/tweet", retweet);
 
+// home api 
+
+
+
+// search api
+
+app.use('/', search);
 
 
 app.get('/edit', sessionCheck, (req, res) => {

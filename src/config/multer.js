@@ -9,7 +9,7 @@ const path = require('path');
 // upload using MULTER
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, '/home/aditya-thakor/Desktop/VZAMS/project/twitter/public/upload') //folder name
+        cb(null, 'public/upload') //folder name
     },
     filename: (req, file, cb) => {
         console.log(file)

@@ -138,7 +138,7 @@ async function validate(field) {
     if (field == 'code') {
         var next_a = document.getElementById("next_3");
         var input_code = document.getElementById("floatingCode").value;
-      
+        console.log(input_code);
         next_a.style.pointerEvents = '';
 
 
@@ -162,7 +162,7 @@ async function validate(field) {
                     })
 
                     let data = await res.json();
-                   
+                    console.log(data.status);
                     if (data.status == 200) {
                         Error_Message('err_code', '');
                     } else {
@@ -191,7 +191,7 @@ async function validate(field) {
         var input_psw = document.getElementById("floatingPassword").value;
         var input_cpsw = document.getElementById("floatingCpassword").value;
         var next_a = document.getElementById('submit_btn');
-        
+        console.log(input_psw);
         if (input_psw.length == 0) {
             next_a.style.pointerEvents = "";
 
@@ -199,7 +199,7 @@ async function validate(field) {
 
         }
         if (input_psw == input_cpsw) {
-           
+            console.log("password same");
             if (regex_psw.test(input_psw)) {
                 next_a.style.pointerEvents = "";
 

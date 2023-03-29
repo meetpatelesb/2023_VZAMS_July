@@ -22,7 +22,7 @@ function change_tab() {
 
         case 1:
             var text_value = document.getElementById("floatingInput").value;
-            
+            console.log(text_value);
             if (text_value != "") {
                 let func_fetch = async(text_value) => {
 
@@ -36,7 +36,7 @@ function change_tab() {
                         })
                     })
                     let data = await res.json();
-                 
+                    console.log(data.status);
                     if (data.status == 200) {
                         classLists(div_auth, div_psw);
                     } else if (data.status == 404) {
@@ -54,7 +54,8 @@ function change_tab() {
         case 2:
             var psw = document.getElementById('floatingInput3').value;
             let email = document.getElementById('floatingInput').value;
-           
+            console.log(email);
+            console.log(psw);
 
             break;
 
@@ -68,7 +69,7 @@ function change_tab() {
     } else {
         toggle++;
     }
-
+    console.log(toggle);
 
 }
 
@@ -97,10 +98,10 @@ async function check_submit(event) {
 
             })
             let data = await res.json();
-            
+            console.log(data.status)
 
             if (data.status == 200) {
-                location.assign('/homePage');
+                location.assign('/homePage')
             } else {
                 Error_Message('warning2', 'Incorrect Password');
                 return;
