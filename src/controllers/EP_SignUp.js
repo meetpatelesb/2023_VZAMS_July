@@ -28,6 +28,7 @@ let page_signUp_post = async(req, res) => {
 
         let profile = `INSERT INTO profile_master (profile_name,profile_username, user_id,dob) values
             ('${name}','${username}',${insertedUserId},'${dob}')`;
+        console.log(profile)
         let result = await queryExecute(profile);
 
 

@@ -129,6 +129,8 @@ let retweet = require("./src/routes/retweetRoutes.js");
 let editPage = require('./src/routes/editProfileRoutes');
 var comment = require("./src/routes/commentRoutes");
 var like = require("./src/routes/likeRoutes")
+var twitterBlue = require("./src/routes/tblueRoutes")
+var twitterLogout = require("./src/routes/logoutRoutes")
 
 
 let sessionCheck = require('./src/middleWare/session')
@@ -169,6 +171,8 @@ app.use('/', sessionCheck, homePage);
 app.use("/tweet", retweet);
 app.use("/comm", comment);
 app.use("/tweet_like", like)
+app.use("/tweet_blue", twitterBlue)
+app.use("/tweet_logout", twitterLogout)
 
 
 let search = require('./src/routes/searchRoutes');

@@ -2,6 +2,7 @@
 
 //show comment box
 
+
 async function popcomment(id, j) {
     console.log("hello");
     let cmt_box = document.getElementsByName('cmt-box');

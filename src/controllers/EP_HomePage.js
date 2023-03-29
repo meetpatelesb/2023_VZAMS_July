@@ -5,6 +5,7 @@ var moment = require("moment");
 const { query } = require('../config/connection');
 
 
+
 var page_home = async function(req, res) {
     var user_id = req.session.user_id;
     var tweet_id = req.body.tweet_id
@@ -15,6 +16,7 @@ var page_home = async function(req, res) {
     var countcmt = `SELECT comment_count FROM tweet_master order by tweet_create desc;`
     var totalcmt = await queryExecute(countcmt);
     // console.log("totalcmt", countcmt);
+
 
     var already = `select tweet_id from retweet_master where user_id = ${user_id} AND active =  1`
     var alreadyLiked = await queryExecute(already);
@@ -41,7 +43,7 @@ var page_home = async function(req, res) {
     //like
     var likeCount = `SELECT like_count from tweet_master;`
     var likeCount_result = await queryExecute(likeCount);
-    // console.log(likeCount_result);
+    // // console.log(likeCount_result);
     var like_count = likeCount_result
 
     var already_liked = `SELECT like_tweet_id from like_master WHERE like_user_id =${user_id} AND activate= 1;`
@@ -87,10 +89,12 @@ var page_tweet_create = async function(req, res) {
     var { tweet_text } = req.body;
 
 
+
     if (req.file != undefined) {
         if ((req.file.filename).includes('.mp4')) {
-            var user_id = req.seesion.user_id;
-            var user_id = req.seesion.user_id;
+
+
+            var user_id = req.session.user_id;
             var tweet_query = `INSERT INTO tweet_master ( tweet_content, user_id,tweet_video, like_count) VALUES ( '${tweet_text}', ${user_id}, '${req.file.filename}', '11')`;
             var tweetResult = await queryExecute(tweet_query);
             res.redirect('/homePage');
