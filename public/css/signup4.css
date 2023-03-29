@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+
+}
+
+body {
+    background: #999999 !important;
+}
+
+
+.t_logo img {
+    width: 50px;
+    height: 50px;
+}
+
+.form-box {
+    margin-top: 50px;
+    /* box-shadow: #000;
+    border-width: 2px solid black; */
+}
+
+.form_register {
+    max-width: 550px;
+    max-height: 700px;
+    margin: 0 auto;
+    padding: 20px 50px 30px;
+    background: #FFFFFF;
+    border-radius: 8px;
+}
+
+.twitter-logo {
+    height: 50px;
+    width: 50px;
+}
+
+.v-header h3 {
+    margin-top: 30px;
+    font-size: 34px;
+    font-weight: bold;
+
+}
+
+.v-header p {
+   
+    margin-top: 10px;
+}
+
+.next {
+    display: flex;
+    justify-content: center;
+    background: #000;
+    border-radius: 20px;
+    padding: 5px;
+    margin-top: 100px;
+}
+
+.next a:link,
+.next a:visited,
+.next a:hover {
+    color: #FFF;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.next:hover {
+    background: rgba(0, 0, 0, 0.9);
+    cursor: pointer;
+}
+

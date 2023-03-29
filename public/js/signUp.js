@@ -1,14 +1,14 @@
 async function validate(field) {
     var name = document.myForm.name.value
     var email = document.myForm.email.value
-    var username = document.myForm.username.value
+
 
     var regex = new RegExp(/^[0-9]+$/); // only numbers
     var regex_psw = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/);
     //Minimum eight characters, at least one letter, one number and one special character
     var regEx = /^[A-Z][a-z\s]*$/;
     var mail_regEx = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    var unregex = /^[A-Za-z][A-Za-z0-9_]{3,15}$/;
+    var unregex = /^@[A-Za-z][A-Za-z0-9_]{3,30}$/;
 
 
     if (field == 'name') {
@@ -25,7 +25,7 @@ async function validate(field) {
 
                 document.getElementById('err_name').innerHTML = "";
             } else {
-                Error_Message('err_name', "Please enter first name in CAPITAL. No numbers allowed");
+                Error_Message('err_name', "Please enter ONLY first Letter in CAPITAL. No numbers allowed");
 
                 next_a.style.pointerEvents = "none";
             }
@@ -75,13 +75,15 @@ async function validate(field) {
     }
 
     if (field == 'username') {
-        console.log(username);
-        var next_a = document.getElementById("next_a4")
-        console.log(next_a);
+        var username = document.myForm.username.value;
+
+        var next_a = document.getElementById("next_a4");
+
         if (username.length == 0) {
             document.getElementById('err_username').innerHTML = ""
         } else {
             if (username.match(unregex)) {
+
 
 
                 const result = await fetch("/signUp/valid_username", {
@@ -94,19 +96,21 @@ async function validate(field) {
                     })
                 })
                 const data = await result.json();
-                console.log(data.username);
+
 
                 if (data.username == username) {
+
                     document.getElementById('err_username').innerHTML = "Username is already registered";
                     document.getElementById('err_username').style.color = "red";
                     next_a.style.pointerEvents = "none";
-                } else {
+                } else if (data.userName == username) {
+
                     next_a.style.pointerEvents = "";
                     document.getElementById('err_username').innerHTML = "";
                 }
 
             } else {
-                Error_Message('err_username', "Username cannot contain whitespace and must be between 3-15 characters.");
+                Error_Message('err_username', "Username must containe @ as firsr character and cannot container white-space and must be between 3-15 characters.");
                 next_a.style.pointerEvents = "none";
             }
         }
@@ -156,7 +160,7 @@ async function validate(field) {
         var input_psw = document.getElementById("floatingPassword").value;
         var input_cpsw = document.getElementById("floatingCpassword").value;
         var next_a = document.getElementById('submit_btn');
-        console.log(input_psw);
+
         if (input_psw.length == 0) {
             next_a.style.pointerEvents = "";
 
@@ -164,7 +168,7 @@ async function validate(field) {
 
         }
         if (input_psw == input_cpsw) {
-            console.log("password same");
+
             if (regex_psw.test(input_psw)) {
                 next_a.style.pointerEvents = "";
 
@@ -189,7 +193,7 @@ async function validate(field) {
 
 var toggle = 1;
 var count = 1;
-console.log(toggle);
+
 
 var div_fp = document.getElementById("auth");
 var div_sp = document.getElementById("second_page");
@@ -339,7 +343,7 @@ async function change_tab() {
             if (input_psw != "" && input_cpsw != "") {
                 Error_Message('err_psw', "");
 
-                console.log("object");
+
             } else {
                 Error_Message('err_psw', "Please fill password");
                 return;

@@ -1,10 +1,11 @@
 body {
     background: rgb(99, 39, 120);
+    overflow: hidden;
 }
 
 .form-control:focus {
     box-shadow: none;
-    border-color: #BA68C8;
+    border-color: #BA68C8
 }
 
 .profile-button {
@@ -41,21 +42,4 @@ body {
     color: #fff;
     cursor: pointer;
     border: solid 1px #BA68C8
-}
-
-.container {
-    width: 600px !important;
-    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
-    margin: 50px;
-}
-
-.profile-setting {
-    padding-top: 10px !important;
-    display: flex;
-    justify-content: center;
-}
-
-.profile-image {
-    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
-    margin-bottom: 10px;
 }

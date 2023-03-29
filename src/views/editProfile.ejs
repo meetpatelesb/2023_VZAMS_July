@@ -2,72 +2,61 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Profile</title>
-    <link rel="stylesheet" href="/css/editProfile.css" />
+    <link rel="stylesheet" href="/css/editProfile.css">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 
 <body>
-    <form action="/editdata" method="post">
-
-        <% for (const x of data) { %>
-
-
-            <div class="container">
+    <div class="container rounded bg-white mt-5 mb-5">
+        <div class="row">
+            <div class="col-md-3 border-right">
+                <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span class="font-weight-bold">Aditya</span>
+                    <span class="text-black-50">@aditya</span><span> </span></div>
+            </div>
+            <div class="col-md-5 border-right">
                 <div class="p-3 py-5">
-                    <div class="profile-setting">
-                        <h4>Profile Settings</h4>
-                    </div>
-
-                    <div class="">
-                        <div class="d-flex flex-column align-items-center text-center py-5">
-                            <img class="rounded-circle mt-5 profile-image" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg" /><span class="font-weight-bold">Aditya</span>
-                            <span class="text-black-50"><%= x.profile_username%></span>
-                        </div>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="text-right">Profile Settings</h4>
                     </div>
 
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="name" name="name" value="<%= x.profile_name%>" placeholder="Name" />
-                        <label for="floatingInput " class="floatingInput text-muted">
-                  Name
-                </label>
-                        <p class="error_message"><span id="err_auth "></span></p>
+
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Name">
+                        <label for="floatingInput " class="floatingInput text-muted "> Name </label>
+                        <p class="error_message "><span id="err_auth "></span></p>
                     </div>
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="text_value" value="<%= x.profile_bio%>" name="bio" placeholder="Bio" />
-                        <label for="floatingInput " class="floatingInput text-muted">
-                  Bio
-                </label>
-                        <p class="error_message"><span id="err_auth "></span></p>
+                    <div class="form-floating mb-3 ">
+
+                        <input type="text" class="form-control " id="text_value " name="bio" placeholder="Bio">
+                        <label for="floatingInput " class="floatingInput text-muted "> Bio </label>
+                        <p class="error_message "><span id="err_auth "></span></p>
                     </div>
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="text_value" value="<%= x.profile_location%>" name="location" placeholder="Location" />
-                        <label for="floatingInput " class="floatingInput text-muted">
-                  Location
-                </label>
-                        <p class="error_message"><span id="err_auth "></span></p>
+                    <div class="form-floating mb-3 ">
+
+                        <input type="text" class="form-control " id="text_value" name="location" placeholder="Location">
+                        <label for="floatingInput " class="floatingInput text-muted "> Location </label>
+                        <p class="error_message "><span id="err_auth "></span></p>
                     </div>
 
-                    <div class="form-floating mb-3">
-                        <input type="date" class="form-control" id="text_value" name="birthdate" value="<%= x.dob%>" />
-                        <label for="floatingInput" class="floatingInput text-muted">
-                  Birth Date
-                </label>
+                    <div class="form-floating mb-3 ">
+
+                        <input type="date" class="form-control" id="text_value" name="birthdate" value="2001-07-06">
+                        <label for="floatingInput" class="floatingInput text-muted"> Birth Date </label>
                         <p class="error_message"><span id="err_auth"></span></p>
                     </div>
-                    <div class="mt-5 text-center">
-                        <button class="btn btn-primary profile-button" type="button ">
-                  Save Profile
-                </button>
-                    </div>
+                    <div class="mt-5 text-center "><button class="btn btn-primary profile-button " type="button ">Save Profile</button></div>
                 </div>
             </div>
-            <%}%>
-    </form>
+
+        </div>
+    </div>
+    </div>
+    </div>
 </body>
 
 </html>

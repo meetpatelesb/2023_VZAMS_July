@@ -31,6 +31,14 @@ body {
     /* color: white; */
 }
 
+.active {
+    display: block;
+}
+
+.in_active {
+    display: none;
+}
+
 .container {
     display: grid;
     grid-template-columns: 243px auto 283px;
@@ -165,7 +173,7 @@ first tweet
 */
 
 .title {
-    padding-top: 110px;
+    margin-top: 20px;
     /* position: relative; */
 }
 
@@ -224,7 +232,8 @@ tweet showing start
 
 .tweets {
     display: flex;
-    margin-top: 20px;
+    padding: 0 16px;
+    margin-bottom: 20px;
 }
 
 .tweets a i {
@@ -318,13 +327,6 @@ right sidebar starte
     text-indent: 7px;
     padding: 10px 30px;
     border: 1px solid #8899A6;
-}
-
-.right-side {
-    position: fixed;
-    right: 100px;
-    display: flex;
-    flex-direction: column;
 }
 
 .right-side div a {
@@ -640,19 +642,6 @@ h1 {
     width: 100%;
 }
 
-
-/* .tabs li div p::after {
-    content: "";
-    display: block;
-    width: 100%;
-    height: 5px;
-    border-radius: 8px;
-    position: absolute;
-    transition-duration: 0.2s;
-    bottom: 0;
-    background-color: #1d9bf0;
-} */
-
 .tabs .active p {
     color: #0f1419;
 }
@@ -760,6 +749,8 @@ tweet showing start
 }
 
 .like-icons {
+    display: flex;
+    width: 500px;
     padding: 5px;
     display: flex;
     justify-content: space-between;
@@ -895,3 +886,12 @@ side bar started-----------------------
 /* 
 sidebar ended---------------------
 */
+
+
+/* 
+
+*/
+
+.cmt-textarea {
+    border: 1px solid red;
+}
