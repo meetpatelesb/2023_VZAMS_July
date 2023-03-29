@@ -57,8 +57,8 @@ let signUp = require('./src/routes/signUpRoutes');
 let signIn = require('./src/routes/signInRoutes');
 let profilePage = require('./src/routes/profilePageRoutes');
 let homePage = require('./src/routes/homePageRoutes');
-var retweet = require("./src/routes/retweetRoutes.js");
-
+let retweet = require("./src/routes/retweetRoutes.js");
+let editPage = require('./src/routes/editProfileRoutes');
 
 let sessionCheck = require('./src/middleWare/session')
 
@@ -67,10 +67,10 @@ let sessionCheck = require('./src/middleWare/session')
 app.set('view engine', 'ejs');
 
 
-
 // Assets
 app.use("/css", express.static(__dirname + '/public/css'));
 app.use("/assets", express.static(__dirname + '/public/assets'));
+app.use("/images",express.static(__dirname + '/public/images'));
 app.use("/js", express.static(__dirname + '/public/js'));
 app.use("/upload", express.static(__dirname + '/public/upload'));
 //access body
@@ -96,11 +96,5 @@ app.use('/', signIn);
 app.use('/', sessionCheck, profilePage);
 app.use('/', sessionCheck, homePage);
 app.use("/tweet", retweet);
-
-
-
-app.get('/edit', sessionCheck, (req, res) => {
-    res.render('editProfile')
-})
-
+app.use("/", sessionCheck, editPage);
 app.listen(process.env.PORT, () => { console.log('http://localhost:' + process.env.PORT); })
