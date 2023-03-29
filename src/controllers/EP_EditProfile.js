@@ -17,15 +17,39 @@ let page_edit = async(req, res) => {
 
 
 let page_editdata = async(req, res) => {
- 
+ var user_id = req.session.user_id;
+    const file = req.files;
+    console.log(file);
+    var select_profile = `select profile_image as dp ,profile_cover as cover from profile_master where user_id=${user_id}`;
+    var users_profile = await queryExecute(select_profile);
+
+
+
+    var cover_imgsrc = req.files.image_cover;
+    var profile_imgsrc = req.files.image;
+
+   console.log("COVER",cover_imgsrc);
+   console.log("PROFILE",profile_imgsrc);
 
     const { name, location, bio, birthdate } = req.body;
-    let editdata = `update profile_master set profile_image = '${req.file.filename}', profile_cover = '${req.file.filename}' ,profile_name = '${name}',profile_bio = '${bio}',
+    if (cover_imgsrc) {
+        cover_imgsrc =  file.image_cover[0].filename;
+        } else {
+        cover_imgsrc = users_profile[0].cover;
+        }
+    
+        if (profile_imgsrc) {
+        profile_imgsrc = file.image[0].filename
+        } else {
+        profile_imgsrc = users_profile[0].dp
+        }
+
+   
+    let editdata = `update profile_master set profile_image = '${profile_imgsrc}', profile_cover = '${cover_imgsrc}' ,profile_name = '${name}',profile_bio = '${bio}',
     profile_location = '${location}',dob='${birthdate}' where user_id = ${req.session.user_id}`;
+    console.log(editdata);
     let data = await queryExecute(editdata);
-
     res.redirect('/user');
-
 }
 
 
