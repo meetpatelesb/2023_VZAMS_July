@@ -20,7 +20,6 @@ const storage_profile = multer.diskStorage({
             cb(null, '/home/siddharth-patel/Desktop/VZAMS/project/pull_request_twitter/twitter/public/assets/profile');
     },
     filename : (req,file,cb)=>{
-        
             cb(null, Date.now() + path.extname(file.originalname));
     
     }
