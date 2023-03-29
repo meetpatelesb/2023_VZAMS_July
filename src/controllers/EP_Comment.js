@@ -7,7 +7,7 @@ var fetch_Comment = async(req, res) => {
     var user_id = req.session.user_id;
     var cmt = req.body.comment;
     var tweet_id = req.body.tweet_id;
-    console.log("tweet_id", tweet_id);
+    // console.log("tweet_id", tweet_id);
 
     var countcm = `SELECT comment_count FROM tweet_master WHERE tweet_id = ${tweet_id};`
     var countex = await queryExecute(countcm);
@@ -35,9 +35,9 @@ var fetch_Comment = async(req, res) => {
 }
 
 var show_Comment = async(req, res) => {
-    console.log("heyy");
+    // console.log("heyy");
     let tweet_id = req.query.id;
-    console.log(tweet_id);
+    // console.log(tweet_id);
     var showcomment = `SELECT * FROM comment_master where tweet_id = '${tweet_id}' order  by comment_create desc`;
     var comments = await queryExecute(showcomment);
     res.json({ comments: comments });
