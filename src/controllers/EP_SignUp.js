@@ -9,12 +9,12 @@ let count = 0;
 
 // Functions
 
-let page_signUp = async (req, res) => {
+let page_signUp = async(req, res) => {
     res.render('../src/views/signUp');
-    
+
 };
 
-let page_signUp_post = async (req, res) => {
+let page_signUp_post = async(req, res) => {
 
     const { name, email, dob, username, psw } = req.body;
 
@@ -28,9 +28,10 @@ let page_signUp_post = async (req, res) => {
 
         let profile = `INSERT INTO profile_master (profile_name,profile_username, user_id,dob) values
             ('${name}','${username}',${insertedUserId},'${dob}')`;
+        console.log(profile)
         let result = await queryExecute(profile);
 
-       
+
         if (!(result)) {
             console.log('No result');
         }
@@ -41,29 +42,29 @@ let page_signUp_post = async (req, res) => {
     res.redirect("/");
 }
 
-let fetch_validEmail = async (req, res) => {
+let fetch_validEmail = async(req, res) => {
     var userEmail = req.body.email;
- 
+
 
     var query = `select user_email from user_master where user_email = '${userEmail.toLowerCase()}'`;
-  
-        var result = await queryExecute(query);
-        if (result.length != 0) {
 
-            res.json({
+    var result = await queryExecute(query);
+    if (result.length != 0) {
 
-                email: userEmail
-            })
-        }
-   
+        res.json({
+
+            email: userEmail
+        })
+    }
+
 
 }
 
 
-let fetch_sendMail = async (req, res) => {
+let fetch_sendMail = async(req, res) => {
 
     let email = req.body.email;
-   
+
 
     if (count == 0) {
         OTP = '';
@@ -118,19 +119,18 @@ let fetch_sendMail = async (req, res) => {
 };
 
 
-let fetch_userName = async (req, res) => {
+let fetch_userName = async(req, res) => {
     var userName = req.body.username;
-   
+
     var query = `select user_username from user_master where user_username = '${userName}'`;
-  
+
     var result = await queryExecute(query);
-   
+
     if (result.length != 0) {
         res.json({
             username: result[0].user_username
         })
-    }
-    else {
+    } else {
         res.json({
             userName
         })

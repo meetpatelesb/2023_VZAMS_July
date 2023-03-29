@@ -2,7 +2,7 @@
 
 let express = require('express');
 let router = express.Router();
-let multer = require('../config/multer.js')
+let multer = require('../config/multer')
 
 
 const { fetch_Comment, show_Comment } = require('../controllers/EP_Comment');

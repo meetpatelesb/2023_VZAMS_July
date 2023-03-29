@@ -1,5 +1,5 @@
 // Require LocalFiles
-const connection = require('../config/connection.js');
+const connection = require('../config/connection');
 const queryExecute = require('../config/queryExecute');
 const bcrypt = require('bcryptjs');
 const nodemailer = require('nodemailer');
