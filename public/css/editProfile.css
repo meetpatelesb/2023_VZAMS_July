@@ -1,11 +1,15 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
 body {
     background: rgb(99, 39, 120);
-    overflow: hidden;
 }
 
 .form-control:focus {
     box-shadow: none;
-    border-color: #BA68C8
+    border-color: #BA68C8;
 }
 
 .profile-button {
@@ -42,4 +46,49 @@ body {
     color: #fff;
     cursor: pointer;
     border: solid 1px #BA68C8
+}
+
+.container {
+    width: 600px !important;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    margin: 50px;
+}
+
+.profile-setting {
+   padding: 5px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.profile-image {
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    margin-bottom: 10px;
+}
+/*sid css*/
+.profile {
+    position: relative;
+    display: flex;
+}
+
+.twitter-banner {
+    width: 100%;
+    height: 100%;
+}
+
+.profile-pic-container {
+    max-width: 20%;
+    max-height: 10%;
+    position: absolute;
+    top: 68%;
+    left: 6%;
+}
+.twitter-profile-picture{
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #fefefd;
+}
+.form_field{
+    margin-top: 15%;
 }

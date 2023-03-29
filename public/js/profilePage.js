@@ -160,14 +160,6 @@ async function search() {
 
 }
 
-
-
-
-
-
-
-
-
 /*tweet create validation */
 
 document.getElementById('tweetBtn').disabled = true;

@@ -499,7 +499,7 @@ main {
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.hero {
+.profile {
     position: relative;
     display: flex;
 }

@@ -1,6 +1,7 @@
 const connection = require('../config/connection.js');
 const queryExecute = require('../config/queryExecute');
 const bcrypt = require('bcryptjs');
+var moment = require("moment");
 const { query } = require('../config/connection');
 
 
@@ -22,8 +23,17 @@ var page_home = async function(req, res) {
         userLiked.push(alreadyLiked[i].tweet_id);
     }
 
-    var showTweet = `SELECT * FROM tweet_master order by tweet_create desc;`;
+    var showTweet = `SELECT tm.*,um.user_name,um.user_username FROM 
+    tweet_master tm join user_master um on 
+    um.user_id = tm.user_id order by tweet_create desc`;
     var tweets = await queryExecute(showTweet);
+
+
+    var tweet_create = [];
+    for (let i = 0; i < tweets.length; i++) {
+        tweet_create.push(moment(tweets[i].tweet_create).fromNow());
+    }
+
 
     var user = `select user_name,user_username from user_master where user_id = ${user_id}`;
     var userName = await queryExecute(user);
@@ -68,7 +78,7 @@ var page_home = async function(req, res) {
         var whoFollow = await queryExecute(with_whofollow);
 
     }
-    res.render('../src/views/homePage', { port: process.env.PORT, tweets, retweet_like_count, userLiked, userName, totalcmt, like_count, tweet_id, user_liked, whoFollow });
+    res.render('../src/views/homePage', { port: process.env.PORT, tweets, retweet_like_count, userLiked, userName, tweet_create, totalcmt, like_count, tweet_id, user_liked, whoFollow });
 };
 
 var page_tweet_create = async function(req, res) {

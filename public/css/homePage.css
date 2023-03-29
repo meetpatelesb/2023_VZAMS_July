@@ -173,10 +173,6 @@ side bar started-----------------------
         background-color: rgba(230, 231, 232, 200);
     }
     
-    .follow-btn {
-        /* width: calc( 100% /3); */
-    }
-    
     .profile-btn div a i {
         color: black;
     }
@@ -450,6 +446,13 @@ right sidebar starte
         /* color: red; */
         /* background-color: red; */
         color: black
+    }
+    /*sid css*/
+    
+    .tweet_time {
+        opacity: 0.6;
+        padding: 2%;
+        font-size: 14px;
     }
     /* comment */
     
