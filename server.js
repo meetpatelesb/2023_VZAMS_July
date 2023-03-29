@@ -127,7 +127,8 @@ let profilePage = require('./src/routes/profilePageRoutes');
 let homePage = require('./src/routes/homePageRoutes');
 var retweet = require("./src/routes/retweetRoutes.js");
 var comment = require("./src/routes/commentRoutes");
-var like = require("./src/routes/likeRoutes")
+var like = require("./src/routes/likeRoutes");
+let search = require('./src/routes/searchRoutes');
 
 
 let sessionCheck = require('./src/middleWare/session')
@@ -170,7 +171,7 @@ app.use("/comm", comment);
 app.use("/tweet_like", like)
 
 
-let search = require('./src/routes/searchRoutes');
+
 // let sessionCheck = require('./src/middleWare/session')
 
 app.use('/', search);

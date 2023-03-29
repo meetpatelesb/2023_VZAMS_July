@@ -238,6 +238,7 @@ first tweet
 
     .tweet-area i {
         font-size: 22px;
+        cursor: pointer;
         color: rgba(0, 155, 236, 255);
     }
 
@@ -246,6 +247,7 @@ first tweet
         display: flex;
         align-items: end;
         color: black;
+        cursor: pointer;
         /* margin-top: 8px; */
         background-color: var(--main-color);
         padding: 5px 20px;
@@ -324,7 +326,8 @@ tweet showing start
         width: calc(100% / 3);
     } */
 
-    .icon a {
+    .icon i {
+        cursor: pointer;
         display: inline;
     }
 
@@ -338,12 +341,6 @@ tweets showign end
     /* 
 right sidebar starte
 */
-
-    .right-side {
-        height: 100vh;
-        width: 283px;
-    }
-
     .w-t-f {
         color: black;
         margin-top: 10px;
@@ -355,11 +352,15 @@ right sidebar starte
         margin-bottom: 30px;
     }
 
+    .search_profiles {
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+        border-radius: 10px;
+    }
+
     .search-bar {
         color: #009FE8;
         position: relative;
         width: 100%;
-        margin-left: 20px;
     }
 
     .search-bar div {
@@ -371,6 +372,15 @@ right sidebar starte
         padding: 5px;
     }
 
+    #search_pro {
+        box-shadow: rgb(0 0 0 / 25%) 0px 54px 55px, rgb(0 0 0 / 12%) 0px -12px 30px, rgb(0 0 0 / 12%) 0px 4px 6px, rgb(0 0 0 / 17%) 0px 12px 13px, rgb(0 0 0 / 9%) 0px -3px 5px;
+        border-radius: 10px;
+        display: none;
+        height: 300px;
+        overflow: auto;
+        overflow-x: hidden;
+    }
+
     .search {
         width: 100%;
         margin-top: 10px;
@@ -380,10 +390,22 @@ right sidebar starte
         border: 1px solid #8899A6;
     }
 
+    .wtf-profile {
+        max-height: 50%;
+    }
+
+    .right-fix {
+        position: fixed;
+        display: flex;
+        margin-left: 20px;
+        flex-direction: column;
+    }
+
     .right-side div a {
         font-weight: 700;
         border-radius: 50px;
         color: black;
+        padding: 8px 13px;
     }
 
     .recommand-profile {
@@ -405,6 +427,7 @@ right sidebar starte
 
     .left-clm-s {
         width: 20%;
+        margin-top: 5px;
     }
 
     .profile-img-s {
@@ -412,7 +435,6 @@ right sidebar starte
     }
 
     .right-clm-s {
-        /* margin-left: 5px; */
         display: flex;
         /* align-items: center; */
         text-align: justify;
@@ -420,7 +442,6 @@ right sidebar starte
     }
 
     .right-clm-s a {
-        margin-left: 10px;
         display: flex;
         /* align-items: center; */
         text-align: justify;
@@ -434,7 +455,7 @@ right sidebar starte
 
     .follow-btn-s {
         display: flex;
-        min-width: 65px;
+        padding: 10px 0px;
     }
 
     .follow-btn-s a {
@@ -449,10 +470,6 @@ right sidebar starte
         font-weight: 600;
         padding: 12px 15px;
         background: black;
-    }
-
-    .wtf-profile {
-        margin-left: 20px;
     }
 
     .error {
@@ -511,11 +528,11 @@ right sidebar starte
         justify-content: flex-start;
     }
 
-    .btn1 {
+    /* .btn1 {
         display: flex;
         justify-content: flex-start;
-        width: 50%;
-    }
+        width: 100%;
+    } */
 
     .btn2 {
         display: flex;
@@ -523,7 +540,7 @@ right sidebar starte
     }
 
     .btns {
-        width: 50%;
+        width: 100%;
         display: flex;
         flex-direction: row;
         justify-content: flex-end;

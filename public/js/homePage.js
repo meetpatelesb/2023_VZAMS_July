@@ -1,7 +1,6 @@
 /*zeel js*/
 
 //show comment box
-
 async function popcomment(id, j) {
     console.log("hello");
     let cmt_box = document.getElementsByName('cmt-box');
@@ -13,33 +12,30 @@ async function popcomment(id, j) {
     //show comment
     var sendid = await fetch(`/comm/comment_show?id=${id}`)
     const data1 = await sendid.json();
+    var cmt_show = document.getElementsByName('cmt-show');
+    console.log(cmt_show);
 
     for (let i = 0; i < data1['comments'].length; i++) {
-        var cmt_show = document.getElementsByName('cmt-show');
         cmt_show[j].innerHTML += `<div class="comments">
-                                <div class="left-clm">
-                                    <img src="assets/proflieimg.jpg" class="profile-img" />
-                                </div>
-                                <div class="right-clm">
-                                    <div>
-                                    <div class="comm-sec">
-                                        <p class="cmt-p" id="">Meet</p>
-                                        <span class="cmt-tag">@Meet_patel07</span>
-                                        <a href="">
-                                            <i class="bi bi-three-dots"></i>
-                                        </a>
-                                        </div>
-                                        <div class="comment-area">
-                                            <p class="comments-text" id="comments-text">
-                                                ${data1['comments'][i].comment_content}
-                                            </p>
-                                        </div>
+                            <div class="left-clm">
+                                <img src="assets/proflieimg.jpg" class="profile-img" />
+                            </div>
+                            <div class="right-clm">
+                                <div>
+                                <div class="comm-sec">
+                                <strong id=""> ${data1['comments'][i].user_name}</strong>
+                                <span class="tag"> ${data1['comments'][i].user_username}</span>
+                                    </div>
+                                    <div class="comment-area">
+                                        <p class="comments-text" id="comments-text">
+                                            ${data1['comments'][i].comment_content}
+                                        </p>
                                     </div>
                                 </div>
-                            </div>`
+                            </div>
+                        </div>`
     }
 }
-
 //comment alert
     function alertcmt(id, j) {
         var com = document.getElementsByName('cmt');
@@ -73,11 +69,12 @@ async function savecomment(id, j) {
             })
         })
         const data1 = await insert.json();
-        console.log("data1", data1);
+        // console.log("data1", data1);
         var cmt_show = document.getElementsByName('cmt-show');
         cmt_show[j].innerHTML = '';
-
+        //   console.log(cmt_show[j].innerHTML)
         for (let i = 0; i < data1['comments'].length; i++) {
+            console.log("name",data1['comments'][i].user_name);
             cmt_show[j].innerHTML += `<div class="comments">
                             <div class="left-clm">
                                 <img src="assets/proflieimg.jpg" class="profile-img" />
@@ -85,11 +82,8 @@ async function savecomment(id, j) {
                             <div class="right-clm">
                                 <div>
                                 <div class="comm-sec">
-                                    <p class="cmt-p" id="">Meet</p>
-                                    <span class="cmt-tag">@Meet_patel07</span>
-                                    <a href="">
-                                        <i class="bi bi-three-dots"></i>
-                                    </a>
+                                <strong id=""> ${data1['comments'][i].user_name}</strong>
+                                <span class="tag"> ${data1['comments'][i].user_username}</span>
                                     </div>
                                     <div class="comment-area">
                                         <p class="comments-text" id="comments-text">
@@ -105,23 +99,27 @@ async function savecomment(id, j) {
 }
 
  //show emojis
-    let clk = 1;
-    function emoji() {
-        var clk = document.getElementsByClassName('emojiclk')
-        console.log("hello");
-        if (!clk == 0) {
-            console.log("hello")
-            document.getElementsByClassName('emoji').style.display = "block";
-            document.querySelector('emoji-picker').addEventListener('emoji-click', e => {
-                document.getElementsByClassName("cmt").value += e.detail.unicode
-            })
-            clk = 0;
+    // let clk = 1;
+    // function emoji(j,cmtid) {
+    //     var clik = document.getElementsByClassName('emojiclk');
+    //     console.log("hello");
+    //     if (!clik == 0) {
+    //         console.log("hello")
+    //         // document.getElementById('emoji').style.display = "block";
+    //         let emj = document.getElementsByClassName('emoji');
+    //         emj[j].style.display = "block";
+    //         console.log(document.getElementsByName("cmt")[j].id);
+    //         console.log(cmtid);
+    //         document.querySelector('emoji-picker').addEventListener('emoji-click', e => {
+    //            document.getElementById(cmtid).textContent += e.detail.unicode
+    //         })
+    //         clk = 0;
 
-        } else {
-            document.getElementById('emoji').style.display = "none";
-            clk = 1;
-        }
-    }
+    //     } else {
+    //         document.getElementById('emoji').style.display = "none";
+    //         clk = 1;
+    //     }
+    // }
 
 //close comment area
 function closecomment(id, j) {
@@ -174,13 +172,15 @@ async function retweet(id) {
 
 /*searching process */
 async function search() {
+    document.getElementById('search_pro').style.display = "block";
     document.getElementById('search_pro').innerHTML = '';
+
 
     var searchText = document.getElementById('search-text').value;
     var search_pro = document.getElementById('search_pro').innerHTML;
 
 
-
+if(searchText.length!= 0){
     let res = await fetch(`/search?search=${searchText}`);
 
     let data = await res.json();
@@ -208,6 +208,37 @@ async function search() {
 
     }
     document.getElementById('search_pro').innerHTML = search_pro;
+
+}else{
+    document.getElementById('search_pro').innerHTML = "";
+}
+    // let res = await fetch(`/search?search=${searchText}`);
+
+    // let data = await res.json();
+
+    // if (data.search_res.length) {
+
+    //     for (let i = 0; i < data.search_res.length; i++) {
+    //         var sample = ``;
+    //         search_pro +=
+    //             `     <div class="profile-btn-s" onclick="search_profile(${data.search_res[i].user_id},'${data.search_res[i].profile_name}')">
+    //                 <div class="left-clm-s">
+    //                     <img src="/upload/${data.search_res[i].profile_image}" class="profile-img-s" />
+    //                 </div>
+    //                 <div class="right-clm-s">
+    //                     <div>
+    //                         <strong>${data.search_res[i].user_username}</strong><br>
+    //                         <span class="tag">@${data.search_res[i].profile_name}</span>
+    //                     </div>
+    //                 </div>
+                
+    //                 <div class="follow-btn-s">
+    //         `;
+    //         search_pro += `${sample}</div> </div>`;
+    //     };
+
+    // }
+    // document.getElementById('search_pro').innerHTML = search_pro;
 
 }
 
