@@ -499,14 +499,15 @@ main {
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.hero {
+.profile {
     position: relative;
     display: flex;
 }
 
 .twitter-banner {
-    width: 100%;
-    height: 100%;
+    width: 618px;
+    height: 180px;
+    object-fit: cover;
 }
 
 .profile-pic-container {
@@ -892,6 +893,86 @@ sidebar ended---------------------
 
 */
 
-.cmt-textarea {
-    border: 1px solid red;
+#cmt-box {
+    display: none;
+    width: 70%;
+    height: auto;
+    margin-top: 20px;
+}
+
+.cmt {
+    width: 100%;
+    height: 100px;
+    resize: none;
+    font-size: 20px;
+    border-radius: 5px;
+}
+
+.cmt-footer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+.cmt-show {
+    /* margin-left: -6px; */
+    margin-top: 25px;
+    /* background-color: lightblue; */
+    width: 100%;
+    height: 110px;
+    overflow: auto;
+    overflow-x: hidden;
+}
+
+.emoji {
+    justify-content: flex-start;
+}
+
+.btn1 {
+    display: flex;
+    justify-content: flex-start;
+    width: 50%;
+}
+
+.btn2 {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btns {
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+#emoji {
+    width: 100%;
+}
+
+#close {
+    display: block;
+}
+
+.comments {
+    display: flex;
+    flex-direction: row;
+}
+
+.comm-sec {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+}
+
+.cmt-p {
+    font-weight: 900;
+    font-size: 20px;
+    padding: 5px;
+}
+
+.cmt-tag {
+    padding: 8px;
+    font-size: 15px;
 }

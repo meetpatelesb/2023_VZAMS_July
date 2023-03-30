@@ -125,9 +125,12 @@ let signUp = require('./src/routes/signUpRoutes');
 let signIn = require('./src/routes/signInRoutes');
 let profilePage = require('./src/routes/profilePageRoutes');
 let homePage = require('./src/routes/homePageRoutes');
-var retweet = require("./src/routes/retweetRoutes.js");
+let retweet = require("./src/routes/retweetRoutes.js");
+let editPage = require('./src/routes/editProfileRoutes');
 var comment = require("./src/routes/commentRoutes");
 var like = require("./src/routes/likeRoutes")
+var twitterBlue = require("./src/routes/tblueRoutes")
+var twitterLogout = require("./src/routes/logoutRoutes")
 
 
 let sessionCheck = require('./src/middleWare/session')
@@ -137,10 +140,10 @@ let sessionCheck = require('./src/middleWare/session')
 app.set('view engine', 'ejs');
 
 
-
 // Assets
 app.use("/css", express.static(__dirname + '/public/css'));
 app.use("/assets", express.static(__dirname + '/public/assets'));
+app.use("/images", express.static(__dirname + '/public/images'));
 app.use("/js", express.static(__dirname + '/public/js'));
 app.use("/upload", express.static(__dirname + '/public/upload'));
 //access body
@@ -168,6 +171,8 @@ app.use('/', sessionCheck, homePage);
 app.use("/tweet", retweet);
 app.use("/comm", comment);
 app.use("/tweet_like", like)
+app.use("/tweet_blue", twitterBlue)
+app.use("/tweet_logout", twitterLogout)
 
 
 let search = require('./src/routes/searchRoutes');
@@ -175,8 +180,6 @@ let search = require('./src/routes/searchRoutes');
 
 app.use('/', search);
 
-app.get('/edit', sessionCheck, (req, res) => {
-    res.render('editProfile')
-})
+app.use("/", sessionCheck, editPage);
 
 app.listen(process.env.PORT, () => { console.log('http://localhost:' + process.env.PORT); })

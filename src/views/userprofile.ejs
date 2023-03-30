@@ -131,17 +131,17 @@
                     </div>
                 </header>
                 <div>
-                    <section class="hero">
-                        <img src="/assets/banner.jpg" alt="Twitter Banner" class="twitter-banner">
+                    <div class="profile">
+                        <img src="/assets/profile/<%= x.profile_cover %>" alt="Twitter Banner" class="twitter-banner">
                         <div class="profile-pic-container">
-                            <img src="/assets/Profile.jpg" alt="Profile Picture" class="twitter-profile-picture">
+                            <img src="/assets/profile/<%= x.profile_image %>" alt="Profile Picture" class="twitter-profile-picture">
                         </div>
-                    </section>
+                    </div>
                     <section class="profile-details">
                         <nav>
 
                             <button class="profile-botton">
-                    <a href="" target="_top">Edit Profile</a>
+                    <a href=" <%= link %> " target="_top"><%= btn%></a>
                   </button>
                         </nav>
                         <div class="profile-info">
@@ -227,6 +227,7 @@
                                                 <a href="" target="_top">
                                                     <small><%= get_profile[0].profile_username%></small>
                                                 </a>
+
                                             </div>
 
                                             <div class="tweets-area">
@@ -303,8 +304,8 @@
 
                                 <%}%>
                         </div>
-                        <div class="retweet in_active" id="retweet">
-                            <%for(j=0;j<tweets.length;j++){%>
+                        <div class="title in_active" id="retweet">
+                            <%for(j=0;j<retweets_data.length;j++){%>
 
                                 <div class="tweets">
                                     <div class="left-clm">
@@ -312,42 +313,49 @@
                                     </div>
                                     <div class="right-clm">
                                         <div>
-                                            <strong id="">Meet Vaghasiya</strong>
-                                            <span class="tag">@Meet_patel07</span>
-                                            <a href="">
-                                                <i class="bi bi-three-dots"></i>
-                                            </a>
+                                            <div class='tweet-name'>
+                                                <a href="" target="_top">
+                                                    <p>
+                                                        <h4>
+                                                            <%= get_profile[0].profile_name%>
+                                                        </h4>
+                                                    </p>
+                                                </a>
+                                                <a href="" target="_top">
+                                                    <small><%= get_profile[0].profile_username%></small>
+                                                </a>
+                                                <span class="tweet_time"><%=tweet_create[j]%></span>
+                                            </div>
 
                                             <div class="tweets-area">
                                                 <p class="tweet-text" id="tweet-text">
-                                                    <%=tweets[j].tweet_content%>
+                                                    <%=retweets_data[j].tweet_content%>
                                                 </p>
-                                                <%if(tweets[j].tweet_image){%>
-                                                    <img src="/upload/<%=tweets[j].tweet_image%>" class="tweet-img">
-                                                    <%}else if(tweets[j].tweet_video){%>
+                                                <%if(retweets_data[j].tweet_image){%>
+                                                    <img src="/upload/<%=retweets_data[j].tweet_image%>" class="tweet-img">
+                                                    <%}else if(retweets_data[j].tweet_video){%>
                                                         <video controls>
-                                                        <source src="/upload/<%=tweets[j].tweet_video%>" type="video/mp4" class="tweet-video">
+                                                        <source src="/upload/<%=retweets_data[j].tweet_video%>" type="video/mp4" class="tweet-video">
                                                       </video>
 
                                                         <%}%>
 
                                                             <div class="like-icons">
                                                                 <div class="icon">
-                                                                    <%=tweets[j].tweet_id%>
-                                                                        <a class="fa-solid fa-comment" id="reply" onclick="popcomment('<%=tweets[j].tweet_id%>','<%=j%>')"></a>
-                                                                        <span class="reply-count" id="reply-count">
+                                                                    <a class="fa-solid fa-comment" id="reply" onclick="popcomment('<%=retweets_data[j].tweet_id%>','<%=j%>')"></a>
+                                                                    <span class="reply-count" id="reply-count">
                                                                     <%=totalcmt[j].comment_count%>
                                                                 </span>
                                                                 </div>
                                                                 <div class="icon">
-                                                                    <i href="" class="fa fa-heart" id="like<%=tweets[j].tweet_id%>" onclick="likeFunction('<%=tweets[j].tweet_id%>')"></i>
-                                                                    <span class="like-count" id="s<%=tweets[j].tweet_id%>">
-                                                                <%=tweets[j].like_count%></span>
+                                                                    <i href="" class="fa fa-heart" id="like<%=retweets_data[j].tweet_id%>" onclick="likeFunction('<%=retweets_data[j].tweet_id%>')"></i>
+                                                                    <span class="like-count" id="s<%=retweets_data[j].tweet_id%>">
+                                                                <%=retweets_data[j].like_count%></span>
                                                                 </div>
                                                                 <div class="icon">
-                                                                    <i class="fa-solid fa-retweet" id="<%=tweets[j].tweet_id%>" onclick="retweet(this.id)"></i>
-                                                                    <span class="retweet-count" id="span<%=tweets[j].tweet_id%>">
-                                                                <%=tweets[j].retweet_like_count%>
+                                                                    <i class="fa-solid fa-retweet" id="<%=retweets_data[j].tweet_id%>" onclick="retweet(this.id)"></i>
+                                                                    <span class="retweet-count" id="span<%=retweets_data[j].tweet_id%>">
+                                                                <%=retweets_data[j].retweet_like_count%>
                                                             </span>
                                                                 </div>
                                                             </div>
@@ -359,7 +367,7 @@
                                                                     <div class="cmt-content">
                                                                         <form>
                                                                             <div class="cmt-textarea">
-                                                                                <textarea class="cmt border border-secondary" id="cmt" onblur="alertcmt('<%=tweets[j].tweet_id%>','<%=j%>')" name="cmt"></textarea>
+                                                                                <textarea class="cmt border border-secondary" id="cmt" onblur="alertcmt('<%=retweets_data[j].tweet_id%>','<%=j%>')" name="cmt"></textarea>
                                                                             </div>
                                                                             <p id="alert"></p>
                                                                             <div class="cmt-footer">
@@ -368,13 +376,13 @@
                                                                                     <emoji-picker id="emoji" class="emoji" style="display: none;"></emoji-picker>
                                                                                 </div>
                                                                                 <div class="btns">
-                                                                                    <div class="btn3"><a class="btn btn-secondary" id="close" onclick="closecomment('<%=tweets[j].tweet_id%>','<%=j%>')">Close</a>
+                                                                                    <div class="btn3"><a class="btn btn-secondary" id="close" onclick="closecomment('<%=retweets_data[j].tweet_id%>','<%=j%>')">Close</a>
                                                                                     </div>
                                                                                     <div class="btn2" id="savecommentbtn" name="savecommentbtn">
 
                                                                                         <!-- <input type="submit" value="Comment" id="comment"
                                                                                 class="btn btn-primary"
-                                                                                onclick="savecomment( <%=tweets[j].tweet_id%>)"> -->
+                                                                                onclick="savecomment( <%=retweets_data[j].tweet_id%>)"> -->
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="cmt-show" id="cmt-show" name="cmt-show">

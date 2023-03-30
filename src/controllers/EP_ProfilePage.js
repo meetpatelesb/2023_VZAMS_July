@@ -1,8 +1,7 @@
 const connection = require('../config/connection.js');
 const queryExecute = require('../config/queryExecute');
 const bcrypt = require('bcryptjs');
-
-
+var moment = require("moment");
 let fetch_tweets = async(req, res) => {
 
     res.json({ done: 'done' });
@@ -56,7 +55,7 @@ var page_profilePage = async function(req, res) {
     if (sda.length != 0) {
 
         let user_id = sda[0]['user_id'];
-        let sql = `select um.create_date,profile_username,profile_name,profile_bio,profile_following,profile_followers,dob,profile_location from profile_master pm
+        let sql = `select um.create_date,profile_cover,profile_image,profile_username,profile_name,profile_bio,profile_following,profile_followers,dob,profile_location from profile_master pm
         join user_master um on pm.user_id = um.user_id
         where um.user_id = ${user_id};
 `
@@ -78,7 +77,24 @@ var page_profilePage = async function(req, res) {
             userLiked.push(alreadyLiked[i].tweet_id);
         }
 
-        var showTweet = `SELECT * FROM tweet_master order by tweet_create desc;`;
+        // retweet
+        let retweet = `SELECT tweet_content,tweet_create,tweet_image,tweet_video,tm.tweet_id,like_count,retweet_like_count,comment_count FROM retweet_master rm
+        join tweet_master tm 
+        on rm.tweet_id = tm.tweet_id
+        where rm.user_id = ${user_id};`
+
+        console.log(retweet);
+        let retweets_data = await queryExecute(retweet);
+
+        console.log(retweets_data);
+
+        var tweet_create = [];
+        for (let i = 0; i < retweets_data.length; i++) {
+            tweet_create.push(moment(retweets_data[i].tweet_create).fromNow());
+        }
+
+        var showTweet = `select * from tweet_master where user_id = ${user_id} order by tweet_create desc;`;
+        console.log(showTweet);
         var tweets = await queryExecute(showTweet);
 
         var user = `select user_name,user_username from user_master where user_id = ${user_id}`;
@@ -124,7 +140,14 @@ var page_profilePage = async function(req, res) {
             var whoFollow = await queryExecute(with_whofollow);
 
         }
-        res.render('../src/views/userprofile', { get_profile, user_data, port: process.env.PORT, tweets, retweet_like_count, userLiked, userName, totalcmt, like_count, tweet_id, user_liked, whoFollow });
+        if (req.session.user_id == user_id) {
+            res.render('../src/views/userprofile', { get_profile, tweet_create, retweets_data, user_data, port: process.env.PORT, tweets, retweet_like_count, userLiked, userName, totalcmt, like_count, tweet_id, user_liked, whoFollow, btn: 'Edit Profile', link: '/edit' });
+
+        } else {
+            res.render('../src/views/userprofile', { get_profile, tweet_create, retweets_data, user_data, port: process.env.PORT, tweets, retweet_like_count, userLiked, userName, totalcmt, like_count, tweet_id, user_liked, whoFollow, btn: 'Follow', link: '' });
+        }
+    } else {
+        res.render('../src/views/404');
     };
 };
 // if (getdata.length == 0) {

@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    /* text-align: justify; */
+}
+
+body {
+    background: #999999 !important;
+    overflow: hidden;
+}
+
+.t_logo img {
+    width: 20%;
+    height: 20%;
+}
+
+.twitter-logo {
+    height: 50px;
+    width: 50px;
+}
+
+.form-box {
+    margin-top: 50px;
+    /* box-shadow: #000;
+    border-width: 2px solid black; */
+}
+
+.form-register {
+    max-width: 550px;
+    margin: 0 auto;
+    padding: 20px 50px 30px;
+    background: #FFFFFF;
+    border-radius: 8px;
+}
+
+.logout-btn {
+    display: flex;
+    justify-content: center;
+    margin-top: 5%;
+    background: #000;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.logout-btn a:link,
+.logout-btn a:visited,
+.logout-btn a:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+.logout-btn:hover {
+    background: rgba(0, 0, 0, 0.9);
+    cursor: pointer;
+}
+
+.cancel-btn {
+    display: flex;
+    justify-content: center;
+    margin-top: 5%;
+    background: #000;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.cancel-btn a:link,
+.cancel-btn a:visited,
+.cancel-btn a:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+.cancel-btn:hover {
+    background: rgba(0, 0, 0, 0.9);
+    cursor: pointer;
+}

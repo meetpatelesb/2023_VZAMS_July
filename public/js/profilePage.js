@@ -160,14 +160,6 @@ async function search() {
 
 }
 
-
-
-
-
-
-
-
-
 /*tweet create validation */
 
 document.getElementById('tweetBtn').disabled = true;
@@ -215,7 +207,8 @@ async function follow(user) {
         document.getElementById(user).value = "Follow";
         var user_id = user;
         let res = await fetch(`/follow?follow_id='${user_id}'`);
-        console.log(res);
+        
+        
     }
 }
 
