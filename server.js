@@ -128,7 +128,8 @@ let homePage = require('./src/routes/homePageRoutes');
 let retweet = require("./src/routes/retweetRoutes.js");
 let editPage = require('./src/routes/editProfileRoutes');
 var comment = require("./src/routes/commentRoutes");
-var like = require("./src/routes/likeRoutes")
+var like = require("./src/routes/likeRoutes");
+let search = require('./src/routes/searchRoutes');
 var twitterBlue = require("./src/routes/tblueRoutes")
 var twitterLogout = require("./src/routes/logoutRoutes")
 
@@ -175,7 +176,7 @@ app.use("/tweet_blue", twitterBlue)
 app.use("/tweet_logout", twitterLogout)
 
 
-let search = require('./src/routes/searchRoutes');
+
 // let sessionCheck = require('./src/middleWare/session')
 
 app.use('/', search);

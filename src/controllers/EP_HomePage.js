@@ -15,7 +15,7 @@ var page_home = async function(req, res) {
     var retweet_like_count = showLikes;
     var countcmt = `SELECT comment_count FROM tweet_master order by tweet_create desc;`
     var totalcmt = await queryExecute(countcmt);
-    // console.log("totalcmt", countcmt);
+    console.log("totalcmt", countcmt);
 
 
     var already = `select tweet_id from retweet_master where user_id = ${user_id} AND active =  1`
@@ -43,7 +43,7 @@ var page_home = async function(req, res) {
     //like
     var likeCount = `SELECT like_count from tweet_master;`
     var likeCount_result = await queryExecute(likeCount);
-    // // console.log(likeCount_result);
+    // // // console.log(likeCount_result);
     var like_count = likeCount_result
 
     var already_liked = `SELECT like_tweet_id from like_master WHERE like_user_id =${user_id} AND activate= 1;`

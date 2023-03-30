@@ -18,7 +18,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer"
 />
 
-<script type="module" src="https://cdn.jsdelivr.net/npm/emoji-picker-element@^1/index.js"></script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer"
@@ -37,10 +36,11 @@
         <div></div>
         <aside class="left-side">
             <div class="left-navbar">
-                <div>
-                    <div class="twitter-img menu">
-                        <img src="/assets/twitter.png" class="twitter-icon" />
-                    </div>
+                <div class="twitter-img menu">
+                    <img src="/assets/twitter.png" class="twitter-icon" />
+                </div>
+
+                <div class="sec-menu">
                     <div class="menu">
                         <a href="">
                             <div>
@@ -49,22 +49,22 @@
                             </div>
                         </a>
                     </div>
-                    <div class="menu">
+                    <!--  <div class="menu">
                         <a href="">
                             <div>
                                 <i class="bi bi-hash"></i>
                                 <span>Explore</span>
                             </div>
                         </a>
-                    </div>
-                    <div class="menu">
+                    </div> -->
+                    <!-- <div class="menu">
                         <a href="">
                             <div>
                                 <i class="bi bi-bell-fill"></i>
                                 <span>Notifications</span>
                             </div>
                         </a>
-                    </div>
+                    </div>-->
                     <div class="menu">
                         <a href="/tweet_blue/tblue">
                             <div>
@@ -101,29 +101,32 @@ username += ''+userName[0].user_username[i];
                             <button class="tweet-btn">Tweet</button>
 
                             <div class="profile-btn">
-                                <div class="left-clm">
-                                    <img src="/assets/proflieimg.jpg" class="profile-img" />
-                                </div>
-                                <div class="right-clm">
-                                    <div>
-                                        <strong>
+                                <a href="/user/<%= username%>" class="profile-id">
+                                    <div class="left-pro">
+                                        <img src="/assets/proflieimg.jpg" class="profile-img" />
+                                    </div>
+                                    <div class="right-pro">
+                                        <div>
+                                            <div class="show-pro">
+                                                <strong>
                                     <%=userName[0].user_name%>
                                 </strong>
-                                        <span class="tag">
+                                                <span class="tag">
                                     <%=userName[0].user_username%>
                                 </span>
-                                    </div>
+                                            </div>
+                                        </div>
 
-                                    <span></span>
-                                </div>
-                                <div class="pro-more">
-                                    <a href="">
-                                        <div><i class="bi bi-three-dots"></i></div>
-                                    </a>
-                                </div>
+                                        <!-- <div class="pro-more">
+                            <a href="">
+                                <div><i class="bi bi-three-dots"></i></div>
+                            </a>
+                        </div> -->
+                                    </div>
+                                </a>
                             </div>
+
                     </div>
-                </div>
         </aside>
 
         <!-- sidebar  ended--------------------------------------------- -->
@@ -150,6 +153,13 @@ username += ''+userName[0].user_username[i];
                                     </label>
                                     <input type="file" id="tweet-img" name="image" accept="image/*" style="display: none; " />
                                     <input type="file" id="tweet-img" name="image" accept="image/*" style="display: none; " />
+                                    <input type="file" id="tweet-img" name="image" accept="image/*" style="display: none; " />
+                                    <!-- <div class="btn1"> -->
+                                    <!-- <a class="far fa-grin-beam" id="emojiclk"
+                                                onclick="emoji()"></a>
+                                            <emoji-picker id="emoji"
+                                                style="display: none;"></emoji-picker> -->
+                                    <!-- </div> -->
                                     <input type="submit" value="Tweet" class="tweet-a" id="tweetBtn">
                                 </div>
                             </div>
@@ -160,52 +170,53 @@ username += ''+userName[0].user_username[i];
 
                 <!-- tweet showings    -->
 
+
                 <%for(j=0;j<tweets.length;j++){%>
-
                     <div class="tweets">
-                        <div class="left-clm">
-                            <img src="/assets/proflieimg.jpg" class="profile-img" />
-                        </div>
-                        <div class="right-clm">
-                            <div>
-                                <strong id=""><%=tweets[j].user_name%></strong>
-                                <span class="tag"><%=tweets[j].user_username%></span>
-                                <span class="tweet_time"><%=tweet_create[j]%></span>
-                                <a href="">
-                                    <i class="bi bi-three-dots"></i>
-                                </a>
-
-                                <div class="tweets-area">
-                                    <p class="tweet-text" id="tweet-text">
-                                        <%=tweets[j].tweet_content%>
-                                    </p>
-                                    <%if(tweets[j].tweet_image){%>
-                                        <img src="/upload/<%=tweets[j].tweet_image%>" class="tweet-img">
-                                        <%}else if(tweets[j].tweet_video){%>
-                                            <video controls>
-                                                <source src="/upload/<%=tweets[j].tweet_video%>" type="video/mp4" class="tweet-video">
-                                              </video>
-
+                        <div class="tweets-in d-flex">
+                            <div class="left-clm">
+                                <img src="/assets/proflieimg.jpg" class="profile-img" />
+                            </div>
+                            <div class="right-clm">
+                                <div class="d-flex flex-column">
+                                    <div class="user-tweet d-flex flex-row">
+                                        <div class="user">
+                                            <strong id=""><%=tweets[j].user_name%></strong>
+                                            <span class="tag"><%=tweets[j].user_username%></span>
+                                            <span class="tweet_time"><%=tweet_create[j]%></span>
+                                        </div>
+                                        <div class="more">
+                                            <a href="">
+                                                <i class="bi bi-three-dots"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="tweets-area">
+                                        <p class="tweet-text" id="tweet-text">
+                                            <%=tweets[j].tweet_content%>
+                                        </p>
+                                        <%if(tweets[j].tweet_image){%>
+                                            <img src="upload/<%=tweets[j].tweet_image%>" class="tweet-img">
                                             <%}%>
-
                                                 <div class="like-icons">
                                                     <div class="icon">
                                                         <%=tweets[j].tweet_id%>
-                                                            <a class="fa-solid fa-comment" id="reply" onclick="popcomment('<%=tweets[j].tweet_id%>','<%=j%>')"></a>
+                                                            <i class="fa-solid fa-comment" id="reply" onclick="popcomment('<%=tweets[j].tweet_id%>','<%=j%>')"></i>
                                                             <span class="reply-count" id="reply-count">
-                                                            <%=totalcmt[j].comment_count%>
-                                                        </span>
+                                                                <%=totalcmt[j].comment_count%>
+                                                            </span>
                                                     </div>
                                                     <div class="icon">
                                                         <i href="" class="fa fa-heart" id="like<%=tweets[j].tweet_id%>" onclick="likeFunction('<%=tweets[j].tweet_id%>')"></i>
                                                         <span class="like-count" id="s<%=tweets[j].tweet_id%>">
-                                                        <%=tweets[j].like_count%></span>
+                                                            <%=tweets[j].like_count%>
+                                                        </span>
                                                     </div>
                                                     <div class="icon">
                                                         <i class="fa-solid fa-retweet" id="<%=tweets[j].tweet_id%>" onclick="retweet(this.id)"></i>
                                                         <span class="retweet-count" id="span<%=tweets[j].tweet_id%>">
-                                                        <%=tweets[j].retweet_like_count%>
-                                                    </span>
+                                                            <%=tweets[j].retweet_like_count%>
+                                                        </span>
                                                     </div>
                                                 </div>
                                                 <div class="cmt" name="cmt-box" id="cmt-box">
@@ -220,34 +231,30 @@ username += ''+userName[0].user_username[i];
                                                                 </div>
                                                                 <p id="alert"></p>
                                                                 <div class="cmt-footer">
-                                                                    <div class="btn1">
-                                                                        <a class="far fa-grin-beam" class="emojiclk" id="emojiclk" onclick="emoji()"></a>
-                                                                        <emoji-picker id="emoji" class="emoji" style="display: none;"></emoji-picker>
-                                                                    </div>
+                                                                    <!-- <div class="btn1">
+                                                                        <a class="far fa-grin-beam" id="emojiclk"
+                                                                            onclick="emoji()"></a>
+                                                                        <emoji-picker id="emoji"
+                                                                            style="display: none;"></emoji-picker>
+                                                                    </div> -->
                                                                     <div class="btns">
                                                                         <div class="btn3"><a class="btn btn-secondary" id="close" onclick="closecomment('<%=tweets[j].tweet_id%>','<%=j%>')">Close</a>
                                                                         </div>
                                                                         <div class="btn2" id="savecommentbtn" name="savecommentbtn">
-
-                                                                            <!-- <input type="submit" value="Comment" id="comment"
-                                                                        class="btn btn-primary"
-                                                                        onclick="savecomment( <%=tweets[j].tweet_id%>)"> -->
                                                                         </div>
                                                                     </div>
                                                                     <div class="cmt-show" id="cmt-show" name="cmt-show">
-
                                                                     </div>
                                                                 </div>
                                                             </form>
                                                         </div>
                                                     </div>
                                                 </div>
-
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                     <%}%>
             </div>
         </section>
@@ -256,43 +263,58 @@ username += ''+userName[0].user_username[i];
 
         <!--------------------------rigth-side started---------------------->
         <aside class="right-side">
-            <div class="search-bar">
+            <div class="right-fix">
+                <div class="search-bar">
 
-                <div><i class="bi bi-search"></i></div>
-                <input class="search" placeholder="Search Tweets" id="search-text" onkeyup="search()" />
+                    <div> <i class="bi bi-search"></i></div>
+                    <input class="search" placeholder="Search Tweets" id="search-text" onkeyup="search()" />
+                </div>
 
-            </div>
-            <div class="search_profiles">
-                <div id="search_pro">
+                <div class="search_profiles">
+                    <div id="search_pro">
+                    </div>
+                </div>
+                <!-- <div class="wtf"> -->
+                <div class="wtf-profile">
+                    <div class="wtf-head">
+                        <span class="w-t-f">Who to Follow</span>
+                    </div>
+
+                    <div class="wtf-list">
+                        <div class="wtf-list-in">
+                            <%for(let i=0;i<whoFollow.length;i++){%>
+
+                                <div class="recommand-profile">
+                                    <% let username='' ; username=whoFollow[i].user_username.replace('@',''); %>
+                                        <div class="profile-btn-s">
+                                            <div class="left-clm-s">
+                                                <img src="/upload/<%=whoFollow[i].profile_image%>" class="profile-img-s" />
+                                            </div>
+                                            <div class="right-clm-s">
+                                                <a href="/user/<%= username%>">
+                                                    <div>
+                                                        <span>
+                                                            <%=whoFollow[i].profile_name%>
+                                                        </span>
+                                                        <small>
+                                                            <%=whoFollow[i].user_username%>
+                                                        </small>
+                                                    </div>
+                                                </a>
+                                            </div>
+
+                                            <div class="follow-btn-s">
+                                                <input type='button' class="follow-a" id="<%=whoFollow[i].user_id%>" onclick='follow_user(`<%=whoFollow[i].user_id%>`)' value='Follow'>
+                                            </div>
+                                        </div>
+
+                                </div>
+                                <%}%>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <span class="w-t-f">Who to Follow</span>
-
-
-
-            <div class="recommand-profile">
-
-                <%=console.log("hey",whoFollow.length)%>
-                    <%for(let i =0;i<whoFollow.length;i++){%>
-                        <div class="profile-btn-s">
-                            <div class="left-clm-s">
-                                <img src="/upload/<%=whoFollow[i].profile_image%>" class="profile-img-s" />
-                            </div>
-                            <div class="right-clm-s">
-                                <div>
-                                    <strong><%=whoFollow[i].profile_name%> </strong>
-                                    <span class="tag">@<%=whoFollow[i].user_username%> </span>
-                                </div>
-                            </div>
-                            <div class="follow-btn-s">
-                                <input type='button' class="follow-a-s" id="<%=whoFollow[i].user_id%>" onclick="follow_user(`<%=whoFollow[i].user_id%>`)" value='Follow'>
-                            </div>
-                        </div>
-                        <%}%>
             </div>
-
-
-
         </aside>
 
         <!---------------------rigth -side ended---------------------------------->
