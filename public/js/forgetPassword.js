@@ -1,5 +1,5 @@
 var toggle = 1;
-
+var code;
 var div_auth = document.getElementById("auth");
 var div_confirm = document.getElementById("confirm");
 var div_code = document.getElementById("verify_code");
@@ -96,14 +96,15 @@ async function change_tab() {
                         toggle
                     })
                 })
-
+                var data = await res.json();
+                code = data.OTP;
             } else {
                 return;
             }
             break;
 
         case 3:
-
+            document.getElementById("gettingcode").innerHTML = code;
             var input_code = document.getElementById("floatingCode").value;
 
             if (input_code != "") {
@@ -138,7 +139,7 @@ async function validate(field) {
     if (field == 'code') {
         var next_a = document.getElementById("next_3");
         var input_code = document.getElementById("floatingCode").value;
-      
+
         next_a.style.pointerEvents = '';
 
 
@@ -162,7 +163,7 @@ async function validate(field) {
                     })
 
                     let data = await res.json();
-                   
+
                     if (data.status == 200) {
                         Error_Message('err_code', '');
                     } else {
@@ -191,7 +192,7 @@ async function validate(field) {
         var input_psw = document.getElementById("floatingPassword").value;
         var input_cpsw = document.getElementById("floatingCpassword").value;
         var next_a = document.getElementById('submit_btn');
-        
+
         if (input_psw.length == 0) {
             next_a.style.pointerEvents = "";
 
@@ -199,7 +200,7 @@ async function validate(field) {
 
         }
         if (input_psw == input_cpsw) {
-           
+
             if (regex_psw.test(input_psw)) {
                 next_a.style.pointerEvents = "";
 

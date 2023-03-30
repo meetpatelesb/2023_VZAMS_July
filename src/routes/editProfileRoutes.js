@@ -1,5 +1,3 @@
-
-
 // Controller
 const {
     page_edit,
@@ -11,7 +9,14 @@ let multer = require('../config/multer.js')
 
 
 router.get('/edit', page_edit);
-router.post('/editdata',multer.uplaod_profile.single("image"),page_editdata);
+router.post('/editdata', multer.uplaod_profile.fields([{
+
+    name: 'image',
+    maxCount: 1
+}, {
+    name: 'image_cover',
+    maxCount: 1
+}]), page_editdata);
 
 
 

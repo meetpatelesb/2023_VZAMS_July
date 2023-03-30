@@ -120,8 +120,8 @@ async function search() {
     let res = await fetch(`/search?search=${searchText}`);
 
     let data = await res.json();
-    console.log(data.search_res);
-    console.log(data.search_res[0].user_username)
+    // console.log(data.search_res);
+    // console.log(data.search_res[0].user_username)
     if (data.search_res.length) {
 
         for (let i = 0; i < data.search_res.length; i++) {
@@ -134,7 +134,7 @@ async function search() {
             }
 
             let search_user = `/user/${username}`
-            console.log(search_user);
+                // console.log(search_user);
             search_pro +=
                 `<div class="profile-btn-s search-content">
 
@@ -152,7 +152,7 @@ async function search() {
         </div>`
 
             search_pro += `${sample}`;
-            console.log(search_pro);
+            // console.log(search_pro);
         };
 
     }
@@ -175,7 +175,7 @@ function maxim() {
     var max_abccc = document.getElementById('tweet-text').value;
 
     var len = max_abccc.length;
-    console.log(len);
+    // console.log(len);
 
     if (len == 0 && len == undefined && len == null) {
         document.getElementById('tweetBtn').disabled = true;
@@ -201,13 +201,14 @@ async function follow(user) {
         document.getElementById(user).value = "Following";
         var user_id = user;
         let res = await fetch(`/follow?follow_id='${user_id}'`);
-        console.log(res);
+        // console.log(res);
 
     } else {
         document.getElementById(user).value = "Follow";
         var user_id = user;
         let res = await fetch(`/follow?follow_id='${user_id}'`);
-        console.log(res);
+
+
     }
 }
 
@@ -238,7 +239,7 @@ async function likeFunction(x) {
     }
     //Dislike
     else {
-        console.log("Dislike");
+        // console.log("Dislike");
         like_color.style.color = ''
             // console.log('unlike')
         const result = await fetch("/tweet_like/like", {
@@ -258,7 +259,7 @@ async function likeFunction(x) {
 
 
 async function popcomment(id, j) {
-    console.log("hello");
+    // console.log("hello");
     let cmt_box = document.getElementsByName('cmt-box');
     cmt_box[j].style.display = "block";
     //save button
@@ -298,14 +299,14 @@ async function popcomment(id, j) {
 //comment alert
 function alertcmt(id, j) {
     var com = document.getElementsByName('cmt');
-    console.log(com[j].value);
+    // console.log(com[j].value);
     if (((com[j].value).trim()).length > 0) {
         document.getElementById('alert').innerHTML = " ";
     } else {
         //comment alert
         function alertcmt(id, j) {
             var com = document.getElementsByName('cmt');
-            console.log(com[j].value);
+            // console.log(com[j].value);
             if (((com[j].value).trim()).length > 0) {
                 document.getElementById('alert').innerHTML = " ";
             } else {
@@ -338,7 +339,7 @@ async function savecomment(id, j) {
             })
         })
         const data1 = await insert.json();
-        console.log("data1", data1);
+        // console.log("data1", data1);
         var cmt_show = document.getElementsByName('cmt-show');
         cmt_show[j].innerHTML = '';
 
@@ -375,8 +376,8 @@ let clk = 1;
 function emoji() {
     var clik = document.getElementById('emojiclk')
     if (!clk == 0) {
-        console.log("hello emoji")
-            // console.log(document.getElementById('emoji'))
+        // console.log("hello emoji")
+        // console.log(document.getElementById('emoji'))
         document.getElementById('emoji').style.display = "block";
         document.querySelector('emoji-picker').addEventListener('emoji-click', e => {
             document.getElementById("cmt").value += e.detail.unicode
