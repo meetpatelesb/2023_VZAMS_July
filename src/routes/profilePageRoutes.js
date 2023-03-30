@@ -11,5 +11,5 @@ router.post('/fetch/profile_retweets', fetch_retweets);
 
 router.get('/user/:user_name', page_profilePage);
 
-router.get('/follow', fetch_follow);
+// router.get('/follow', fetch_follow);
 module.exports = router;

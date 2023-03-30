@@ -114,6 +114,7 @@ var page_tweet_create = async function(req, res) {
 
 // who to follow showings
 var fetch_follow = async(req, res) => {
+    console.log("HELLO FOLLOW");
     var user_id = req.session.user_id;
     var follow_id = req.query.follow_id;
     var check_count = ` select a.profile_following,a.profile_followers,a.user_id from profile_master a left join user_master b on a.user_id =b.user_id where a.user_id =${user_id};`;
@@ -130,6 +131,7 @@ var fetch_follow = async(req, res) => {
     var check_data = `select * from follow_master where followers_uid = ${follow_id} and follow_uid = ${user_id};`;
 
     var check_data_res = await queryExecute(check_data);
+    console.log(check_data_res[0] != undefined);
 
     if (check_data_res[0] != undefined) {
 
@@ -166,6 +168,7 @@ var fetch_follow = async(req, res) => {
             var update_Count_followers = await queryExecute(update_count_followers);
         }
     } else {
+        console.log("log else ");
 
         var insert_follow_data = `INSERT INTO follow_master ( follow_uid, followers_uid, follow_flag) VALUES ( ${user_id}, ${follow_id}, '1');`
         var res_insert_f_data = await queryExecute(insert_follow_data);
@@ -174,11 +177,13 @@ var fetch_follow = async(req, res) => {
         // following count first
         following_count += 1;
         var insert_count = `update  profile_master set profile_following = ${following_count} where user_id = ${user_id};  `
+        console.log(insert_count);
         var insert_Count = await queryExecute(insert_count);
 
         // followers count first
         followers_count += 1;
         var insert_count2 = `update  profile_master set profile_followers = ${followers_count} where user_id = ${follow_id};`
+        console.log(insert_count2);
         var insert_Count2 = await queryExecute(insert_count2);
     }
     res.json({ msg: "followed" });
