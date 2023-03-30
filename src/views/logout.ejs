@@ -28,16 +28,16 @@
                 </div>
 
                 <div class="logout-content">
-                    <p>You can always login back at any time. If you just want to switch account, you can do thatby adding an exixting account.
+                    <p>You can always login back at any time. If you just want to switch account, you can do that by adding an exixting account.
                     </p>
                 </div>
 
-                <div class="logout-btn">
-                    <a href="http://localhost:8000/signIn">Logout</a><br>
+                <div class="logout-btn" onclick="logout()">
+                    Logout<br>
                 </div>
 
-                <!-- <div class="cancel-btn">
-                    <a href="">Cancel</a>
+                <!-- <div class="cancel-btn" onclick="location.assign('/home')">
+                    <a href="#">Cancel</a>
                 </div> -->
 
             </div>
@@ -47,5 +47,10 @@
     </div>
 
 </body>
+<script>
+    function logout() {
+        location.assign("http://localhost:8000/signIn")
+    }
+</script>
 
 </html>

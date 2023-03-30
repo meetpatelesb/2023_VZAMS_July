@@ -42,13 +42,14 @@ body {
     margin-top: 5%;
     background: #000;
     border-radius: 10px;
+    color: #fff;
     padding: 5px;
 }
 
-.logout-btn a:link,
-.logout-btn a:visited,
-.logout-btn a:hover {
-    color: #fff;
+.logout-btn:link,
+.logout-btn:visited,
+.logout-btn:hover {
+    color: #4aa2b8;
     text-decoration: none;
 }
 
