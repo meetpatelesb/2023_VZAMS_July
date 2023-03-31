@@ -57,24 +57,3 @@ body {
     background: rgba(0, 0, 0, 0.9);
     cursor: pointer;
 }
-
-.cancel-btn {
-    display: flex;
-    justify-content: center;
-    margin-top: 5%;
-    background: #000;
-    border-radius: 10px;
-    padding: 5px;
-}
-
-.cancel-btn a:link,
-.cancel-btn a:visited,
-.cancel-btn a:hover {
-    color: #fff;
-    text-decoration: none;
-}
-
-.cancel-btn:hover {
-    background: rgba(0, 0, 0, 0.9);
-    cursor: pointer;
-}
