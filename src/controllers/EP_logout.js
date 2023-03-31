@@ -6,6 +6,6 @@ const bcrypt = require('bcryptjs');
 var fetch_logout = async(req, res) => {
     // console.log('Bye logout');
     res.render('../src/views/logout.ejs');
-    req.session.destroy();
+req.session.destroy();
 }
 module.exports = { fetch_logout };
