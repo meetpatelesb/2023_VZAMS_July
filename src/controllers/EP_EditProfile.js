@@ -43,7 +43,7 @@ let page_edit = async(req, res) => {
     let data = await queryExecute(edit);
     // console.log(data);
     username = data[0].profile_username.replace('@', '');
-    console.log(username);
+
 
     res.render('../src/views/editProfile', { data })
 };
