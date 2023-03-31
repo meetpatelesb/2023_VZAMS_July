@@ -86,12 +86,8 @@
                     </div>
                     <div class="menu">
 
-                        <%let username = '';
-                       
- for (i=1;i<userName[0].user_username.length;i++){
-username += ''+userName[0].user_username[i];     
- }
- %>
+                        <%let username = userName[0].user_username.replace('@','');
+                        %>
                             <a href="/user/<%= username%>">
                                 <div>
                                     <i class="bi bi-person-fill"></i>

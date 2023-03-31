@@ -2,7 +2,7 @@ const connection = require('../config/connection.js');
 const queryExecute = require('../config/queryExecute');
 const bcrypt = require('bcryptjs');
 const { uplaod_profile } = require('../config/multer.js');
-
+let username;
 
 // let page_edit = async(req, res) => {
 //     console.log(req.session.user_id);
@@ -42,6 +42,9 @@ let page_edit = async(req, res) => {
     profile_master where user_id = ${req.session.user_id}`
     let data = await queryExecute(edit);
     // console.log(data);
+    username = data[0].profile_username.replace('@', '');
+    console.log(username);
+
     res.render('../src/views/editProfile', { data })
 };
 
@@ -81,7 +84,8 @@ let page_editdata = async(req, res) => {
     profile_location = '${location}',dob='${birthdate}' where user_id = ${req.session.user_id}`;
     // console.log(editdata);
     let data = await queryExecute(editdata);
-    res.redirect(`/user/${name}`);
+
+    res.redirect(`/user/${username}`);
 }
 
 
