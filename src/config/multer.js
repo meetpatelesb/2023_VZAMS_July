@@ -17,7 +17,7 @@ const upload = multer({ storage: storage});
 
 const storage_profile = multer.diskStorage({
     destination:(req,file,cb)=>{
-            cb(null, '/home/siddharth-patel/Desktop/VZAMS/project/pull_request_twitter/twitter/public/assets/profile');
+            cb(null, 'public/assets/profile');
     },
     filename : (req,file,cb)=>{
             cb(null, Date.now() + path.extname(file.originalname));

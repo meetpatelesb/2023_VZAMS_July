@@ -19,17 +19,15 @@ let page_edit = async(req, res) => {
 let page_editdata = async(req, res) => {
  var user_id = req.session.user_id;
     const file = req.files;
-    console.log(file);
+   
     var select_profile = `select profile_image as dp ,profile_cover as cover from profile_master where user_id=${user_id}`;
     var users_profile = await queryExecute(select_profile);
-
-
 
     var cover_imgsrc = req.files.image_cover;
     var profile_imgsrc = req.files.image;
 
-   console.log("COVER",cover_imgsrc);
-   console.log("PROFILE",profile_imgsrc);
+    console.log("COVER",cover_imgsrc);
+    console.log("PROFILE",profile_imgsrc);
 
     const { name, location, bio, birthdate } = req.body;
     if (cover_imgsrc) {
