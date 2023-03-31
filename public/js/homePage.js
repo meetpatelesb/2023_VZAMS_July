@@ -159,7 +159,7 @@ async function retweet(id) {
             retweet_icon_count.innerHTML = data.count;
             if (data.flag == true) {
                 retweet_icon.style.color = "green"
-            } else if (data.flag == false) {
+            } else if (data.flag == false) {} else if (data.flag == false) {
                 retweet_icon.style.color = "black";
             }
 
@@ -289,19 +289,20 @@ async function search_profile(pro_id, pro_name) {
 }
 
 // follow function .................
-async function follow(user) {
-
-    var follow_btn = document.getElementById(user);
+async function follow(user, followid) {
+    var user_id = followid;
+    var follow_btn = document.getElementById(user).value;
     console.log(follow_btn);
     if (follow_btn == "Follow") {
         document.getElementById(user).value = "Following";
-        var user_id = user;
+
+        console.log("FOLLOW ID", user_id);
         let res = await fetch(`/follow?follow_id='${user_id}'`);
         // console.log(res);
 
     } else {
         document.getElementById(user).value = "Follow";
-        var user_id = user;
+
         let res = await fetch(`/follow?follow_id='${user_id}'`);
 
 

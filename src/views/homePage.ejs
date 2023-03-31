@@ -334,7 +334,7 @@
                                             </div>
 
                                             <div class="follow-btn-s">
-                                                <input type='button' class="follow-a" id='<%=whoFollow[i].followers_uid%>' onclick='follow("<%=whoFollow[i].user_id%>")' value="Follow">
+                                                <input type='button' class="follow-a" id="follow<%=whoFollow[i].user_id%>" onclick='follow(this.id,"<%=whoFollow[i].user_id%>")' value="Follow">
                                             </div>
                                         </div>
 
