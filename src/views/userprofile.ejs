@@ -65,10 +65,7 @@
                         <div class="menu">
 
 
-                            <%let username = '';
-                            for (i=1;i< user_data[0].user_username.length;i++){
-                            username += ''+user_data[0].user_username[i]; 
-                            }
+                            <%let username = userName[0].user_username.replace('@','');
                             %>
 
                                 <a href="/user/<%=username%>">
@@ -90,23 +87,23 @@
                         <button class="tweet-btn" onclick="window.location='/homePage'">Tweet</button>
 
                         <div class="profile-btn">
-                            <div class="left-clm">
-                                <img src="/assets/profile/<%=user_data[0].profile_image%>" class="user-profile" />
-                            </div>
-                            <div class="right-clm">
-                                <div>
-                                    <span><%= user_data[0].user_name%></span>
-                                    <small><%= user_data[0].user_username%></small>
+                            <a href="/user/<%= username%>" class="profile-id">
+                                <div class="left-pro">
+                                    <img src="/assets/profile/<%=userName[0].profile_image%>" class="profile-img" />
                                 </div>
-                            </div>
-                            <div class="pro-more">
-                                <a href="">
-                                    <div><i class="bi bi-three-dots"></i></div>
-                                </a>
-                            </div>
+                                <div class="right-pro">
+                                    <div>
+                                        <div class="show-pro">
+                                            <strong>
+                                        <%=userName[0].user_name%>
+                                    </strong>
+                                            <span class="tag">
+                                        <%=userName[0].user_username%>
+                                    </span>
+                                        </div>
+                                    </div>
+                                </div>
                         </div>
-                    </div>
-                </div>
             </aside>
 
             <!-- sidebar  ended--------------------------------------------- -->
@@ -453,7 +450,7 @@
             </aside>
 
             <!-----rigth -side ended---------------------------------->
-    </div>
+            </div>
 </body>
 <script src="/js/profilePage.js"></script>
 <script>

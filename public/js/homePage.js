@@ -21,7 +21,7 @@ async function popcomment(id, j) {
     for (let i = 0; i < data1['comments'].length; i++) {
         cmt_show[j].innerHTML += `<div class="comments">
                             <div class="left-clm">
-                                <img src="assets/proflieimg.jpg" class="profile-img" />
+                                <img src="/assets/profile/${data1['comments'][i].profile_image}" class="profile-img" />
                             </div>
                             <div class="right-clm">
                                 <div>
@@ -80,7 +80,7 @@ async function savecomment(id, j) {
             // console.log("name", data1['comments'][i].user_name);
             cmt_show[j].innerHTML += `<div class="comments">
                             <div class="left-clm">
-                                <img src="assets/proflieimg.jpg" class="profile-img" />
+                                <img src="/assets/profile/${data1['comments'][i].profile_image}" class="profile-img" />
                             </div>
                             <div class="right-clm">
                                 <div>
@@ -191,20 +191,23 @@ async function search() {
 
             for (let i = 0; i < data.search_res.length; i++) {
                 var sample = ``;
+                let username = data.search_res[0].user_username.replace('@', '');
+                let search_user = `/user/${username}`
                 search_pro +=
-                    `     <div class="profile-btn-s" onclick="search_profile(${data.search_res[i].user_id},'${data.search_res[i].profile_name}')">
-                    <div class="left-clm-s">
-                        <img src="/assets/profile/${data.search_res[i].profile_image}" class="profile-img-s" />
-                    </div>
-                    <div class="right-clm-s">
+                    `<div class="profile-btn-s search-content">
+
+                <div class="left-clm-s">
+                <img src="/upload/${data.search_res[i].profile_image}" class="profile-img-s" />
+                </div>
+                <div class="right-clm-s">
+                    <a href="${search_user}">
                         <div>
-                            <strong>${data.search_res[i].user_username}</strong><br>
-                            <span class="tag">@${data.search_res[i].profile_name}</span>
+                        <span>${data.search_res[i].user_username}</span>
+                            <small>${data.search_res[i].profile_name}</small>
                         </div>
-                    </div>
-                
-                    <div class="follow-btn-s">
-            `;
+                    </a>
+                </div>
+            </div>`
                 search_pro += `${sample}</div> </div>`;
             };
 

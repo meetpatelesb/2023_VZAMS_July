@@ -127,12 +127,7 @@ async function search() {
         for (let i = 0; i < data.search_res.length; i++) {
             var sample = ``;
 
-            let username = '';
-            let name = data.search_res[i].user_username;
-            for (j = 1; j < name.length; j++) {
-                username += '' + name[j];
-            }
-
+            let username = data.search_res[0].user_username.replace('@', '');
             let search_user = `/user/${username}`
                 // console.log(search_user);
             search_pro +=
