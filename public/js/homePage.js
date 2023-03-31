@@ -2,8 +2,10 @@
 
 //show comment box
 
+
+
 async function popcomment(id, j) {
-    console.log("hello");
+    // console.log("hello");
     let cmt_box = document.getElementsByName('cmt-box');
     cmt_box[j].style.display = "block";
     //save button
@@ -13,57 +15,44 @@ async function popcomment(id, j) {
     //show comment
     var sendid = await fetch(`/comm/comment_show?id=${id}`)
     const data1 = await sendid.json();
+    var cmt_show = document.getElementsByName('cmt-show');
+    // console.log(cmt_show);
 
     for (let i = 0; i < data1['comments'].length; i++) {
-        var cmt_show = document.getElementsByName('cmt-show');
         cmt_show[j].innerHTML += `<div class="comments">
-                                <div class="left-clm">
-                                    <img src="assets/proflieimg.jpg" class="profile-img" />
-                                </div>
-                                <div class="right-clm">
-                                    <div>
-                                    <div class="comm-sec">
-                                        <p class="cmt-p" id="">Meet</p>
-                                        <span class="cmt-tag">@Meet_patel07</span>
-                                        <a href="">
-                                            <i class="bi bi-three-dots"></i>
-                                        </a>
-                                        </div>
-                                        <div class="comment-area">
-                                            <p class="comments-text" id="comments-text">
-                                                ${data1['comments'][i].comment_content}
-                                            </p>
-                                        </div>
+                            <div class="left-clm">
+                                <img src="assets/proflieimg.jpg" class="profile-img" />
+                            </div>
+                            <div class="right-clm">
+                                <div>
+                                <div class="comm-sec">
+                                <strong id=""> ${data1['comments'][i].user_name}</strong>
+                                <span class="tag"> ${data1['comments'][i].user_username}</span>
+                                    </div>
+                                    <div class="comment-area">
+                                        <p class="comments-text" id="comments-text">
+                                            ${data1['comments'][i].comment_content}
+                                        </p>
                                     </div>
                                 </div>
-                            </div>`
+                            </div>
+                        </div>`
     }
 }
-
 //comment alert
 function alertcmt(id, j) {
     var com = document.getElementsByName('cmt');
-    console.log(com[j].value);
+    // console.log(com[j].value);
     if (((com[j].value).trim()).length > 0) {
         document.getElementById('alert').innerHTML = " ";
     } else {
-        //comment alert
-        function alertcmt(id, j) {
-            var com = document.getElementsByName('cmt');
-            console.log(com[j].value);
-            if (((com[j].value).trim()).length > 0) {
-                document.getElementById('alert').innerHTML = " ";
-            } else {
 
-                document.getElementById('alert').innerHTML = "please enter a comment"
-                document.getElementById('alert').style.color = "red";
-            }
-        }
         document.getElementById('alert').innerHTML = "please enter a comment"
         document.getElementById('alert').style.color = "red";
     }
 }
-
+document.getElementById('alert').innerHTML = "please enter a comment"
+document.getElementById('alert').style.color = "red";
 //insert comment in database
 
 async function savecomment(id, j) {
@@ -83,33 +72,31 @@ async function savecomment(id, j) {
             })
         })
         const data1 = await insert.json();
-        console.log("data1", data1);
+        // console.log("data1", data1);
         var cmt_show = document.getElementsByName('cmt-show');
         cmt_show[j].innerHTML = '';
-
+        //   console.log(cmt_show[j].innerHTML)
         for (let i = 0; i < data1['comments'].length; i++) {
+            // console.log("name", data1['comments'][i].user_name);
             cmt_show[j].innerHTML += `<div class="comments">
-                                <div class="left-clm">
-                                    <img src="assets/proflieimg.jpg" class="profile-img" />
-                                </div>
-                                <div class="right-clm">
-                                    <div>
-                                    <div class="comm-sec">
-                                        <p class="cmt-p" id="">Meet</p>
-                                        <span class="cmt-tag">@Meet_patel07</span>
-                                        <a href="">
-                                            <i class="bi bi-three-dots"></i>
-                                        </a>
-                                        </div>
-                                        <div class="comment-area">
-                                            <p class="comments-text" id="comments-text">
-                                                ${data1['comments'][i].comment_content}
-                                            </p>
-                                        </div>
+                            <div class="left-clm">
+                                <img src="assets/proflieimg.jpg" class="profile-img" />
+                            </div>
+                            <div class="right-clm">
+                                <div>
+                                <div class="comm-sec">
+                                <strong id=""> ${data1['comments'][i].user_name}</strong>
+                                <span class="tag"> ${data1['comments'][i].user_username}</span>
+                                    </div>
+                                    <div class="comment-area">
+                                        <p class="comments-text" id="comments-text">
+                                            ${data1['comments'][i].comment_content}
+                                        </p>
                                     </div>
                                 </div>
-                            </div>`
-            location.reload()
+                            </div>
+                        </div>`
+            location.reload();
         }
     } else {}
 }
@@ -118,22 +105,23 @@ async function savecomment(id, j) {
 let clk = 1;
 
 function emoji() {
-    var clik = document.getElementById('emojiclk')
+
     if (!clk == 0) {
-        console.log("hello emoji")
-            // console.log(document.getElementById('emoji'))
+        clk = 0;
+        // console.log("hello")
         document.getElementById('emoji').style.display = "block";
         document.querySelector('emoji-picker').addEventListener('emoji-click', e => {
-            document.getElementById("cmt").value += e.detail.unicode
+
+            document.getElementById("tweet-text").value += e.detail.unicode;
         })
-        clk = 0;
 
     } else {
+        // console.log("in else ..");
         document.getElementById('emoji').style.display = "none";
         clk = 1;
     }
+    document.getElementById('tweet-text').focus();
 }
-
 
 //close comment area
 function closecomment(id, j) {
@@ -149,10 +137,10 @@ async function retweet(id) {
 
     var retweet_icon_count = document.getElementById("span" + id);
     var retweet_icon = document.getElementById(id);
-    console.log("ICON :", retweet_icon);
-    console.log("COUNT:", retweet_icon_count);
+    // console.log("ICON :", retweet_icon);
+    // console.log("COUNT:", retweet_icon_count);
 
-    console.log("tweetid", id);
+    // console.log("tweetid", id);
     if (retweet_icon.classList.value == "fa-solid fa-retweet") {
 
         const result = await fetch("/tweet/retweet", {
@@ -166,7 +154,7 @@ async function retweet(id) {
         })
 
         const data = await result.json();
-        console.log(data);
+        // console.log(data);
         if (data) {
             retweet_icon_count.innerHTML = data.count;
             if (data.flag == true) {
@@ -182,29 +170,31 @@ async function retweet(id) {
 /*-----------------------------sid js-------------------------------------------*/
 
 
-/*-------------------meet js ------------------------------------- */
+/*meet js  */
 
 /*searching process */
 async function search() {
+    document.getElementById('search_pro').style.display = "block";
     document.getElementById('search_pro').innerHTML = '';
+
 
     var searchText = document.getElementById('search-text').value;
     var search_pro = document.getElementById('search_pro').innerHTML;
 
 
+    if (searchText.length != 0) {
+        let res = await fetch(`/search?search=${searchText}`);
 
-    let res = await fetch(`/search?search=${searchText}`);
+        let data = await res.json();
 
-    let data = await res.json();
+        if (data.search_res.length) {
 
-    if (data.search_res.length) {
-
-        for (let i = 0; i < data.search_res.length; i++) {
-            var sample = ``;
-            search_pro +=
-                `     <div class="profile-btn-s" onclick="search_profile(${data.search_res[i].user_id},'${data.search_res[i].profile_name}')">
+            for (let i = 0; i < data.search_res.length; i++) {
+                var sample = ``;
+                search_pro +=
+                    `     <div class="profile-btn-s" onclick="search_profile(${data.search_res[i].user_id},'${data.search_res[i].profile_name}')">
                     <div class="left-clm-s">
-                        <img src="/upload/${data.search_res[i].profile_image}" class="profile-img-s" />
+                        <img src="/assets/profile/${data.search_res[i].profile_image}" class="profile-img-s" />
                     </div>
                     <div class="right-clm-s">
                         <div>
@@ -215,11 +205,42 @@ async function search() {
                 
                     <div class="follow-btn-s">
             `;
-            search_pro += `${sample}</div> </div>`;
-        };
+                search_pro += `${sample}</div> </div>`;
+            };
 
+        }
+        document.getElementById('search_pro').innerHTML = search_pro;
+
+    } else {
+        document.getElementById('search_pro').innerHTML = "";
     }
-    document.getElementById('search_pro').innerHTML = search_pro;
+    // let res = await fetch(`/search?search=${searchText}`);
+
+    // let data = await res.json();
+
+    // if (data.search_res.length) {
+
+    //     for (let i = 0; i < data.search_res.length; i++) {
+    //         var sample = ``;
+    //         search_pro +=
+    //             `     <div class="profile-btn-s" onclick="search_profile(${data.search_res[i].user_id},'${data.search_res[i].profile_name}')">
+    //                 <div class="left-clm-s">
+    //                     <img src="/upload/${data.search_res[i].profile_image}" class="profile-img-s" />
+    //                 </div>
+    //                 <div class="right-clm-s">
+    //                     <div>
+    //                         <strong>${data.search_res[i].user_username}</strong><br>
+    //                         <span class="tag">@${data.search_res[i].profile_name}</span>
+    //                     </div>
+    //                 </div>
+
+    //                 <div class="follow-btn-s">
+    //         `;
+    //         search_pro += `${sample}</div> </div>`;
+    //     };
+
+    // }
+    // document.getElementById('search_pro').innerHTML = search_pro;
 
 }
 
@@ -240,45 +261,51 @@ function maxim() {
     var max_abccc = document.getElementById('tweet-text').value;
 
     var len = max_abccc.length;
-    console.log(len);
+    // console.log(len);
+    if (((max_abccc).trim()).length > 0) {
+        if (len == 0 && len == undefined && len == null) {
+            document.getElementById('tweetBtn').disabled = true;
+        } else if (len >= 151) {
+            error_max.innerHTML = "tweet character limit is reached!!";
+            document.getElementById('tweetBtn').disabled = true;
 
-    if (len == 0 && len == undefined && len == null) {
-        document.getElementById('tweetBtn').disabled = true;
-    } else if (len >= 151) {
-        error_max.innerHTML = "tweet character limit is reached!!";
-        document.getElementById('tweetBtn').disabled = true;
+        } else {
+            document.getElementById('tweetBtn').disabled = false;
+            error_max.innerHTML = " ";
 
+        }
     } else {
-        document.getElementById('tweetBtn').disabled = false;
-        error_max.innerHTML = " ";
 
     }
-
 }
 
 // search_profile ..............
 
 async function search_profile(pro_id, pro_name) {
-    console.log(`pro_id=${pro_id}&pro_name=${pro_name}`);
+    // console.log(`pro_id=${pro_id}&pro_name=${pro_name}`);
     let res = await fetch(`/search_profile?pro_id=${pro_id}&pro_name=${pro_name}`);
 
     let data = await res.json();
 }
 
 // follow function .................
-async function follow_user(user) {
-    console.log("click follow");
+async function follow(user, followid) {
+    var user_id = followid;
     var follow_btn = document.getElementById(user).value;
+    console.log(follow_btn);
     if (follow_btn == "Follow") {
         document.getElementById(user).value = "Following";
-        var user_id = user;
 
+        console.log("FOLLOW ID", user_id);
         let res = await fetch(`/follow?follow_id='${user_id}'`);
+        // console.log(res);
 
     } else {
         document.getElementById(user).value = "Follow";
-        var user_id = user;
+
         let res = await fetch(`/follow?follow_id='${user_id}'`);
+
+
     }
 }
 
@@ -320,7 +347,7 @@ async function likeFunction(x) {
     }
     //Dislike
     else {
-        console.log("Dislike");
+        // console.log("Dislike");
         like_color.style.color = ''
             // console.log('unlike')
         const result = await fetch("/tweet_like/like", {

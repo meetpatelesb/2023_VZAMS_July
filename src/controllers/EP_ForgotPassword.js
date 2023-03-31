@@ -116,7 +116,7 @@ let fetch_sendMail = async(req, res) => {
         </div>`
     })
 
-    res.json({ send: 'sent' });
+    res.json({ send: 'sent', OTP });
 
 
 };

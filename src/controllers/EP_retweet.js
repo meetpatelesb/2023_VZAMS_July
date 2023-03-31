@@ -8,7 +8,7 @@ var fetch_retweet = async(req, res) => {
     var user_id = req.session.user_id;
     var tweet_ID = req.body.tweet_id;
     var flag = req.body.flag;
-    console.log(tweet_ID);
+    // console.log(tweet_ID);
 
     /* Getting  Active column to identified that user retweet a tweet or not*/
 
@@ -20,7 +20,7 @@ var fetch_retweet = async(req, res) => {
     /*Get database retweet like query */
     var countRetweet = `select retweet_like_count from tweet_master where tweet_id = ${tweet_ID}`;
     var retweet_like = await queryExecute(countRetweet);
-    console.log("RETWEET", retweet_like);
+    // console.log("RETWEET", retweet_like);
     var count = retweet_like[0].retweet_like_count;
     /*Get database retweet like query */
 
