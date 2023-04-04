@@ -5,8 +5,7 @@ let router = express.Router();
 
 
 const {
-    search,
-    search_profile
+    search
 } = require('../controllers/EP_search');
 
 router.get('/search', search);
