@@ -24,17 +24,19 @@ var con = ms.createConnection({
     password: "root",
     database: "twitter"
 });
+
 function queryExecutor(query) {
-    return new Promise(function (resolve, reject) {
-        con.query(query, function (err, result) {
+    return new Promise(function(resolve, reject) {
+        con.query(query, function(err, result) {
             resolve(result)
         })
     })
 };
-app.get('/signin', function (req, res) {
+app.get('/signin', function(req, res) {
     res.render('signin.ejs', { status: "", msg: "" })
 });
-app.post('/signin', async function (req, res) {
+
+app.post('/signin', async function(req, res) {
     var email = req.body.email;
     var pass = req.body.password;
     // console.log(pass);
@@ -46,11 +48,11 @@ app.post('/signin', async function (req, res) {
         res.redirect('/home')
     } else {
         res.render('signin.ejs', { status: 404, msg: 'password is incorrect!!please try again.' })
-        // res.json({status: 404, msg:'password is incorrect!!please try again.'});
+            // res.json({status: 404, msg:'password is incorrect!!please try again.'});
     }
 })
 
-app.post('/email', async function (req, res) {
+app.post('/email', async function(req, res) {
     var email = req.body.email;
     // console.log(email);
     var sql = `select * from  user_master where user_email="${email}"`;
@@ -61,7 +63,7 @@ app.post('/email', async function (req, res) {
         res.json({ status: 404, msg: "Sorry,We couldn't find your email!!" });
     }
 })
-app.get('/home', async function (req, res) {
+app.get('/home', async function(req, res) {
 
     var showTweet = `SELECT * FROM twitter.tweet_master where user_id = '1' order  by tweet_create desc;`;
     var showcomment = `SELECT * FROM twitter.comment_master where user_id = '1' order  by comment_create desc;`;
@@ -69,10 +71,10 @@ app.get('/home', async function (req, res) {
     var comments = await queryExecutor(showcomment);
     console.log(comments.length);
     console.log(comments);
-    res.render('home', { tweets,comments});
+    res.render('home', { tweets, comments });
 });
 
-app.get('/search', function (req, res) {
+app.get('/search', function(req, res) {
 
     var search = req.query.search;
     console.log(search + "meet");
@@ -84,15 +86,15 @@ app.get('/search', function (req, res) {
     });
 
 });
-app.post('/comment', async function (req, res){
-    var cmt = req.body.cmt;
-    var sql = `insert into comment_master (comment_content,user_id,tweet_id) values('${cmt}','${1}','${1}')`;
-    var result = await queryExecutor(sql);
-    console.log(result)
-    res.redirect('/home')
+app.post('/comment', async function(req, res) {
+        var cmt = req.body.cmt;
+        var sql = `insert into comment_master (comment_content,user_id,tweet_id) values('${cmt}','${1}','${1}')`;
+        var result = await queryExecutor(sql);
+        console.log(result)
+        res.redirect('/home')
 
-})
-// multer start
+    })
+    // multer start
 
 // upload using MULTER
 const storage = multer.diskStorage({
@@ -121,7 +123,7 @@ const upload = multer({ storage: storage })
 // multer finished
 
 
-app.post('/tweet', upload.single('image'), function (req, res) {
+app.post('/tweet', upload.single('image'), function(req, res) {
 
     var { tweet_text } = req.body;
 
@@ -154,12 +156,12 @@ app.post('/tweet', upload.single('image'), function (req, res) {
 // res.send("Image Uploaded")
 
 
-app.post('/tweetshow', function (req, res) {
+app.post('/tweetshow', function(req, res) {
 
 });
 
 
-app.get('/tweet', function (req, res) {
+app.get('/tweet', function(req, res) {
     res.redirect('/');
 
 });
