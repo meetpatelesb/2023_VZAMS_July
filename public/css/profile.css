@@ -306,7 +306,7 @@ right sidebar starte
 }
 
 .search-bar {
-    color: #009fe8;
+    color: #009FE8;
     position: relative;
     width: 100%;
 }
@@ -320,6 +320,15 @@ right sidebar starte
     padding: 5px;
 }
 
+#search_pro {
+    box-shadow: rgb(0 0 0 / 25%) 0px 54px 55px, rgb(0 0 0 / 12%) 0px -12px 30px, rgb(0 0 0 / 12%) 0px 4px 6px, rgb(0 0 0 / 17%) 0px 12px 13px, rgb(0 0 0 / 9%) 0px -3px 5px;
+    border-radius: 10px;
+    display: none;
+    height: 300px;
+    overflow: auto;
+    overflow-x: hidden;
+}
+
 .search {
     width: 100%;
     margin-top: 10px;
@@ -329,11 +338,22 @@ right sidebar starte
     border: 1px solid #8899A6;
 }
 
+.wtf-profile {
+    max-height: 50%;
+}
+
+.right-fix {
+    position: fixed;
+    display: flex;
+    margin-left: 20px;
+    flex-direction: column;
+}
+
 .right-side div a {
     font-weight: 700;
     border-radius: 50px;
-    color: white;
-    padding: 08px 13px;
+    color: black;
+    padding: 8px 13px;
 }
 
 .recommand-profile {
@@ -355,6 +375,7 @@ right sidebar starte
 
 .left-clm-s {
     width: 20%;
+    margin-top: 5px;
 }
 
 .profile-img-s {
@@ -362,7 +383,6 @@ right sidebar starte
 }
 
 .right-clm-s {
-    margin-left: 10px;
     display: flex;
     /* align-items: center; */
     text-align: justify;
@@ -393,7 +413,7 @@ right sidebar starte
 
 .follow-btn-s input[type='button'] {
     border: 1px solid;
-    color: #fff;
+    color: #FFF;
     border-radius: 30px;
     font-weight: 600;
     padding: 12px 15px;

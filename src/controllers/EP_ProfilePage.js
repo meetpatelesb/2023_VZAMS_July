@@ -15,11 +15,37 @@ let fetch_retweets = async(req, res) => {
 
 }
 
+// var fetch_follow = async(req, res) => {
+//     var user_id = req.session.user_id;
+//     var follow_id = req.query.follow_id;
+
+
+//     var check_data = `select * from follow_master where followers_uid = ${follow_id} and follow_uid = ${user_id};`;
+//     var check_data_res = await queryExecute(check_data);
+//     if (check_data_res[0] != undefined) {
+//         if (check_data_res[0].follow_flag == 1) {
+//             var update_flag1 = `update follow_master set follow_flag  = 0 where followers_uid = ${follow_id} and follow_uid = ${user_id};`
+//             var res_u_flag1 = await queryExecute(update_flag1);
+//         } else if (check_data_res[0].follow_flag == 0) {
+//             var update_flag0 = `update follow_master set follow_flag  = 1 where followers_uid = ${follow_id} and follow_uid = ${user_id};`
+//             var res_u_flag0 = await queryExecute(update_flag0);
+//         }
+//     } else {
+
+//         var insert_follow_data = `INSERT INTO follow_master ( follow_uid, followers_uid, follow_flag) VALUES ( ${user_id}, ${follow_id}, '1');`
+//         var res_insert_f_data = await queryExecute(insert_follow_data);
+//     }
+
+//     res.json({ msg: "followed" });
+// }
+
+
+
 var fetch_follow = async(req, res) => {
     var user_id = req.session.user_id;
     var follow_id = req.query.follow_id;
 
-
+    console.log("fetch follow profile");
     var check_data = `select * from follow_master where followers_uid = ${follow_id} and follow_uid = ${user_id};`;
     var check_data_res = await queryExecute(check_data);
     if (check_data_res[0] != undefined) {
@@ -43,11 +69,10 @@ var fetch_follow = async(req, res) => {
 
 
 
-
 var page_profilePage = async function(req, res) {
     var user_id = req.session.user_id;
     var tweet_id = req.body.tweet_id
-
+    console.log("page profilepage profile");
 
     let get_id = `select user_id from profile_master where profile_username = '@${req.params.user_name}'`;
     let sda = await queryExecute(get_id);

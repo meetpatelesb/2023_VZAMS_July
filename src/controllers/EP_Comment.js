@@ -26,8 +26,8 @@ var fetch_Comment = async(req, res) => {
 
     // show comments
     var showcomment = `SELECT cm.*,um.user_name,um.user_username,pm.profile_image FROM
-    comment_master cm join user_master um on
-    um.user_id = cm.user_id join profile_master pm on pm.user_id = cm.user_id where tweet_id=${tweet_id} order by comment_create desc;`;
+comment_master cm join user_master um on
+um.user_id = cm.user_id join profile_master pm on pm.user_id = cm.user_id where tweet_id=${tweet_id} order by comment_create desc;`;
     var comments = await queryExecute(showcomment);
     var countsql = `
                 UPDATE tweet_master
@@ -35,7 +35,6 @@ var fetch_Comment = async(req, res) => {
                 WHERE tweet_id = ${ tweet_id };
                 `
     var comment_count = await queryExecute(countsql);
-    // console.log("que", countsql, comment_count)
     res.json({ comments: comments });
 }
 
@@ -45,8 +44,8 @@ var show_Comment = async(req, res) => {
     // console.log("heyy");
     let tweet_id = req.query.id;
     var showcomment = `SELECT cm.*,um.user_name,um.user_username,pm.profile_image FROM
-    comment_master cm join user_master um on
-    um.user_id = cm.user_id join profile_master pm on pm.user_id = cm.user_id where tweet_id=${tweet_id} order by comment_create desc;`;
+comment_master cm join user_master um on
+um.user_id = cm.user_id join profile_master pm on pm.user_id = cm.user_id where tweet_id=${tweet_id} order by comment_create desc;`;
 
     var comments = await queryExecute(showcomment);
     res.json({ comments: comments });

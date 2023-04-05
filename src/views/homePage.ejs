@@ -208,7 +208,7 @@
                                 <div class="d-flex flex-column">
                                     <div class="user-tweet d-flex flex-row">
                                         <div class="user">
-                                            <strong id=""><%=tweets[j].user_name%></strong>
+                                            <a href="/user/<%=tweets[j].user_name%>" class="link_color"><strong id=""><%=tweets[j].user_name%></strong></a>
                                             <span class="tag"><%=tweets[j].user_username%></span>
                                             <span class="tweet_time"><%=tweet_create[j]%></span>
                                         </div>
@@ -227,9 +227,9 @@
                                             <%}%>
                                                 <div class="like-icons">
                                                     <div class="icon">
-                                                        <%=tweets[j].tweet_id%>
-                                                            <i class="fa-solid fa-comment" id="reply" onclick="popcomment('<%=tweets[j].tweet_id%>','<%=j%>')"></i>
-                                                            <span class="reply-count" id="reply-count">
+
+                                                        <i class="fa-solid fa-comment" id="reply" onclick="popcomment('<%=tweets[j].tweet_id%>','<%=j%>')"></i>
+                                                        <span class="reply-count" id="reply-count">
                                                                 <%=totalcmt[j].comment_count%>
                                                             </span>
                                                     </div>
@@ -297,7 +297,10 @@
                 <div class="search-bar">
 
                     <div> <i class="bi bi-search"></i></div>
-                    <input class="search" placeholder="Search Tweets" id="search-text" onkeydown="search()" />
+                    <input class="search" placeholder="Search user" id="search-text" onkeydown="search()" />
+                </div>
+                <div class="searcherr">
+                    <p id="search_err"></p>
                 </div>
 
                 <div class="search_profiles">

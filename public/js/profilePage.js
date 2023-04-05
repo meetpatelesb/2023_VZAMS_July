@@ -111,49 +111,135 @@ async function retweet(id) {
 
 /*meet js  */
 
+// async function search() {
+//     document.getElementById('search_pro').innerHTML = '';
+
+//     var searchText = document.getElementById('search-text').value;
+//     var search_pro = document.getElementById('search_pro').innerHTML;
+
+//     let res = await fetch(`/search?search=${searchText}`);
+
+//     let data = await res.json();
+//     // console.log(data.search_res);
+//     // console.log(data.search_res[0].user_username)
+//     if (data.search_res.length) {
+
+//         for (let i = 0; i < data.search_res.length; i++) {
+//             var sample = ``;
+
+//             let username = data.search_res[0].user_username.replace('@', '');
+//             let search_user = `/user/${username}`
+//                 // console.log(search_user);
+//             search_pro +=
+//                 `<div class="profile-btn-s search-content">
+
+//             <div class="left-clm-s">
+//             <img src="/assets/profile/${data.search_res[i].profile_image}" class="profile-img-s" />
+//             </div>
+//             <div class="right-clm-s">
+//                 <a href="${search_user}">
+//                     <div>
+//                     <span>${data.search_res[i].user_username}</span>
+//                         <small>${data.search_res[i].profile_name}</small>
+//                     </div>
+//                 </a>
+//             </div>
+//         </div>`
+
+//             search_pro += `${sample}`;
+//             // console.log(search_pro);
+//         };
+
+//     }
+//     document.getElementById('search_pro').innerHTML = search_pro;
+
+// }
+
+/*searching process */
 async function search() {
-    document.getElementById('search_pro').innerHTML = '';
+
 
     var searchText = document.getElementById('search-text').value;
-    var search_pro = document.getElementById('search_pro').innerHTML;
+    var search_pro = document.getElementById('search_pro').innerHTML = "";
+    document.getElementById('search_err').innerHTML = "";
 
-    let res = await fetch(`/search?search=${searchText}`);
+    if (searchText.length != 0) {
+        let res = await fetch(`/search?search=${searchText}`);
 
-    let data = await res.json();
-    // console.log(data.search_res);
-    // console.log(data.search_res[0].user_username)
-    if (data.search_res.length) {
+        let data = await res.json();
+        console.log(data.search_res);
+        if (data.search_res != undefined) {
 
-        for (let i = 0; i < data.search_res.length; i++) {
-            var sample = ``;
+            document.getElementById('search_pro').style.display = "block";
+            document.getElementById('search_pro').innerHTML = '';
 
-            let username = data.search_res[0].user_username.replace('@', '');
-            let search_user = `/user/${username}`
-                // console.log(search_user);
-            search_pro +=
-                `<div class="profile-btn-s search-content">
+            for (let i = 0; i < data.search_res.length; i++) {
+                var sample = ``;
+                document.getElementById('search_err').innerHTML = "";
+                let username = data.search_res[0].user_username.replace('@', '');
+                let search_user = `/user/${username}`
+                search_pro +=
+                    `<div class="profile-btn-s search-content">
 
-            <div class="left-clm-s">
-            <img src="/upload/${data.search_res[i].profile_image}" class="profile-img-s" />
-            </div>
-            <div class="right-clm-s">
-                <a href="${search_user}">
-                    <div>
-                    <span>${data.search_res[i].user_username}</span>
-                        <small>${data.search_res[i].profile_name}</small>
-                    </div>
-                </a>
-            </div>
-        </div>`
+                <div class="left-clm-s">
+                <img src="/assets/profile/${data.search_res[i].profile_image}" class="profile-img-s" />
+                </div>
+                <div class="right-clm-s">
+                    <a href="${search_user}">
+                        <div>
+                        <span>${data.search_res[i].user_username}</span>
+                            <small>${data.search_res[i].profile_name}</small>
+                        </div>
+                    </a>
+                </div>
+            </div>`
+                search_pro += `${sample}</div> </div>`;
+            };
 
-            search_pro += `${sample}`;
-            // console.log(search_pro);
-        };
+        } else if (data.search_res == undefined) {
+            document.getElementById('search_pro').style.display = "none";
+            document.getElementById('search_err').innerHTML = "User Not Found";
+            document.getElementById('search_err').style.color = "grey";
+        }
+        document.getElementById('search_pro').innerHTML = search_pro;
 
+    } else {
+        document.getElementById('search_pro').innerHTML = "";
+        document.getElementById('search_pro').style.display = "none";
     }
-    document.getElementById('search_pro').innerHTML = search_pro;
+    // let res = await fetch(`/search?search=${searchText}`);
+
+    // let data = await res.json();
+
+    // if (data.search_res.length) {
+
+    //     for (let i = 0; i < data.search_res.length; i++) {
+    //         var sample = ``;
+    //         search_pro +=
+    //             `     <div class="profile-btn-s" onclick="search_profile(${data.search_res[i].user_id},'${data.search_res[i].profile_name}')">
+    //                 <div class="left-clm-s">
+    //                     <img src="/upload/${data.search_res[i].profile_image}" class="profile-img-s" />
+    //                 </div>
+    //                 <div class="right-clm-s">
+    //                     <div>
+    //                         <strong>${data.search_res[i].user_username}</strong><br>
+    //                         <span class="tag">@${data.search_res[i].profile_name}</span>
+    //                     </div>
+    //                 </div>
+
+    //                 <div class="follow-btn-s">
+    //         `;
+    //         search_pro += `${sample}</div> </div>`;
+    //     };
+
+    // }
+    // document.getElementById('search_pro').innerHTML = search_pro;
 
 }
+
+
+
+
 
 /*tweet create validation */
 
@@ -269,7 +355,7 @@ async function popcomment(id, j) {
         var cmt_show = document.getElementsByName('cmt-show');
         cmt_show[j].innerHTML += `<div class="comments">
                                 <div class="left-clm">
-                                    <img src="assets/proflieimg.jpg" class="profile-img" />
+                                    <img src="/assets/profile/${data1['comments'][i].profile_image}" class="profile-img" />
                                 </div>
                                 <div class="right-clm">
                                     <div>
@@ -341,7 +427,7 @@ async function savecomment(id, j) {
         for (let i = 0; i < data1['comments'].length; i++) {
             cmt_show[j].innerHTML += `<div class="comments">
                                 <div class="left-clm">
-                                    <img src="assets/proflieimg.jpg" class="profile-img" />
+                                    <img src="/assets/profile/${data1['comments'][i].profile_image}" class="profile-img" />
                                 </div>
                                 <div class="right-clm">
                                     <div>

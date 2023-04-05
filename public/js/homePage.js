@@ -174,30 +174,32 @@ async function retweet(id) {
 
 /*searching process */
 async function search() {
-    document.getElementById('search_pro').style.display = "block";
-    document.getElementById('search_pro').innerHTML = '';
 
 
     var searchText = document.getElementById('search-text').value;
-    var search_pro = document.getElementById('search_pro').innerHTML;
+    var search_pro = document.getElementById('search_pro').innerHTML = "";
 
 
     if (searchText.length != 0) {
         let res = await fetch(`/search?search=${searchText}`);
 
         let data = await res.json();
+        console.log(data.search_res);
+        if (data.search_res != undefined) {
 
-        if (data.search_res.length) {
+            document.getElementById('search_pro').style.display = "block";
+            document.getElementById('search_pro').innerHTML = '';
 
             for (let i = 0; i < data.search_res.length; i++) {
                 var sample = ``;
+                document.getElementById('search_err').innerHTML = "";
                 let username = data.search_res[0].user_username.replace('@', '');
                 let search_user = `/user/${username}`
                 search_pro +=
                     `<div class="profile-btn-s search-content">
 
                 <div class="left-clm-s">
-                <img src="/upload/${data.search_res[i].profile_image}" class="profile-img-s" />
+                <img src="/assets/profile/${data.search_res[i].profile_image}" class="profile-img-s" />
                 </div>
                 <div class="right-clm-s">
                     <a href="${search_user}">
@@ -211,11 +213,16 @@ async function search() {
                 search_pro += `${sample}</div> </div>`;
             };
 
+        } else if (data.search_res == undefined) {
+            document.getElementById('search_pro').style.display = "none";
+            document.getElementById('search_err').innerHTML = "User Not Found";
+            document.getElementById('search_err').style.color = "grey";
         }
         document.getElementById('search_pro').innerHTML = search_pro;
 
     } else {
         document.getElementById('search_pro').innerHTML = "";
+        document.getElementById('search_pro').style.display = "none";
     }
     // let res = await fetch(`/search?search=${searchText}`);
 

@@ -694,3 +694,8 @@ width: 100%;
     align-items: flex-start;
     justify-content: flex-end;
 }
+
+.link_color {
+    text-decoration: none;
+    color: black;
+}

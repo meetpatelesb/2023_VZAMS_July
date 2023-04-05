@@ -64,7 +64,7 @@ var page_home = async function(req, res) {
     var user_id = req.session.user_id;
     var whofollow_id = `SELECT followers_uid FROM follow_master where follow_flag = '1' and follow_uid=${user_id} ;`
     var whoFollow_id = await queryExecute(whofollow_id);
-    console.log(whoFollow_id);
+    // console.log(whoFollow_id);
     // console.log(whoFollow_id);
 
 
@@ -92,6 +92,8 @@ var page_home = async function(req, res) {
 var page_tweet_create = async function(req, res) {
     var user_id = req.session.user_id;
 
+    // console.log("tweet creat follow homepage");
+
     var { tweet_text } = req.body;
 
 
@@ -99,20 +101,17 @@ var page_tweet_create = async function(req, res) {
     if (req.file != undefined) {
         if ((req.file.filename).includes('.mp4')) {
 
-
             var user_id = req.session.user_id;
-            var tweet_query = `INSERT INTO tweet_master ( tweet_content, user_id,tweet_video) VALUES ( '${tweet_text}', ${user_id}, '${req.file.filename}')`;
-            var tweetResult = await queryExecute(tweet_query);
+            var tweetResult = connection.query('INSERT INTO tweet_master ( tweet_content, user_id,tweet_video) VALUES (?,?,?)', [tweet_text, user_id, req.file.filename]);
             res.redirect('/homePage');
         } else {
-            var tweet_query = `INSERT INTO tweet_master ( tweet_content, user_id, tweet_image) VALUES ( '${tweet_text}', ${user_id}, '${req.file.filename}')`;
-            var tweetResult = await queryExecute(tweet_query);
+            var tweet_query = connection.query('INSERT INTO tweet_master ( tweet_content, user_id, tweet_image) VALUES (?,?,?)', [tweet_text, user_id, req.file.filename]);
             res.redirect('/homePage');
         };
 
     } else {
-        var tweet_query = `INSERT INTO tweet_master ( tweet_content, user_id) VALUES ( '${tweet_text}', ${user_id})`;
-        var tweetResult = await queryExecute(tweet_query);
+
+        let tweet_query = connection.query('INSERT INTO tweet_master ( tweet_content, user_id) VALUES (?,?)', [tweet_text, user_id])
         res.redirect('/homePage');
     };
 
@@ -123,72 +122,109 @@ var fetch_follow = async(req, res) => {
     // console.log("HELLO FOLLOW");
     var user_id = req.session.user_id;
     var follow_id = req.query.follow_id;
-    var check_count = ` select a.profile_following,a.profile_followers,a.user_id from profile_master a left join user_master b on a.user_id =b.user_id where a.user_id =${user_id};`;
 
-    var update_count_followers = ` select a.profile_following,a.profile_followers,a.user_id from profile_master a left join user_master b on a.user_id =b.user_id where a.user_id =${follow_id};`
+    // console.log("fetch follow homepage");
+    // console.log(follow_id);
+    var check_count = `select a.profile_following, a.profile_followers, a.user_id from profile_master a left join user_master b on a.user_id = b.user_id where a.user_id = ${ user_id };`;
+
+    var update_count_followers = `select a.profile_following, a.profile_followers, a.user_id from profile_master a left join user_master b on a.user_id = b.user_id where a.user_id = ${ follow_id };`
+        // console.log(update_count_followers);
     var check_Count = await queryExecute(check_count);
     var check_Count_followers = await queryExecute(update_count_followers);
 
     var following_count = check_Count[0].profile_following;
     var followers_count = check_Count_followers[0].profile_followers;
+    // console.log(following_count, followers_count, "homepage");
 
     // following counter and followers.......................
 
-    var check_data = `select * from follow_master where followers_uid = ${follow_id} and follow_uid = ${user_id};`;
-
+    var check_data = `select * from follow_master where followers_uid = ${ follow_id } and follow_uid = ${ user_id };`;
+    // console.log("check data: " + check_data);
     var check_data_res = await queryExecute(check_data);
     // console.log(check_data_res[0] != undefined);
 
     if (check_data_res[0] != undefined) {
 
         if (check_data_res[0].follow_flag == 1) {
-            var update_flag1 = `update  follow_master set follow_flag  = 0 where followers_uid = ${follow_id} and follow_uid = ${user_id};`
+            var update_flag1 = `
+            update follow_master set follow_flag = 0 where followers_uid = ${ follow_id }
+            and follow_uid = ${ user_id };
+            `
+
+            // console.log("update flag1", update_flag1);
             var res_u_flag1 = await queryExecute(update_flag1);
 
 
             // following counter
             following_count -= 1;
-            var update_count = ` update  profile_master set profile_following = ${following_count} where user_id = ${user_id};`;
+            var update_count = `
+            update profile_master set profile_following = ${ following_count } where user_id = ${ user_id };`;
+            // console.log("update_count1: " + update_count);
             var update_Count = await queryExecute(update_count);
 
 
             // followers counter
             followers_count -= 1;
-            var update_count_followers = `update profile_master set profile_followers = ${followers_count} where followers_uid = ${follow_id};`
+            var update_count_followers = `
+            update profile_master set profile_followers = ${ followers_count }
+            where user_id = ${ follow_id };
+            `;
+            // console.log("update_count_followers1: " + update_count_followers);
             var update_Count_followers = await queryExecute(update_count_followers);
 
 
         } else if (check_data_res[0].follow_flag == 0) {
 
-            var update_flag0 = `update  follow_master set follow_flag  = 1 where followers_uid = ${follow_id} and follow_uid = ${user_id};`
+            var update_flag0 = `
+            update follow_master set follow_flag = 1 where followers_uid = ${ follow_id }
+            and follow_uid = ${ user_id };
+            `;
+
+            // console.log("update_flag0: " + update_flag0);
             var res_u_flag0 = await queryExecute(update_flag0);
 
             // following counter
             following_count += 1;
-            var update_count = ` update  profile_master set profile_following = ${following_count} where user_id = ${user_id};`;
+            var update_count = `
+            update profile_master set profile_following = ${ following_count }
+            where user_id = ${ user_id };
+            `;
+            // console.log("update_count2: " + update_count);
             var update_Count = await queryExecute(update_count);
 
             // followers counter
-            followers_count -= 1;
-            var update_count_followers = `update profile_master set profile_followers = ${followers_count} where followers_uid = ${follow_id};`
+            followers_count += 1;
+            var update_count_followers = `
+            update profile_master set profile_followers = ${ followers_count }
+            where user_id = ${ follow_id };
+            `;
+            // console.log("update_count_followers2: " + update_count_followers);
             var update_Count_followers = await queryExecute(update_count_followers);
         }
     } else {
         // console.log("log else ");
 
-        var insert_follow_data = `INSERT INTO follow_master ( follow_uid, followers_uid, follow_flag) VALUES ( ${user_id}, ${follow_id}, '1');`
+        var insert_follow_data = `
+            INSERT INTO follow_master(follow_uid, followers_uid, follow_flag) VALUES(${ user_id }, ${ follow_id }, '1');
+            `
         var res_insert_f_data = await queryExecute(insert_follow_data);
 
 
         // following count first
         following_count += 1;
-        var insert_count = `update  profile_master set profile_following = ${following_count} where user_id = ${user_id};  `
+        var insert_count = `
+            update profile_master set profile_following = ${ following_count }
+            where user_id = ${ user_id };
+            `
             // console.log(insert_count);
         var insert_Count = await queryExecute(insert_count);
 
         // followers count first
         followers_count += 1;
-        var insert_count2 = `update  profile_master set profile_followers = ${followers_count} where user_id = ${follow_id};`
+        var insert_count2 = `
+            update profile_master set profile_followers = ${ followers_count }
+            where user_id = ${ follow_id };
+            `
             // console.log(insert_count2);
         var insert_Count2 = await queryExecute(insert_count2);
     }
@@ -206,7 +242,7 @@ var fetch_follow = async(req, res) => {
 // var fetch_unfollow = async(req, res) => {
 //     var follow_id = req.query.follow_id;
 //     res.json({ msg: "unfollowed" });
-// }
+// }    
 
 
 module.exports = { page_home, page_tweet_create, fetch_follow };
