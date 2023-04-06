@@ -65,7 +65,7 @@
                         <div class="menu">
 
 
-                            <%let username = userName[0].user_username.replace('@','');
+                            <%let username = user_data[0].user_username.replace('@','');
                             %>
 
                                 <a href="/user/<%=username%>">
@@ -137,9 +137,7 @@
                     <section class="profile-details">
                         <nav>
 
-                            <button class="profile-botton">
-                    <a href=" <%= link %> " target="_top"><%= btn%></a>
-                  </button>
+                            <%- sendDiv %>
                         </nav>
                         <div class="profile-info">
 
@@ -179,7 +177,7 @@
 
                                     <div class="user-follow">
                                         <p><strong><%= x.profile_following %></strong><span>Following</span></p>
-                                        <p><strong><%= x.profile_followers %></strong> <span>Followers</span></p>
+                                        <p><strong id="strong_followers"><%= x.profile_followers %></strong> <span>Followers</span></p>
                                     </div>
                             </div>
                         </div>
@@ -449,7 +447,7 @@
                                                 </div>
 
                                                 <div class="follow-btn-s">
-                                                    <input type='button' class="follow-a" id="<%=whoFollow[i].user_id%>" onclick='follow("<%=whoFollow[i].user_id%>")' value="Follow">
+                                                    <input type='button' class="follow-a" id="follow<%=whoFollow[i].user_id%>" onclick='follow(this.id,"<%=whoFollow[i].user_id%>")' value="Follow">
                                                 </div>
                                             </div>
 

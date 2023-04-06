@@ -306,9 +306,7 @@ async function follow(user, followid) {
     if (follow_btn == "Follow") {
         document.getElementById(user).value = "Following";
 
-        console.log("FOLLOW ID", user_id);
         let res = await fetch(`/follow?follow_id='${user_id}'`);
-        // console.log(res);
 
     } else {
         document.getElementById(user).value = "Follow";

@@ -574,7 +574,8 @@ nav {
     transition-duration: 0.5s;
 }
 
-.profile-botton a {
+.profile-botton a,
+#profile-Follow-span {
     text-decoration: none;
     display: inline-block;
     padding: 8px 21px;

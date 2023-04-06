@@ -275,21 +275,39 @@ function maxim() {
 // search_profile ..............
 
 // follow function .................
-
-async function follow(user) {
+async function follow(user, followid) {
+    var user_id = followid;
     var follow_btn = document.getElementById(user).value;
+    console.log(follow_btn);
     if (follow_btn == "Follow") {
         document.getElementById(user).value = "Following";
-        var user_id = user;
+
         let res = await fetch(`/follow?follow_id='${user_id}'`);
-        // console.log(res);
 
     } else {
         document.getElementById(user).value = "Follow";
-        var user_id = user;
+
         let res = await fetch(`/follow?follow_id='${user_id}'`);
 
 
+    }
+}
+
+async function user_follow(followid) {
+    var user_id = followid;
+    let follow_btn = document.getElementById('profile-Follow-span');
+    let getFollower_strong = document.getElementById('strong_followers');
+
+    if (follow_btn.innerText == "Follow") {
+        follow_btn.innerText = 'Following'
+        let res = await fetch(`/follow?follow_id='${user_id}'`);
+        let data = await res.json();
+        getFollower_strong.innerHTML = data.user_followers_count;
+    } else {
+        follow_btn.innerText = 'Follow'
+        let res = await fetch(`/follow?follow_id='${user_id}'`);
+        let data = await res.json();
+        getFollower_strong.innerHTML = data.user_followers_count;
     }
 }
 

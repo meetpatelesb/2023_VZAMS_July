@@ -123,8 +123,6 @@ var fetch_follow = async(req, res) => {
     var user_id = req.session.user_id;
     var follow_id = req.query.follow_id;
 
-    // console.log("fetch follow homepage");
-    // console.log(follow_id);
     var check_count = `select a.profile_following, a.profile_followers, a.user_id from profile_master a left join user_master b on a.user_id = b.user_id where a.user_id = ${ user_id };`;
 
     var update_count_followers = `select a.profile_following, a.profile_followers, a.user_id from profile_master a left join user_master b on a.user_id = b.user_id where a.user_id = ${ follow_id };`
@@ -153,7 +151,6 @@ var fetch_follow = async(req, res) => {
 
             // console.log("update flag1", update_flag1);
             var res_u_flag1 = await queryExecute(update_flag1);
-
 
             // following counter
             following_count -= 1;
@@ -228,13 +225,20 @@ var fetch_follow = async(req, res) => {
             // console.log(insert_count2);
         var insert_Count2 = await queryExecute(insert_count2);
     }
-    res.json({ msg: "followed" });
+
+
+    let count_follower_page = `select profile_following,profile_followers from profile_master where user_id = ${follow_id}`
+    var updated_count_follow = await queryExecute(count_follower_page);
+
+    let user_following_count = updated_count_follow[0].profile_following;
+    var user_followers_count = updated_count_follow[0].profile_followers;
+    console.log(user_followers_count);
+    console.log(user_following_count);
+    res.json({ msg: "followed", user_following_count, user_followers_count });
 
 
     // users follow followings..................................
-    var user_counts = await queryExecute(check_count);
-    var user_following_count = user_counts[0].profile_following;
-    var user_followers_count = user_counts[0].profile_followers;
+
     // console.log("user following count" + user_following_count, "    user followers count" + user_followers_count);
 
 }
