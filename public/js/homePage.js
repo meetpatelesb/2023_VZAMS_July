@@ -6,6 +6,8 @@ async function popcomment(id, j) {
     // console.log("hello");
     let cmt_box = document.getElementsByName('cmt-box');
     cmt_box[j].style.display = "block";
+    var alert = document.getElementsByClassName('alert');
+    alert[j].innerHTML = " ";
     //save button
     var savecommentbtn = document.getElementsByName('savecommentbtn');
     savecommentbtn[j].innerHTML = `<a value="Comment" id="comment" class="btn btn-primary" onclick="savecomment(${id},${j}),alertcmt(${j})">Comment</a>`;
@@ -56,9 +58,11 @@ function alertcmt(j) {
 
 async function savecomment(id, j) {
 
+
     var com = document.getElementsByName('cmt');
     if (((com[j].value).trim()).length > 0) {
-        document.getElementById('alert').innerHTML = " ";
+        var alert = document.getElementsByClassName('alert');
+        alert[j].innerHTML = " ";
         var insert = await fetch("/comm/comment", {
             method: "POST",
             headers: {

@@ -360,11 +360,8 @@ async function popcomment(id, j) {
                                 <div class="right-clm">
                                     <div>
                                     <div class="comm-sec">
-                                        <p class="cmt-p" id="">Meet</p>
-                                        <span class="cmt-tag">@Meet_patel07</span>
-                                        <a href="">
-                                            <i class="bi bi-three-dots"></i>
-                                        </a>
+                                    <strong id=""> ${data1['comments'][i].user_name}</strong>
+                                    <span class="tag"> ${data1['comments'][i].user_username}</span>
                                         </div>
                                         <div class="comment-area">
                                             <p class="comments-text" id="comments-text">
@@ -432,11 +429,9 @@ async function savecomment(id, j) {
                                 <div class="right-clm">
                                     <div>
                                     <div class="comm-sec">
-                                        <p class="cmt-p" id="">Meet</p>
-                                        <span class="cmt-tag">@Meet_patel07</span>
-                                        <a href="">
-                                            <i class="bi bi-three-dots"></i>
-                                        </a>
+                                    <strong id=""> ${data1['comments'][i].user_name}</strong>
+                                    <span class="tag"> ${data1['comments'][i].user_username}</span>
+                                       
                                         </div>
                                         <div class="comment-area">
                                             <p class="comments-text" id="comments-text">

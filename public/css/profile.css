@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 
- :root {
+:root {
     --main-color: rgb(29, 161, 242);
     --border-color: rgb(56, 68, 77);
     --shadow-color: rgba(29, 161, 242, 0.1);
@@ -117,7 +117,7 @@ side bar started-----------------------
 .right-clm span {
     color: #0f1419;
     font-weight: 600;
-    padding: 5px;
+    /* padding: 5px; */
 }
 
 .right-clm small {
@@ -178,9 +178,9 @@ first tweet
 }
 
 .title img {
+    border-radius: 30px;
     height: 50px;
     width: 50px;
-    border-radius: 45px;
 }
 
 .tweet {
@@ -307,7 +307,7 @@ right sidebar starte
 }
 
 .search-bar {
-    color: #009FE8;
+    color: #009fe8;
     position: relative;
     width: 100%;
 }
@@ -321,15 +321,6 @@ right sidebar starte
     padding: 5px;
 }
 
-#search_pro {
-    box-shadow: rgb(0 0 0 / 25%) 0px 54px 55px, rgb(0 0 0 / 12%) 0px -12px 30px, rgb(0 0 0 / 12%) 0px 4px 6px, rgb(0 0 0 / 17%) 0px 12px 13px, rgb(0 0 0 / 9%) 0px -3px 5px;
-    border-radius: 10px;
-    display: none;
-    height: 300px;
-    overflow: auto;
-    overflow-x: hidden;
-}
-
 .search {
     width: 100%;
     margin-top: 10px;
@@ -339,22 +330,11 @@ right sidebar starte
     border: 1px solid #8899A6;
 }
 
-.wtf-profile {
-    max-height: 50%;
-}
-
-.right-fix {
-    position: fixed;
-    display: flex;
-    margin-left: 20px;
-    flex-direction: column;
-}
-
 .right-side div a {
     font-weight: 700;
     border-radius: 50px;
-    color: black;
-    padding: 8px 13px;
+    color: white;
+    padding: 08px 13px;
 }
 
 .recommand-profile {
@@ -376,7 +356,6 @@ right sidebar starte
 
 .left-clm-s {
     width: 20%;
-    margin-top: 5px;
 }
 
 .profile-img-s {
@@ -384,6 +363,7 @@ right sidebar starte
 }
 
 .right-clm-s {
+    margin-left: 10px;
     display: flex;
     /* align-items: center; */
     text-align: justify;
@@ -414,7 +394,7 @@ right sidebar starte
 
 .follow-btn-s input[type='button'] {
     border: 1px solid;
-    color: #FFF;
+    color: #fff;
     border-radius: 30px;
     font-weight: 600;
     padding: 12px 15px;
@@ -575,8 +555,7 @@ nav {
     transition-duration: 0.5s;
 }
 
-.profile-botton a,
-#profile-Follow-span {
+.profile-botton a {
     text-decoration: none;
     display: inline-block;
     padding: 8px 21px;
@@ -751,9 +730,10 @@ tweet showing start
     font-family: 'Poppins';
 }
 
-.tweets-area p {
+
+/* .tweets-area p {
     width: 100%;
-}
+} */
 
 .tweet-area .tweet-video {
     height: 100px;
@@ -916,9 +896,12 @@ sidebar ended---------------------
 
 */
 
+
+/* comment */
+
 #cmt-box {
     display: none;
-    width: 70%;
+    width: 100%;
     height: auto;
     margin-top: 20px;
 }
@@ -952,23 +935,12 @@ sidebar ended---------------------
     justify-content: flex-start;
 }
 
-.btn1 {
-    display: flex;
-    justify-content: flex-start;
-    width: 50%;
-}
 
-.btn2 {
-    display: flex;
-    justify-content: flex-end;
-}
-
-.btns {
-    width: 50%;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-}
+/* .btn1 {
+display: flex;
+justify-content: flex-start;
+width: 100%;
+} */
 
 #emoji {
     width: 100%;
@@ -981,6 +953,7 @@ sidebar ended---------------------
 .comments {
     display: flex;
     flex-direction: row;
+    margin-top: 10px;
 }
 
 .comm-sec {
@@ -1000,15 +973,45 @@ sidebar ended---------------------
     font-size: 15px;
 }
 
-.searcherr {
-    font-size: 18px;
-    display: flex;
-    justify-content: center;
-    padding: 15px;
+.emoji {
+    justify-content: flex-start;
 }
 
-.tweet_time {
-    font-size: 12px;
-    color: gray;
-    letter-spacing: 0.3px;
+
+/* .btn1 {
+    display: flex;
+    justify-content: flex-start;
+    width: 50%;
+} */
+
+.btn2 {
+    display: flex;
+    justify-content: flex-end;
+    background-color: rgb(44, 95, 189);
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.btns {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.btn3 {
+    background-color: darkgrey;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.profile-botton a,
+#profile-Follow-span {
+    text-decoration: none;
+    display: inline-block;
+    padding: 8px 21px;
+    font-weight: 800;
+    color: #fefefd;
 }
