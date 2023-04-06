@@ -180,6 +180,7 @@ first tweet
 .title img {
     height: 50px;
     width: 50px;
+    border-radius: 45px;
 }
 
 .tweet {
@@ -574,7 +575,8 @@ nav {
     transition-duration: 0.5s;
 }
 
-.profile-botton a {
+.profile-botton a,
+#profile-Follow-span {
     text-decoration: none;
     display: inline-block;
     padding: 8px 21px;
@@ -608,7 +610,8 @@ h1 {
     gap: 20px;
 }
 
-.user-follow span {
+.user-follow span,
+strong {
     color: #536471;
     margin-left: 5px;
 }
@@ -995,4 +998,17 @@ sidebar ended---------------------
 .cmt-tag {
     padding: 8px;
     font-size: 15px;
+}
+
+.searcherr {
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+}
+
+.tweet_time {
+    font-size: 12px;
+    color: gray;
+    letter-spacing: 0.3px;
 }

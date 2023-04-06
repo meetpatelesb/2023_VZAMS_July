@@ -10,7 +10,7 @@ let fetch_tweets = async(req, res) => {
 
 let fetch_retweets = async(req, res) => {
 
-    console.log(req.session.user_id);
+
     res.json({ done: 'done' });
 
 }
@@ -45,7 +45,6 @@ var fetch_follow = async(req, res) => {
     var user_id = req.session.user_id;
     var follow_id = req.query.follow_id;
 
-    console.log("fetch follow profile");
     var check_data = `select * from follow_master where followers_uid = ${follow_id} and follow_uid = ${user_id};`;
     var check_data_res = await queryExecute(check_data);
     if (check_data_res[0] != undefined) {
@@ -72,7 +71,7 @@ var fetch_follow = async(req, res) => {
 var page_profilePage = async function(req, res) {
     var user_id = req.session.user_id;
     var tweet_id = req.body.tweet_id
-    console.log("page profilepage profile");
+
 
     let get_id = `select user_id from profile_master where profile_username = '@${req.params.user_name}'`;
     let sda = await queryExecute(get_id);
@@ -115,7 +114,7 @@ var page_profilePage = async function(req, res) {
 
         var tweet_create = [];
         for (let i = 0; i < retweets_data.length; i++) {
-            tweet_create.push(moment(retweets_data[i].tweet_create).fromNow());
+            tweet_create.push(moment(retweets_data[i].tweet_create).local().fromNow());
         }
 
         var showTweet = `select * from tweet_master where user_id = ${user_id} order by tweet_create desc;`;
@@ -124,6 +123,7 @@ var page_profilePage = async function(req, res) {
 
         var user = `select user_name,user_username from user_master where user_id = ${user_id}`;
         var userName = await queryExecute(user);
+
 
         //like
         var likeCount = `SELECT like_count from tweet_master;`
@@ -147,6 +147,26 @@ var page_profilePage = async function(req, res) {
         var whoFollow_id = await queryExecute(whofollow_id);
 
 
+
+        // For Check user Followed or Not
+        let CheckUserFollow = `SELECT * 
+         FROM twitter.follow_master 
+         where followers_uid = ${user_id} and follow_uid = ${req.session.user_id} and follow_flag = 1`;
+        // console.log(CheckUserFollow);
+
+        let GetFollowUser = await queryExecute(CheckUserFollow);
+
+        if (GetFollowUser.length != 0) {
+            follow_btn = 'Following'
+        } else {
+            follow_btn = 'Follow'
+        }
+
+
+
+
+
+
         var ids = "(";
         if (whoFollow_id.length != 0) {
             for (let i = 0; i < whoFollow_id.length; i++) {
@@ -166,15 +186,54 @@ var page_profilePage = async function(req, res) {
 
         }
         if (req.session.user_id == user_id) {
-            res.render('../src/views/userprofile', { get_profile, tweet_create, retweets_data, user_data, port: process.env.PORT, tweets, retweet_like_count, userLiked, userName, totalcmt, like_count, tweet_id, user_liked, whoFollow, btn: 'Edit Profile', link: '/edit' });
+            res.render('../src/views/userprofile', {
+                get_profile,
+                tweet_create,
+                retweets_data,
+                user_data,
+                port: process.env.PORT,
+                tweets,
+                retweet_like_count,
+                userLiked,
+                userName,
+                totalcmt,
+                like_count,
+                tweet_id,
+                user_liked,
+                whoFollow,
+                sendDiv: `
+                <button class="profile-botton">
+        <a href="/edit" target="_top">Edit Profile</a>
+      </button>`
+            });
 
         } else {
-            res.render('../src/views/userprofile', { get_profile, tweet_create, retweets_data, user_data, port: process.env.PORT, tweets, retweet_like_count, userLiked, userName, totalcmt, like_count, tweet_id, user_liked, whoFollow, btn: 'Follow', link: '' });
+
+            res.render('../src/views/userprofile', {
+                get_profile,
+                tweet_create,
+                retweets_data,
+                user_data,
+                port: process.env.PORT,
+                tweets,
+                retweet_like_count,
+                userLiked,
+                userName,
+                totalcmt,
+                like_count,
+                tweet_id,
+                user_liked,
+                whoFollow,
+                sendDiv: `<button class="profile-botton" id="follow${user_id}" onclick='user_follow("${user_id}")'>
+                <span id="profile-Follow-span">${follow_btn}</span>
+                </button>`
+            });
         }
     } else {
         res.render('../src/views/404');
     };
 };
+
 // if (getdata.length == 0) {
 //     res.render('../src/views/userprofile', { get_profile, user_data, tweets: get_tweets, btn: 'Following', whoFollow });
 // } else {

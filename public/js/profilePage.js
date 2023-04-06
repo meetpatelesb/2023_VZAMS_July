@@ -167,7 +167,7 @@ async function search() {
         let res = await fetch(`/search?search=${searchText}`);
 
         let data = await res.json();
-        console.log(data.search_res);
+
         if (data.search_res != undefined) {
 
             document.getElementById('search_pro').style.display = "block";
@@ -176,7 +176,7 @@ async function search() {
             for (let i = 0; i < data.search_res.length; i++) {
                 var sample = ``;
                 document.getElementById('search_err').innerHTML = "";
-                let username = data.search_res[0].user_username.replace('@', '');
+                let username = data.search_res[i].user_username.replace('@', '');
                 let search_user = `/user/${username}`
                 search_pro +=
                     `<div class="profile-btn-s search-content">
@@ -476,4 +476,27 @@ function emoji() {
 function closecomment(id, j) {
     let cmt_box = document.getElementsByName('cmt-box');
     cmt_box[j].style.display = "none";
+}
+
+
+
+
+
+// userfollowing on fetch
+async function user_follow(followid) {
+    var user_id = followid;
+    let follow_btn = document.getElementById('profile-Follow-span');
+    let getFollower_strong = document.getElementById('strong_followers');
+
+    if (follow_btn.innerText == "Follow") {
+        follow_btn.innerText = 'Following'
+        let res = await fetch(`/follow?follow_id='${user_id}'`);
+        let data = await res.json();
+        getFollower_strong.innerHTML = data.user_followers_count;
+    } else {
+        follow_btn.innerText = 'Follow'
+        let res = await fetch(`/follow?follow_id='${user_id}'`);
+        let data = await res.json();
+        getFollower_strong.innerHTML = data.user_followers_count;
+    }
 }

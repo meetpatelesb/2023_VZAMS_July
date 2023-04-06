@@ -16,7 +16,8 @@ var page_home = async function(req, res) {
     var countcmt = `SELECT comment_count FROM tweet_master order by tweet_create desc;`
     var totalcmt = await queryExecute(countcmt);
     // console.log("totalcmt", countcmt);
-
+    let session_user = `select um.user_username,um.user_name,pm.profile_image from user_master um join profile_master pm on um.user_id = pm.user_id  where pm.user_id = ${req.session.user_id};`
+    let user_data = await queryExecute(session_user);
 
     var already = `select tweet_id from retweet_master where user_id = ${user_id} AND active =  1`
     var alreadyLiked = await queryExecute(already);
@@ -36,6 +37,7 @@ var page_home = async function(req, res) {
 
     var tweet_create = [];
     for (let i = 0; i < tweets.length; i++) {
+
         tweet_create.push(moment(tweets[i].tweet_create).fromNow());
     }
 
@@ -86,7 +88,7 @@ var page_home = async function(req, res) {
         var whoFollow = await queryExecute(with_whofollow);
 
     }
-    res.render('../src/views/homePage', { port: process.env.PORT, tweets, retweet_like_count, userLiked, userName, tweet_create, totalcmt, like_count, tweet_id, user_liked, whoFollow });
+    res.render('../src/views/homePage', { port: process.env.PORT, tweets, user_data, retweet_like_count, userLiked, userName, tweet_create, totalcmt, like_count, tweet_id, user_liked, whoFollow });
 };
 
 var page_tweet_create = async function(req, res) {
@@ -95,6 +97,8 @@ var page_tweet_create = async function(req, res) {
     // console.log("tweet creat follow homepage");
 
     var { tweet_text } = req.body;
+    tweet_text = tweet_text.trim();
+
 
 
 
@@ -109,11 +113,14 @@ var page_tweet_create = async function(req, res) {
             res.redirect('/homePage');
         };
 
-    } else {
+    } else if (tweet_text.length && (tweet_text != " " || tweet_text != null || tweet_text != undefined)) {
 
         let tweet_query = connection.query('INSERT INTO tweet_master ( tweet_content, user_id) VALUES (?,?)', [tweet_text, user_id])
         res.redirect('/homePage');
-    };
+    } else {
+        res.redirect('/homePage');
+
+    }
 
 };
 
@@ -228,13 +235,12 @@ var fetch_follow = async(req, res) => {
             // console.log(insert_count2);
         var insert_Count2 = await queryExecute(insert_count2);
     }
-    res.json({ msg: "followed" });
+    let count_follower_page = `select profile_following,profile_followers from profile_master where user_id = ${follow_id}`
+    var updated_count_follow = await queryExecute(count_follower_page);
 
-
-    // users follow followings..................................
-    var user_counts = await queryExecute(check_count);
-    var user_following_count = user_counts[0].profile_following;
-    var user_followers_count = user_counts[0].profile_followers;
+    let user_following_count = updated_count_follow[0].profile_following;
+    var user_followers_count = updated_count_follow[0].profile_followers;
+    res.json({ msg: "followed", user_following_count, user_followers_count });
     // console.log("user following count" + user_following_count, "    user followers count" + user_followers_count);
 
 }

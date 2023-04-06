@@ -19,8 +19,6 @@ var like = require("./src/routes/likeRoutes");
 let search = require('./src/routes/searchRoutes');
 var twitterBlue = require("./src/routes/tblueRoutes")
 var twitterLogout = require("./src/routes/logoutRoutes")
-
-
 let sessionCheck = require('./src/middleWare/session')
 
 

@@ -80,7 +80,10 @@ body {
 
 .twitter-banner {
     width: 100%;
-    height: 200px;
+}
+
+.tweet-cover-image {
+    width: 100%;
 }
 
 .profile-pic-container {
