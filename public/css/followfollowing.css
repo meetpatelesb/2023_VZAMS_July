@@ -1,0 +1,116 @@
+.tabs {
+    display: flex;
+    list-style-type: none;
+    justify-content: space-around;
+}
+
+.tabs li {
+    text-align: center;
+    transition-duration: 0.2s;
+    cursor: pointer;
+}
+
+.tabs li div {
+    text-decoration: none;
+    padding: 0 16px;
+    width: 100%;
+    white-space: nowrap;
+    color: #536471;
+    font-weight: 700;
+}
+
+.tabs li div p {
+    padding: 16px 0;
+    position: relative;
+    transition-duration: 0.2s;
+}
+
+.tabs li div:hover {
+    background-color: rgba(15, 20, 25, 0.1);
+}
+
+.active {
+    width: 100%;
+    color: #0f1419;
+    border-bottom: 2px solid #1d9bf0;
+}
+
+.notactive {
+    width: 100%;
+}
+
+.tabs .active p {
+    color: #0f1419;
+}
+.active {
+    display: block;
+}
+
+.in_active {
+    display: none;
+}
+
+
+.recommand-profile {
+    width: auto;
+}
+
+.profile-btn-s {
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+    padding: 16px 5px 12px;
+}
+
+.profile-btn-s img {
+    height: 50px;
+    width: 50px;
+    object-fit: cover;
+}
+
+.left-clm-s {
+    width: 20%;
+    margin-top: 5px;
+}
+
+.profile-img-s {
+    border-radius: 100%;
+}
+
+.right-clm-s {
+    display: flex;
+    /* align-items: center; */
+    text-align: justify;
+    width: 60%;
+}
+
+.right-clm-s a {
+    display: flex;
+    /* align-items: center; */
+    text-align: justify;
+    width: 60%;
+    color: black;
+}
+
+.profile-btn-s:hover {
+    background-color: rgba(230, 231, 232, 200);
+}
+
+.follow-btn-s {
+    display: flex;
+    padding: 10px 0px;
+}
+
+.follow-btn-s a {
+    padding: 10px;
+    border-radius: 50%;
+}
+
+.follow-btn-s input[type='button'] {
+    border: 1px solid;
+    color: #FFF;
+    border-radius: 30px;
+    font-weight: 600;
+    padding: 12px 15px;
+    background: black;
+}

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="/css/followfollowing.css" />
+
+</head>
+<body>
+    <section class="section-tweets">
+        <ul class="tabs">
+            <li>
+                <div class="active" id="tabFollower" onclick="divHide(this.id)">
+                    <p>Follower</p>
+                </div>
+            </li>
+            <li>
+                <div class="notactive" id="tabFollowing" onclick="divHide(this.id)">
+                    <p>Following</p>
+                </div>
+            </li>
+        </ul>
+    </section>
+
+
+    <section class="content">
+        <!-- follower -->
+        <div class="title active" id="follower">
+            <%for(let i=0;i<displayFollower.length;i++){%>
+
+                <div class="recommand-profile">
+                    <% let username='' ; username=displayFollower[i].profile_username.replace('@',''); %>
+                        <div class="profile-btn-s">
+                            <div class="left-clm-s">
+                                <img src="/assets/profile/<%=displayFollower[i].profile_image%>" class="profile-img-s" />
+                            </div>
+                            <div class="right-clm-s">
+                                <a href="/user/<%= username%>">
+                                    <div>
+                                        <span>
+                                            <%=displayFollower[i].profile_name%>
+                                        </span>
+                                        <small>
+                                            <%=displayFollower[i].profile_username%>
+                                        </small>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="follow-btn-s">
+                                <input type='button' class="follow-a" id="follow<%=displayFollower[i].user_id%>" onclick='follow(this.id,"<%=displayFollower[i].user_id%>")' value="Follow">
+                            </div>
+                        </div>
+
+                </div>
+                <%}%>
+        </div>
+
+        <!-- following -->
+        <div class="title in_active" id="following">
+            <%for(let i=0;i<displayFollowing.length;i++){%>
+
+                <div class="recommand-profile">
+                    <% let username='' ; username=displayFollowing[i].profile_username.replace('@',''); %>
+                        <div class="profile-btn-s">
+                            <div class="left-clm-s">
+                                <img src="/assets/profile/<%=displayFollowing[i].profile_image%>" class="profile-img-s" />
+                            </div>
+                            <div class="right-clm-s">
+                                <a href="/user/<%= username%>">
+                                    <div>
+                                        <span>
+                                            <%=displayFollowing[i].profile_name%>
+                                        </span>
+                                        <small>
+                                            <%=displayFollowing[i].profile_username%>
+                                        </small>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="follow-btn-s">
+                                <input type='button' class="follow-a" id="follow<%=displayFollowing[i].user_id%>" onclick='follow(this.id,"<%=displayFollowing[i].user_id%>")' value="Follow">
+                            </div>
+                        </div>
+
+                </div>
+                <%}%>
+        </div>
+    </section>
+</body>
+<script src="/js/followfollowing.js"></script>
+</html>

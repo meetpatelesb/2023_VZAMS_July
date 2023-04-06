@@ -324,6 +324,8 @@ async function change_tab() {
             break;
 
         case 7:
+
+            document.getElementById('gettingOtp').innerText = code;
             var input_code = document.getElementById("floatingCode").value;
             if (input_code != "") {
                 Error_Message('err_code', "");

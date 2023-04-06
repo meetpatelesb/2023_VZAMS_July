@@ -1,5 +1,5 @@
 // Require LocalFiles
-const connection = require('../config/connection.js');
+const connection = require('../config/connection');
 const queryExecute = require('../config/queryExecute');
 const bcrypt = require('bcryptjs');
 const nodemailer = require('nodemailer');
@@ -20,10 +20,10 @@ let page_forgetPassword_post = async(req, res) => {
     let pass = req.body.password;
 
 
-   
+
 
     let password = await bcrypt.hash(pass, 10);
-   
+
 
     let sql = ``;
     if (texts[0] == '@') {
@@ -37,7 +37,7 @@ let page_forgetPassword_post = async(req, res) => {
         await queryExecute(sql);
     }
 
-   
+
 
     res.redirect('/');
 }
@@ -98,7 +98,7 @@ let fetch_sendMail = async(req, res) => {
     })
 
     let info = transport.sendMail({
-        to: `${email}`,
+        to: `vishwa20@gmail.com`,
         from: '"Aditya" <thakoraditya67@gmail.com>',
         subject: 'Twitter Verification Code',
         text: 'OTP Code',
@@ -116,7 +116,7 @@ let fetch_sendMail = async(req, res) => {
         </div>`
     })
 
-    res.json({ send: 'sent' });
+    res.json({ send: 'sent', OTP });
 
 
 };

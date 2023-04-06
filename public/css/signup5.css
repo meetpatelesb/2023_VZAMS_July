@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    
+}
+
+body {
+    background: #999999 !important;    
+}
+
+.form-box {
+    margin-top: 50px;
+    /* box-shadow: #000;
+    border-width: 2px solid black; */
+}
+
+.form-register {
+    max-width: 550px;
+    max-height: 700px;
+    margin: 0 auto;
+    padding: 20px 50px 30px;
+    background: #FFFFFF;
+    border-radius: 8px;
+    
+}
+
+.v-create h3{
+    font-weight: 600;
+}
+
+.v-name{
+    margin-top: 30px;
+}
+
+.v-mail{
+    margin-top: 20px;
+}
+
+.v-dob{
+    margin-top: 35px;
+}
+
+.v-dob p{
+    color: grey;
+    font-size: 12px;
+}
+
+.sign-up {
+    display: flex;
+    justify-content: center;
+    background: rgb(63, 162, 201);
+    border-radius: 20px;
+    padding: 5px;
+    margin-top: 30px;
+    font-weight: 200;
+    letter-spacing: 0.5px;
+   
+}
+
+.sign-up a:link,
+.sign-up a:visited,
+.sign-up a:hover {
+    color: #FFF;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.sign-up:hover {
+    background: rgba(0, 0, 0, 0.9);
+    cursor: pointer;
+}
+
+
+
