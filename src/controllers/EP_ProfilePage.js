@@ -162,7 +162,7 @@ var page_profilePage = async function(req, res) {
 
         // For Check user Followed or Not
         let CheckUserFollow = `SELECT * 
-         FROM twitter.follow_master 
+         FROM follow_master 
          where followers_uid = ${user_id} and follow_uid = ${req.session.user_id} and follow_flag = 1`;
         // console.log(CheckUserFollow);
 
