@@ -162,7 +162,7 @@ async function retweet(id) {
             retweet_icon_count.innerHTML = data.count;
             if (data.flag == true) {
                 retweet_icon.style.color = "green"
-            } else if (data.flag == false) {} else if (data.flag == false) {
+            } else if (data.flag == false) {
                 retweet_icon.style.color = "black";
             }
 

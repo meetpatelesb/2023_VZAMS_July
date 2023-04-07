@@ -190,11 +190,11 @@
                                             <span class="tag"><%=tweets[j].user_username%></span>
                                             <span class="tweet_time"><%=tweet_create[j]%></span>
                                         </div>
-                                        <div class="more">
+                                        <!-- <div class="more">
                                             <a href="">
                                                 <i class="bi bi-three-dots"></i>
                                             </a>
-                                        </div>
+                                        </div> -->
                                     </div>
                                     <div class="tweets-area">
                                         <p class="tweet-text" id="tweet-text">
@@ -342,7 +342,6 @@
         document.getElementById(element).style.color = "green";
     });
     //console.log(userLike);
-
     //--------------------vishwa--------------------------------
     var tweetlike = [];
     '<%for(let i=0;i<user_liked.length;i++){%>'
@@ -350,9 +349,13 @@
     '<%}%>'
     //console.log("LIKE", tweetlike);
     tweetlike.forEach(element => {
-
-        document.getElementById("like" + element).style.color = "red";
+        console.log(element + "element");
+        var like_id = "like" + element;
+        console.log(like_id);
+        console.log(document.getElementById(like_id));
+        document.getElementById(like_id).style.color = "red";
     });
+    console.log(tweetlike);
 </script>
 
 

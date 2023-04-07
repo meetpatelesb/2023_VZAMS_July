@@ -97,11 +97,11 @@
                                     <small><%= user_data[0].user_username%></small>
                                 </div>
                             </div>
-                            <div class="pro-more">
+                            <!-- <div class="pro-more">
                                 <a href="">
                                     <div><i class="bi bi-three-dots"></i></div>
                                 </a>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -316,7 +316,7 @@
                                                 <a href="" target="_top">
                                                     <small><%= get_profile[0].profile_username%></small>
                                                 </a>
-                                                <small class="tweet_time"><%=tweet_create[j]%></small>
+                                                <small class="tweet_time"><%=retweet_create[j]%></small>
                                             </div>
 
                                             <div class="tweets-area">
@@ -462,12 +462,13 @@
     '<%for(let i=0;i<userLiked.length;i++){%>'
     userLike.push('<%=userLiked[i]%>');
     '<%}%>'
+
     userLike.forEach(element => {
         //console.log(element);
-        document.getElementById(element).style.color = "green";
+        var icon = document.getElementById(element).style.color = "green";
+        console.log("RTWEETICON", icon);
     });
     //console.log(userLike);
-
     //--------------------vishwa--------------------------------
     var tweetlike = [];
     '<%for(let i=0;i<user_liked.length;i++){%>'
@@ -475,9 +476,13 @@
     '<%}%>'
     //console.log("LIKE", tweetlike);
     tweetlike.forEach(element => {
-
-        document.getElementById("like" + element).style.color = "red";
+        console.log(element + "element");
+        var like_id = "like" + element;
+        console.log(like_id);
+        console.log(document.getElementById(like_id));
+        document.getElementById(like_id).style.color = "red";
     });
+    console.log(tweetlike);
 </script>
 
 </html>

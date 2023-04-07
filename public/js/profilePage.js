@@ -33,14 +33,6 @@ function divHide(divId, tabId) {
 
 
 
-
-
-
-
-
-
-
-
 async function fetch_tweets() {
 
     let res = await fetch('/fetch/profile_tweets', {
@@ -54,8 +46,6 @@ async function fetch_tweets() {
     let data = await res.json();
 }
 fetch_tweets();
-
-
 
 async function fetch_retweets() {
 
@@ -106,54 +96,6 @@ async function retweet(id) {
 
     }
 }
-/*sid js*/
-
-
-/*meet js  */
-
-// async function search() {
-//     document.getElementById('search_pro').innerHTML = '';
-
-//     var searchText = document.getElementById('search-text').value;
-//     var search_pro = document.getElementById('search_pro').innerHTML;
-
-//     let res = await fetch(`/search?search=${searchText}`);
-
-//     let data = await res.json();
-//     // console.log(data.search_res);
-//     // console.log(data.search_res[0].user_username)
-//     if (data.search_res.length) {
-
-//         for (let i = 0; i < data.search_res.length; i++) {
-//             var sample = ``;
-
-//             let username = data.search_res[0].user_username.replace('@', '');
-//             let search_user = `/user/${username}`
-//                 // console.log(search_user);
-//             search_pro +=
-//                 `<div class="profile-btn-s search-content">
-
-//             <div class="left-clm-s">
-//             <img src="/assets/profile/${data.search_res[i].profile_image}" class="profile-img-s" />
-//             </div>
-//             <div class="right-clm-s">
-//                 <a href="${search_user}">
-//                     <div>
-//                     <span>${data.search_res[i].user_username}</span>
-//                         <small>${data.search_res[i].profile_name}</small>
-//                     </div>
-//                 </a>
-//             </div>
-//         </div>`
-
-//             search_pro += `${sample}`;
-//             // console.log(search_pro);
-//         };
-
-//     }
-//     document.getElementById('search_pro').innerHTML = search_pro;
-
-// }
 
 /*searching process */
 async function search() {
@@ -207,33 +149,6 @@ async function search() {
         document.getElementById('search_pro').innerHTML = "";
         document.getElementById('search_pro').style.display = "none";
     }
-    // let res = await fetch(`/search?search=${searchText}`);
-
-    // let data = await res.json();
-
-    // if (data.search_res.length) {
-
-    //     for (let i = 0; i < data.search_res.length; i++) {
-    //         var sample = ``;
-    //         search_pro +=
-    //             `     <div class="profile-btn-s" onclick="search_profile(${data.search_res[i].user_id},'${data.search_res[i].profile_name}')">
-    //                 <div class="left-clm-s">
-    //                     <img src="/upload/${data.search_res[i].profile_image}" class="profile-img-s" />
-    //                 </div>
-    //                 <div class="right-clm-s">
-    //                     <div>
-    //                         <strong>${data.search_res[i].user_username}</strong><br>
-    //                         <span class="tag">@${data.search_res[i].profile_name}</span>
-    //                     </div>
-    //                 </div>
-
-    //                 <div class="follow-btn-s">
-    //         `;
-    //         search_pro += `${sample}</div> </div>`;
-    //     };
-
-    // }
-    // document.getElementById('search_pro').innerHTML = search_pro;
 
 }
 
@@ -274,31 +189,15 @@ function maxim() {
 
 // search_profile ..............
 
-// follow function .................
 
-async function follow(user) {
-    var follow_btn = document.getElementById(user).value;
-    if (follow_btn == "Follow") {
-        document.getElementById(user).value = "Following";
-        var user_id = user;
-        let res = await fetch(`/follow?follow_id='${user_id}'`);
-        // console.log(res);
-
-    } else {
-        document.getElementById(user).value = "Follow";
-        var user_id = user;
-        let res = await fetch(`/follow?follow_id='${user_id}'`);
-
-
-    }
-}
 
 
 
 
 async function likeFunction(x) {
-    // console.log(x)
-    var like_color = document.getElementById('like' + x);
+    var like_id = "like" + x;
+    var like_color = document.getElementById(like_id);
+    console.log(like_color);
     var span = document.getElementById('s' + x);
 
     //Like
@@ -319,7 +218,7 @@ async function likeFunction(x) {
         span.innerHTML = data.l_count;
     }
     //Dislike
-    else {
+    else if (like_color.style.color == 'red') {
         // console.log("Dislike");
         like_color.style.color = ''
             // console.log('unlike')
@@ -336,7 +235,6 @@ async function likeFunction(x) {
         span.innerHTML = data.l_count;
     }
 }
-
 
 
 async function popcomment(id, j) {
@@ -493,5 +391,24 @@ async function user_follow(followid) {
         let res = await fetch(`/follow?follow_id='${user_id}'`);
         let data = await res.json();
         getFollower_strong.innerHTML = data.user_followers_count;
+    }
+}
+
+// follow function .................
+
+async function follow(user) {
+    var follow_btn = document.getElementById(user).value;
+    if (follow_btn == "Follow") {
+        document.getElementById(user).value = "Following";
+        var user_id = user;
+        let res = await fetch(`/follow?follow_id='${user_id}'`);
+        // console.log(res);
+
+    } else {
+        document.getElementById(user).value = "Follow";
+        var user_id = user;
+        let res = await fetch(`/follow?follow_id='${user_id}'`);
+
+
     }
 }

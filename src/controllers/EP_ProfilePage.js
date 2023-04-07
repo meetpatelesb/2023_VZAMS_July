@@ -102,7 +102,7 @@ var page_profilePage = async function(req, res) {
         }
 
         // retweet
-        let retweet = `SELECT tweet_content,tweet_create,tweet_image,tweet_video,tm.tweet_id,like_count,retweet_like_count,comment_count FROM retweet_master rm
+        let retweet = `SELECT tweet_content,retweet_create,tweet_image,tweet_video,tm.tweet_id,like_count,retweet_like_count,comment_count FROM retweet_master rm
         join tweet_master tm 
         on rm.tweet_id = tm.tweet_id
         where rm.user_id = ${user_id};`
@@ -110,16 +110,28 @@ var page_profilePage = async function(req, res) {
         // console.log(retweet);
         let retweets_data = await queryExecute(retweet);
 
-        // console.log(retweets_data);
 
-        var tweet_create = [];
-        for (let i = 0; i < retweets_data.length; i++) {
-            tweet_create.push(moment(retweets_data[i].tweet_create).local().fromNow());
-        }
+
 
         var showTweet = `select * from tweet_master where user_id = ${user_id} order by tweet_create desc;`;
         // console.log(showTweet);
         var tweets = await queryExecute(showTweet);
+        // console.log(retweets_data);
+        var tweet_create = [];
+        for (let i = 0; i < tweets.length; i++) {
+
+            tweet_create.push(moment(tweets[i].tweet_create).fromNow());
+        }
+
+
+
+        // retweet time
+        var retweet_create = [];
+        for (let i = 0; i < retweets_data.length; i++) {
+            retweet_create.push(moment(retweets_data[i].retweet_create).fromNow());
+
+
+        }
 
         var user = `select user_name,user_username from user_master where user_id = ${user_id}`;
         var userName = await queryExecute(user);
@@ -188,6 +200,7 @@ var page_profilePage = async function(req, res) {
         if (req.session.user_id == user_id) {
             res.render('../src/views/userprofile', {
                 get_profile,
+                retweet_create,
                 tweet_create,
                 retweets_data,
                 user_data,
@@ -211,6 +224,7 @@ var page_profilePage = async function(req, res) {
 
             res.render('../src/views/userprofile', {
                 get_profile,
+                retweet_create,
                 tweet_create,
                 retweets_data,
                 user_data,

@@ -330,6 +330,13 @@ right sidebar starte
     border: 1px solid #8899A6;
 }
 
+.searcherr {
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+
 .right-side div a {
     font-weight: 700;
     border-radius: 50px;
