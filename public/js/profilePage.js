@@ -68,7 +68,6 @@ async function retweet(id) {
     var retweet_icon_count = document.getElementById("span" + id);
     var retweet_icon = document.getElementById(id);
 
-
     if (retweet_icon.classList.value == "fa-solid fa-retweet") {
 
         const result = await fetch("/tweet/retweet", {
