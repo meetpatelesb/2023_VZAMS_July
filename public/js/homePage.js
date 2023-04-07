@@ -194,7 +194,7 @@ async function search() {
             document.getElementById('search_pro').innerHTML = '';
 
             for (let i = 0; i < data.search_res.length; i++) {
-                var sample = ``;
+                // var sample = ``;
                 document.getElementById('search_err').innerHTML = "";
                 let username = data.search_res[i].user_username.replace('@', '');
 
@@ -214,13 +214,13 @@ async function search() {
                     </a>
                 </div>
             </div>`
-                search_pro += `${sample}</div> </div>`;
+
             };
 
         } else if (data.search_res == undefined) {
             document.getElementById('search_pro').style.display = "none";
             document.getElementById('search_err').innerHTML = "User Not Found";
-            document.getElementById('search_err').style.color = "grey";
+            // document.getElementById('search_err').style.color = "grey";
         }
         document.getElementById('search_pro').innerHTML = search_pro;
 
@@ -295,12 +295,12 @@ function maxim() {
 
 // search_profile ..............
 
-async function search_profile(pro_id, pro_name) {
-    // console.log(`pro_id=${pro_id}&pro_name=${pro_name}`);
-    let res = await fetch(`/search_profile?pro_id=${pro_id}&pro_name=${pro_name}`);
+// async function search_profile(pro_id, pro_name) {
+//     // console.log(`pro_id=${pro_id}&pro_name=${pro_name}`);
+//     let res = await fetch(`/search_profile?pro_id=${pro_id}&pro_name=${pro_name}`);
 
-    let data = await res.json();
-}
+//     let data = await res.json();
+// }
 
 // follow function .................
 async function follow(user, followid) {

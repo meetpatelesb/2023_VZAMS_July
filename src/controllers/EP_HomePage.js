@@ -4,8 +4,6 @@ const bcrypt = require('bcryptjs');
 var moment = require("moment");
 const { query } = require('../config/connection');
 
-
-
 var page_home = async function(req, res) {
     var user_id = req.session.user_id;
     var tweet_id = req.body.tweet_id
@@ -212,8 +210,7 @@ var fetch_follow = async(req, res) => {
         // console.log("log else ");
 
         var insert_follow_data = `
-            INSERT INTO follow_master(follow_uid, followers_uid, follow_flag) VALUES(${ user_id }, ${ follow_id }, '1');
-            `
+            INSERT INTO follow_master(follow_uid, followers_uid, follow_flag) VALUES(${ user_id }, ${ follow_id }, '1');`
         var res_insert_f_data = await queryExecute(insert_follow_data);
 
 
