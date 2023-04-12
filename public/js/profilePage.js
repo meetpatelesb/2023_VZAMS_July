@@ -189,10 +189,6 @@ function maxim() {
 // search_profile ..............
 
 
-
-
-
-
 async function likeFunction(x) {
     var like_id = "like" + x;
     var like_color = document.getElementById(like_id);
@@ -237,17 +233,13 @@ async function likeFunction(x) {
 
 
 async function popcomment(id, j) {
-    // console.log("hello");
+    console.log(id,"retweet");
     let cmt_box = document.getElementsByName('cmt-box');
     cmt_box[j].style.display = "block";
-    //save button
     var savecommentbtn = document.getElementsByName('savecommentbtn');
     savecommentbtn[j].innerHTML = `<a value="Comment" id="comment" class="btn btn-primary" onclick="savecomment(${id},${j})">Comment</a>`;
-
-    //show comment
     var sendid = await fetch(`/comm/comment_show?id=${id}`)
     const data1 = await sendid.json();
-
     for (let i = 0; i < data1['comments'].length; i++) {
         var cmt_show = document.getElementsByName('cmt-show');
         cmt_show[j].innerHTML += `<div class="comments">
@@ -274,22 +266,9 @@ async function popcomment(id, j) {
 //comment alert
 function alertcmt(id, j) {
     var com = document.getElementsByName('cmt');
-    // console.log(com[j].value);
     if (((com[j].value).trim()).length > 0) {
         document.getElementById('alert').innerHTML = " ";
     } else {
-        //comment alert
-        function alertcmt(id, j) {
-            var com = document.getElementsByName('cmt');
-            // console.log(com[j].value);
-            if (((com[j].value).trim()).length > 0) {
-                document.getElementById('alert').innerHTML = " ";
-            } else {
-
-                document.getElementById('alert').innerHTML = "please enter a comment"
-                document.getElementById('alert').style.color = "red";
-            }
-        }
         document.getElementById('alert').innerHTML = "please enter a comment"
         document.getElementById('alert').style.color = "red";
     }
@@ -314,7 +293,6 @@ async function savecomment(id, j) {
             })
         })
         const data1 = await insert.json();
-        // console.log("data1", data1);
         var cmt_show = document.getElementsByName('cmt-show');
         cmt_show[j].innerHTML = '';
 
@@ -349,8 +327,6 @@ let clk = 1;
 function emoji() {
     var clik = document.getElementById('emojiclk')
     if (!clk == 0) {
-        // console.log("hello emoji")
-        // console.log(document.getElementById('emoji'))
         document.getElementById('emoji').style.display = "block";
         document.querySelector('emoji-picker').addEventListener('emoji-click', e => {
             document.getElementById("cmt").value += e.detail.unicode
@@ -369,8 +345,6 @@ function closecomment(id, j) {
     let cmt_box = document.getElementsByName('cmt-box');
     cmt_box[j].style.display = "none";
 }
-
-
 
 
 

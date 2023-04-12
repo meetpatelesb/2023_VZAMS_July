@@ -334,12 +334,6 @@
 
                                                             <div class="like-icons">
                                                                 <div class="icon">
-                                                                    <a class="fa-solid fa-comment" id="reply" onclick="popcomment('<%=retweets_data[j].tweet_id%>','<%=j%>')"></a>
-                                                                    <span class="reply-count" id="reply-count">
-                                                                    <%=totalcmt[j].comment_count%>
-                                                                </span>
-                                                                </div>
-                                                                <div class="icon">
                                                                     <i href="" class="fa fa-heart" id="like<%=retweets_data[j].tweet_id%>" onclick="likeFunction('<%=retweets_data[j].tweet_id%>')"></i>
                                                                     <span class="like-count" id="s<%=retweets_data[j].tweet_id%>">
                                                                 <%=retweets_data[j].like_count%></span>
@@ -351,37 +345,6 @@
                                                             </span>
                                                                 </div>
                                                             </div>
-                                                            <div class="cmt" name="cmt-box" id="cmt-box">
-                                                                <div class="cmt-enter">
-                                                                    <div class="head">
-                                                                        <h5>Type your Reply.. </h5>
-                                                                    </div>
-                                                                    <div class="cmt-content">
-                                                                        <form>
-                                                                            <div class="cmt-textarea">
-                                                                                <textarea class="cmt border border-secondary" id="cmt" onblur="alertcmt('<%=retweets_data[j].tweet_id%>','<%=j%>')" name="cmt"></textarea>
-                                                                            </div>
-                                                                            <p id="alert"></p>
-                                                                            <div class="cmt-footer">
-                                                                                <div class="btns">
-                                                                                    <div class="btn3"><a class="btn btn-secondary" id="close" onclick="closecomment('<%=retweets_data[j].tweet_id%>','<%=j%>')">Close</a>
-                                                                                    </div>
-                                                                                    <div class="btn2" id="savecommentbtn" name="savecommentbtn">
-
-                                                                                        <!-- <input type="submit" value="Comment" id="comment"
-                                                                                class="btn btn-primary"
-                                                                                onclick="savecomment( <%=retweets_data[j].tweet_id%>)"> -->
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="cmt-show" id="cmt-show" name="cmt-show">
-
-                                                                                </div>
-                                                                            </div>
-                                                                        </form>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
                                             </div>
                                         </div>
                                     </div>
