@@ -180,7 +180,6 @@ async function search() {
                 let search_user = `/user/${username}`
                 search_pro +=
                     `<div class="profile-btn-s search-content">
-
                 <div class="left-clm-s">
                 <img src="/assets/profile/${data.search_res[i].profile_image}" class="profile-img-s" />
                 </div>
@@ -278,17 +277,22 @@ function maxim() {
 async function follow(user, followid) {
     var user_id = followid;
     var follow_btn = document.getElementById(user).value;
-    console.log(follow_btn);
+    let getFollowing_strong = document.getElementById('strong_following');
+
+
     if (follow_btn == "Follow") {
         document.getElementById(user).value = "Following";
 
         let res = await fetch(`/follow?follow_id='${user_id}'`);
+        let data = await res.json();
+        getFollowing_strong.innerHTML = data.session_user_following_count;
 
     } else {
         document.getElementById(user).value = "Follow";
 
         let res = await fetch(`/follow?follow_id='${user_id}'`);
-
+        let data = await res.json();
+        getFollowing_strong.innerHTML = data.session_user_following_count;
 
     }
 }

@@ -332,6 +332,10 @@ right sidebar starte
     font-size: 18px;
     font-weight: 600;
 }
+.wtf-list {
+    height: 300px;
+    overflow: scroll;
+}
 
 .search-bar {
     position: relative;

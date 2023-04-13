@@ -55,6 +55,8 @@ let fetch_validEmail = async(req, res) => {
 
             email: userEmail
         })
+    } else {
+        res.json({ email: '' });
     }
 
 

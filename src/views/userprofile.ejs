@@ -20,7 +20,6 @@
     <div class="container">
         <% for(const x of get_profile) {%>
             <!-- sidebar  started--------------------------------------------- -->
-
             <div></div>
             <aside class="left-side">
                 <div class="left-navbar">
@@ -31,8 +30,6 @@
                         <div class="menu">
                             <a href="/homePage">
                                 <div>
-
-
                                     <i class="bi bi-house-door-fill"></i>
                                     <span>Home</span>
                                 </div>
@@ -63,11 +60,8 @@
                             </a>
                         </div> -->
                         <div class="menu">
-
-
                             <%let username = user_data[0].user_username.replace('@','');
                             %>
-
                                 <a href="/user/<%=username%>">
                                     <div>
                                         <i class="bi bi-person-fill"></i>
@@ -82,10 +76,8 @@
                                     <span>More</span>
                                 </div>
                             </a>
-
                         </div> -->
                         <button class="tweet-btn" onclick="window.location='/homePage'">Tweet</button>
-
                         <div class="profile-btn">
                             <div class="left-clm">
                                 <img src="/assets/profile/<%=user_data[0].profile_image%>" class="user-profile" />
@@ -105,9 +97,7 @@
                     </div>
                 </div>
             </aside>
-
             <!-- sidebar  ended--------------------------------------------- -->
-
             <!-- content main------------------------------------------------->
             <div class="wrapper">
                 <header>
@@ -124,7 +114,6 @@
                             </a>
                             <small> Tweets</small>
                         </div>
-
                     </div>
                 </header>
                 <div>
@@ -136,11 +125,9 @@
                     </div>
                     <section class="profile-details">
                         <nav>
-
                             <%- sendDiv %>
                         </nav>
                         <div class="profile-info">
-
                             <div class="account-header">
                                 <a href="" target="_top">
                                     <p class="account-name">
@@ -150,18 +137,13 @@
                                 </a>
                                 <small><%= x.profile_username%></small>
                             </div>
-
                             <div>
                                 <small class="user-name">
                                     <%= x.profile_bio %>
                                 </small>
-
-
                                 <% let obj = new Date(x.create_date);
                                     let month = obj.toLocaleString('default',{month:'long'});
                                     let year = obj.getFullYear();%>
-
-
                                     <div class="profile-infomation">
                                         <p class="location-name">
                                             <img src="/assets/calendar.png" alt="Verified Badge" class="const-icon" />
@@ -171,12 +153,9 @@
                                             <img src="/assets/location.png" alt="Verified Badge" class="const-icon" />
                                             <small> <%= x.profile_location %> </small>
                                         </p>
-
                                     </div>
-
-
                                     <div class="user-follow">
-                                        <p><strong><%= x.profile_following %></strong><span>Following</span></p>
+                                        <p><strong id="strong_following"><%= x.profile_following %></strong><span>Following</span></p>
                                         <p><strong id="strong_followers"><%= x.profile_followers %></strong> <span>Followers</span></p>
                                     </div>
                             </div>
@@ -197,14 +176,12 @@
                         </ul>
                     </section>
                 </div>
-
                 <%}%>
 
 
                     <section class="content">
                         <div class="title active" id="tweet_top">
                             <%for(j=0;j<tweets.length;j++){%>
-
                                 <div class="tweets">
                                     <div class="left-clm">
                                         <img src="/assets/profile/<%=get_profile[0].profile_image%>" class="profile-img" />
@@ -222,9 +199,7 @@
                                                 <a href="" target="_top">
                                                     <small><%= get_profile[0].profile_username%></small>
                                                 </a>
-
                                             </div>
-
                                             <div class="tweets-area">
                                                 <p class="tweet-text" id="tweet-text">
                                                     <%=tweets[j].tweet_content%>
@@ -235,9 +210,7 @@
                                                         <video controls>
                                                         <source src="/upload/<%=tweets[j].tweet_video%>" type="video/mp4" class="tweet-video">
                                                       </video>
-
                                                         <%}%>
-
                                                             <div class="like-icons">
                                                                 <div class="icon">
                                                                     <a class="fa-solid fa-comment" id="reply" onclick="popcomment('<%=tweets[j].tweet_id%>','<%=j%>')"></a>
@@ -277,31 +250,26 @@
                                                                                     <div class="btn3"><a class="btn btn-secondary" id="close" onclick="closecomment('<%=tweets[j].tweet_id%>','<%=j%>')">Close</a>
                                                                                     </div>
                                                                                     <div class="btn2" id="savecommentbtn" name="savecommentbtn">
-
                                                                                         <!-- <input type="submit" value="Comment" id="comment"
                                                                                 class="btn btn-primary"
                                                                                 onclick="savecomment( <%=tweets[j].tweet_id%>)"> -->
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="cmt-show" id="cmt-show" name="cmt-show">
-
                                                                                 </div>
                                                                             </div>
                                                                         </form>
                                                                     </div>
                                                                 </div>
                                                             </div>
-
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
                                 <%}%>
                         </div>
                         <div class="title in_active" id="retweet">
                             <%for(j=0;j<retweets_data.length;j++){%>
-
                                 <div class="tweets">
                                     <div class="left-clm">
                                         <img src="/assets/profile/<%=get_profile[0].profile_image%>" class="profile-img" />
@@ -321,7 +289,6 @@
                                                 </a>
                                                 <span class="tweet_time"><%=tweet_create[j]%></span>
                                             </div>
-
                                             <div class="tweets-area">
                                                 <p class="tweet-text" id="tweet-text">
                                                     <%=retweets_data[j].tweet_content%>
@@ -332,9 +299,7 @@
                                                         <video controls>
                                                         <source src="/upload/<%=retweets_data[j].tweet_video%>" type="video/mp4" class="tweet-video">
                                                       </video>
-
                                                         <%}%>
-
                                                             <div class="like-icons">
                                                                 <div class="icon">
                                                                     <a class="fa-solid fa-comment" id="reply" onclick="popcomment('<%=retweets_data[j].tweet_id%>','<%=j%>')"></a>
@@ -374,26 +339,22 @@
                                                                                     <div class="btn3"><a class="btn btn-secondary" id="close" onclick="closecomment('<%=retweets_data[j].tweet_id%>','<%=j%>')">Close</a>
                                                                                     </div>
                                                                                     <div class="btn2" id="savecommentbtn" name="savecommentbtn">
-
                                                                                         <!-- <input type="submit" value="Comment" id="comment"
                                                                                 class="btn btn-primary"
                                                                                 onclick="savecomment( <%=retweets_data[j].tweet_id%>)"> -->
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="cmt-show" id="cmt-show" name="cmt-show">
-
                                                                                 </div>
                                                                             </div>
                                                                         </form>
                                                                     </div>
                                                                 </div>
                                                             </div>
-
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
                                 <%}%>
                         </div>
                     </section>
@@ -434,7 +395,7 @@
                                                     <img src="/assets/profile/<%=whoFollow[i].profile_image%>" class="profile-img-s" />
                                                 </div>
                                                 <div class="right-clm-s">
-                                                    <a href="/user/<%= username%>">
+                                                    <a href="/user/<%=username%>">
                                                         <div>
                                                             <span>
                                                                 <%=whoFollow[i].profile_name%>
@@ -474,7 +435,6 @@
         document.getElementById(element).style.color = "green";
     });
     //console.log(userLike);
-
     //--------------------vishwa--------------------------------
     var tweetlike = [];
     '<%for(let i=0;i<user_liked.length;i++){%>'

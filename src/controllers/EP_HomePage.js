@@ -4,8 +4,6 @@ const bcrypt = require('bcryptjs');
 var moment = require("moment");
 const { query } = require('../config/connection');
 
-
-
 var page_home = async function(req, res) {
     var user_id = req.session.user_id;
     var tweet_id = req.body.tweet_id
@@ -16,7 +14,8 @@ var page_home = async function(req, res) {
     var countcmt = `SELECT comment_count FROM tweet_master order by tweet_create desc;`
     var totalcmt = await queryExecute(countcmt);
     // console.log("totalcmt", countcmt);
-
+    let session_user = `select um.user_username,um.user_name,pm.profile_image from user_master um join profile_master pm on um.user_id = pm.user_id  where pm.user_id = ${req.session.user_id};`
+    let user_data = await queryExecute(session_user);
 
     var already = `select tweet_id from retweet_master where user_id = ${user_id} AND active =  1`
     var alreadyLiked = await queryExecute(already);
@@ -36,6 +35,7 @@ var page_home = async function(req, res) {
 
     var tweet_create = [];
     for (let i = 0; i < tweets.length; i++) {
+
         tweet_create.push(moment(tweets[i].tweet_create).fromNow());
     }
 
@@ -77,7 +77,7 @@ var page_home = async function(req, res) {
                 ids += ","
             }
         }
-        ids += ")";
+        ids += `,${req.session.user_id})`;
         const basic = `select  b.profile_name,a.user_id,b.profile_image,a.user_username from profile_master b left join user_master a on b.user_id = a.user_id where a.user_id not in${ids} and a.user_id!=${user_id} limit 5;`;
         var whoFollow = await queryExecute(basic);
 
@@ -86,7 +86,7 @@ var page_home = async function(req, res) {
         var whoFollow = await queryExecute(with_whofollow);
 
     }
-    res.render('../src/views/homePage', { port: process.env.PORT, tweets, retweet_like_count, userLiked, userName, tweet_create, totalcmt, like_count, tweet_id, user_liked, whoFollow });
+    res.render('../src/views/homePage', { port: process.env.PORT, tweets, user_data, retweet_like_count, userLiked, userName, tweet_create, totalcmt, like_count, tweet_id, user_liked, whoFollow });
 };
 
 var page_tweet_create = async function(req, res) {
@@ -95,6 +95,8 @@ var page_tweet_create = async function(req, res) {
     // console.log("tweet creat follow homepage");
 
     var { tweet_text } = req.body;
+    tweet_text = tweet_text.trim();
+
 
 
 
@@ -109,11 +111,14 @@ var page_tweet_create = async function(req, res) {
             res.redirect('/homePage');
         };
 
-    } else {
+    } else if (tweet_text.length && (tweet_text != " " || tweet_text != null || tweet_text != undefined)) {
 
         let tweet_query = connection.query('INSERT INTO tweet_master ( tweet_content, user_id) VALUES (?,?)', [tweet_text, user_id])
         res.redirect('/homePage');
-    };
+    } else {
+        res.redirect('/homePage');
+
+    }
 
 };
 
@@ -123,6 +128,8 @@ var fetch_follow = async(req, res) => {
     var user_id = req.session.user_id;
     var follow_id = req.query.follow_id;
 
+    // console.log("fetch follow homepage");
+    // console.log(follow_id);
     var check_count = `select a.profile_following, a.profile_followers, a.user_id from profile_master a left join user_master b on a.user_id = b.user_id where a.user_id = ${ user_id };`;
 
     var update_count_followers = `select a.profile_following, a.profile_followers, a.user_id from profile_master a left join user_master b on a.user_id = b.user_id where a.user_id = ${ follow_id };`
@@ -151,6 +158,7 @@ var fetch_follow = async(req, res) => {
 
             // console.log("update flag1", update_flag1);
             var res_u_flag1 = await queryExecute(update_flag1);
+
 
             // following counter
             following_count -= 1;
@@ -202,8 +210,7 @@ var fetch_follow = async(req, res) => {
         // console.log("log else ");
 
         var insert_follow_data = `
-            INSERT INTO follow_master(follow_uid, followers_uid, follow_flag) VALUES(${ user_id }, ${ follow_id }, '1');
-            `
+            INSERT INTO follow_master(follow_uid, followers_uid, follow_flag) VALUES(${ user_id }, ${ follow_id }, '1');`
         var res_insert_f_data = await queryExecute(insert_follow_data);
 
 
@@ -225,28 +232,18 @@ var fetch_follow = async(req, res) => {
             // console.log(insert_count2);
         var insert_Count2 = await queryExecute(insert_count2);
     }
-
-
     let count_follower_page = `select profile_following,profile_followers from profile_master where user_id = ${follow_id}`
     var updated_count_follow = await queryExecute(count_follower_page);
 
+    let session_user_follower_count = `select profile_following from profile_master where user_id = ${req.session.user_id}`
+    let session_user_following = await queryExecute(session_user_follower_count);
+
+    let session_user_following_count = session_user_following[0].profile_following;
     let user_following_count = updated_count_follow[0].profile_following;
     var user_followers_count = updated_count_follow[0].profile_followers;
-    console.log(user_followers_count);
-    console.log(user_following_count);
-    res.json({ msg: "followed", user_following_count, user_followers_count });
-
-
-    // users follow followings..................................
-
+    res.json({ msg: "followed", user_following_count, user_followers_count, session_user_following_count });
     // console.log("user following count" + user_following_count, "    user followers count" + user_followers_count);
 
 }
-
-// var fetch_unfollow = async(req, res) => {
-//     var follow_id = req.query.follow_id;
-//     res.json({ msg: "unfollowed" });
-// }    
-
 
 module.exports = { page_home, page_tweet_create, fetch_follow };
